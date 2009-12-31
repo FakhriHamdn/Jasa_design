@@ -155,7 +155,7 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
     $role = $_POST['role'];
 
     //Validasi dikit & membuat enkripsi password
-    if($email === 0){
+    if(getUsersData($email) == 0){
         if(strlen($password) && strlen($confirm_password)>= 3){
             if($password === $confirm_password){
                 $pass = password_hash($password, PASSWORD_DEFAULT);
@@ -168,14 +168,17 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
             } else {
                 $msg = "Passwords are not equal";
                 header("Location: ../auth/register.php?message=" . urlencode($msg));
+                exit();
             }
         } else {
             $msg = "Password must contain at least 3 characters";
             header("Location: ../auth/register.php?message=" . urlencode($msg));
+            exit();
         }
     } else {
         $msg = "Email already registered";
         header("Location: ../auth/register.php?message=" . urlencode($msg));
+        exit();
     }
 
 } else if (isset($_POST['auth_submit']) && $_GET['auth'] === 'login'){
