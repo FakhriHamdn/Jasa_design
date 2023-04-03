@@ -1,0 +1,178 @@
+/* Scroll Bar */
+::-webkit-scrollbar {
+    visibility: hidden;
+    width: 0;
+  }
+
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+/* Navigation Bar */
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 4em;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    z-index: 999;
+    background-color: rgba(255, 255, 255);
+}
+
+.logo-wrapper{
+    cursor: default;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 20%;
+    height: auto;
+}
+
+
+.navigation-wrapper {
+    width: 35%;
+    margin: 0 8em;
+}
+
+ul.navigation-menu {
+    justify-content: space-around;
+    text-align: center;
+    display: flex;
+    
+}
+
+ul.navigation-menu li {
+    list-style: none;
+    display: inline-block;
+}
+
+ul.navigation-menu li a {
+    text-decoration: none;
+    color: #24242a;
+    font-weight: 600;
+    position: relative;
+}
+
+ul.navigation-menu li a:after {
+    content: "";
+    position: absolute;
+    background-color:  #fec112;
+    height: 2px;
+    width: 0;
+    left: 0;
+    bottom: -5px;
+    transition: 0.3s;
+}
+
+ul.navigation-menu li a:hover {
+    color:  #fec112;
+}
+
+ul.navigation-menu li a:hover:after {
+    color:  #fec112;
+    width: 100%;
+}
+
+
+/* Atur tombol login & Register */
+.login-register{
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    width: 20%;
+}
+
+button {
+    border: none;
+    background-color: white;
+}
+
+button a.register {
+    font-size: 1.2em;
+    padding: 6px 2.5em;
+    margin: 0 40px 0 15px;
+    text-decoration: none;
+    color: white;
+    background-color:   #bf202f;
+    border-radius: 5px;
+    border: 2px solid  #bf202f;
+    font-weight: 500;
+    transition: 0.15s;
+
+}
+
+button a.login {
+    font-size: 1.2em;
+    padding: 6px 3em;
+    margin: 0 5px 0 0;
+    text-decoration: none;
+    color:  #bf202f;
+    background-color:  #fff;
+    border-radius: 5px;
+    border: 2px solid  #bf202f;
+    font-weight: 500;
+    transition: 0.15s;
+}
+
+button a.register:hover {
+    background-color:  #8d1925;
+    color: white;
+    transition: 0.4s;
+    border: 2px solid #8d1925;
+}
+
+
+button a.login:hover {
+    background-color:  #bf202f;
+    color: white;
+    transition: 0.4s;
+}
+
+
+/* Setting background iamge */
+.bg-image img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    z-index: -1;
+    filter: brightness(50%);
+}
+
+/* Mengatur content home */
+.container-content {
+    background-color: rgb(255, 255, 255);
+    align-items: center;
+    width: 95%;
+    height: 100vw;
+    position: absolute;
+    top: 35em;
+    left: 2em;
+    box-shadow: -5px -5px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.container-h1 {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+h1.head-text {
+    font-size: 4em;
+    color: orangered;
+    z-index: 100;
+    position: relative;
+    top: -30em;
+    text-align: center;
+    width: 40%;
+}
+@media screen and (max-width: 476px) {
+    ul.navigation-menu li a {
+        font-size: 5px;
+    }
+}
