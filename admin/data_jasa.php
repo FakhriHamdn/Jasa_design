@@ -28,6 +28,7 @@ $add_access = new adminAccess;
                 <li><a href="data_klien.php" class="smooth-scroll">Data User</a></li>
                 <li><a href="data_transaksi.php" class="smooth-scroll">Data Transaksi</a></li>
             </ul>
+            <div>hello</div>
             </div>
         </nav>
         <div class="logout">
