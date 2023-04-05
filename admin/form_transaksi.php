@@ -16,7 +16,6 @@ if ($id_transaksi > 0) {
     $jumlah_jasa = $row['jumlah_jasa'];
     $harga = $row['harga'];
     $total_pembayaran = $row['total_pembayaran'];
-
     $form_action = "action.php?action=update_transactions";
     $title = " Admin | Form Edit Transaksi";
     $main_title = "Form Tambah Data Transaksi";
