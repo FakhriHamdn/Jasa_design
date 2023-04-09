@@ -10,7 +10,6 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-    /* background: #ff00000d !important; */
 }
 
 html {
@@ -25,9 +24,8 @@ html {
 }
 
 .title h2 {
-    font-weight: 700;
+    font-weight: bold;
     font-size: 0.7em;
-    font-family: 'Montserrat', sans-serif;
 }
 
 .title h3 {
@@ -179,7 +177,6 @@ p.acc-text {
     width: 15em;
     text-align: center;
     color: #24242a;
-    font-family: 'Poppins', sans-serif;
 }
 
 span.register-text a {

@@ -50,7 +50,8 @@ if($aksi == "insert_services") {
     $row = $add_access->getHargaJasa($id_jasa);
     $harga = $row['harga'];
     $total_pembayaran = $harga * $_POST['jumlah_jasa'];
-    $result = $add_access->insertTransactions($_POST["id_klien"], $_POST["id_jasa"], $_POST["tanggal"], $_POST["jumlah_jasa"], $harga, $total_pembayaran);
+    $result = $add_access->insertTransactions($_POST["id_klien"], $_POST["id_jasa"], $_POST["tanggal"], 
+    $_POST["jumlah_jasa"], $harga, $total_pembayaran);
     if ($result) {
         header("location:data_transaksi.php");
     } else {

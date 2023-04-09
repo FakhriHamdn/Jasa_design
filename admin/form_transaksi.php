@@ -67,6 +67,7 @@ if ($id_transaksi > 0) {
                             <option value="<?= $options['id_klien'] ?>" <?= $selected ?> ><?= $options['nama_klien']  . ' ' . '- ' . $options['alamat']  . ' ' . '- ' . $options['no_telp']?>
                             </option>
                         <?php } ?>
+                        
                     </select>
                 </tr>
                 <tr>
