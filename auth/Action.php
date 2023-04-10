@@ -32,7 +32,7 @@ if(isset($_POST['submit'])) { //submit dpt dari name button, jadi ketik submit d
             $_SESSION['fullname'] = $row['fullname']; 
             $_SESSION['role'] = $row['role']; 
         }
-        header("location: ../public/home.php?message= Data Valid");
+        header("location: ../index.php?message= Data Valid");
 
         //INI KALO MAU FILE ADMIN/USER DIPISAH TAPI HEADER YANG DIATAS NIH, DI COMMENT DLU. 
         // //KLO MAU PAKE YANG DISATUIN JADI SATU FILE, DICOMMENT AJA BAGIAN INI

@@ -34,7 +34,7 @@ $add_access = new adminAccess;
             </div>
         </nav>
         <div class="logout">
-            <button><a class="href-logout" href="../public/home.php">Home</a></button>
+            <button><a class="href-logout" href="../index.php">Home</a></button>
         </div>
     </header>
 
