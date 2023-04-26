@@ -15,8 +15,8 @@
     <div class="container">
         <section class="wrapper">
             <div class="title">
-                <h2 class="page-title">Register Page</h2>
-                <h3 class="welcome-message">Welcome to Register Page</h3>
+                <h2 class="page-title">Register Form</h2>
+                <h3 class="welcome-message">Create your account</h3> 
                 <span class="login-text">Register</span>
                 <!-- buat munculin notif -->
                 <?php
@@ -30,17 +30,24 @@
                 <form action="Action.php" method="POST" class="form-login">
                     <div class="input-kolom">
                         <div class="input-email">
-                            <label for="email">Input Email</label>
-                            <input type="email" placeholder="Email" name="email" class="input-login" required>
+                            <input type="email" placeholder="First Name" name="email" class="input-login" required>
+                        </div>
+                        <div class="input-email">
+                            <input type="email" placeholder="Last Name" name="email" class="input-login" required>
+                        </div>
+                        <div class="input-email">
+                            <input type="email" placeholder="Your Email" name="email" class="input-login" required>
                         </div>
                         <div class="input-pass">
-                            <label for="password">Input Password</label>
-                            <input type="password" placeholder="******" name="password" class="input-login" autocomplete="off" required>
+                            <input type="password" placeholder="Password" name="password" class="input-login" autocomplete="off" required>
+                        </div>
+                        <div class="input-pass">
+                            <input type="password" placeholder="Confirm Password" name="password" class="input-login" autocomplete="off" required>
                         </div>
                             <button type="submit" class="btn" name="submit">Submit</button>
                         <div class="register-container">
                         <p class="acc-text">Already have an account?
-                        <span class="register-text"><a href="index.php">Login</a></span>
+                        <span class="register-text"><a href="login.php">Login</a></span>
                         </p>
                         </div>
                     </div>

@@ -12,7 +12,7 @@ $add_access = new adminAccess;
     <link rel="shortcut icon" href="../image/lock_icon.png" type="image/x-icon">
     <link rel="stylesheet" href="../styles/admin.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins|Montserrat&display=swap" rel="stylesheet">
-    <!-- <script src="script.js"></script> -->
+    
     <title> Admin | Data Jasa Design </title>
 
 </head>
@@ -27,10 +27,7 @@ $add_access = new adminAccess;
                 <li><a href="data_jasa.php" class="active">Data Jasa</a></li>
                 <li><a href="data_klien.php" class="smooth-scroll">Data User</a></li>
                 <li><a href="data_transaksi.php" class="smooth-scroll">Data Transaksi</a></li>
-            </ul>
-            <div>hello</div>
-            <h1>Hello Test</h1>
-            
+            </ul>            
             </div>
         </nav>
         <div class="logout">
@@ -63,22 +60,23 @@ $add_access = new adminAccess;
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $no=1; foreach($add_access->getServices() as $row ) {?>
+                    <?php $no=1; foreach($add_access->getServices() as $row ) : ?>
                         <tr>
                             <!-- pake $no++ biar pas input sesuai nomor urutnya di browser -->
                             <td><?php echo $row['id_jasa']?></td>
                             <td><?php echo $row['nama_jasa']?></td>
                             <td><?php echo $row['harga']?></td>
                             <td class="button-aksi">
-                            <a href="form_jasa.php?id_jasa=<?= $row['id_jasa']?>" class="edit-button">Edit</a>
-                            <a href="action.php?id_jasa=<?= $row['id_jasa']?>&action=delete_service" class="del-button">Hapus</a>
+                                <a href="form_jasa.php?id_jasa=<?= $row['id_jasa']?>" class="edit-button">Edit</a>
+                                <a href="action.php?id_jasa=<?= $row['id_jasa']?>&action=delete_service" class="del-button">Hapus</a>
                             </td>
                         </tr>
-                    <?php }?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </section>
     </main>
 </div>
+<script src="script.js"></script>
 </body>
 </html>

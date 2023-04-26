@@ -1,3 +1,13 @@
+<?php 
+
+// if(!isset($_SESSION['submit'])) {
+//   header("Location: auth/login.php");
+//   exit;
+// }
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +32,7 @@
           </ul>
         </nav>
         <div class="login-register">
-            <button><a class="login" href="auth/index.php">Login</a></button>
+            <button><a class="login" href="auth/login.php">Login</a></button>
             <button><a class="register" href="auth/register.php">Register</a></button>
         </div>
     </header>

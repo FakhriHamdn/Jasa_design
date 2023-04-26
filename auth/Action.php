@@ -1,5 +1,6 @@
 <?php 
 //kita akan panggil class objek dari class user
+require '../database/connect.php';
 require 'Connect.php';
 session_start(); //setiap codingan session harus ada session_start
 
@@ -18,8 +19,8 @@ if(isset($_POST['submit'])) { //submit dpt dari name button, jadi ketik submit d
     $pass = $user->getPassword();
     $sql = "SELECT * FROM users WHERE email = '$emailId' AND password = '$pass'"; //pake kutip karena bukan int
     
-    $conn = new myConnect();
-    $connection = $conn->getConnect();
+    $conn = new myConnection();
+    $connection = $conn->getConnection();
     $result = $connection->query($sql);
 
     //validasi untuk ngecek datanya ada atau ngk, jika ada maka lakukan..
