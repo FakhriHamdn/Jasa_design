@@ -1,18 +1,3 @@
-<?php 
-
-
-
-
-
-if(isset($_POST['submit'])) {
-    header("Location: ../index.php");
-    $_SESSION['submit'] = true;
-}
-
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +27,7 @@ if(isset($_POST['submit'])) {
                 ?>
             </div>
             <div>
-                <form action="" method="POST" class="form-login">
+                <form action="action.php" method="POST" class="form-login">
                     <div class="input-kolom">
                         <div class="input-email">
                             <label for="email">Input Email</label>

@@ -27,13 +27,13 @@
                 ?>
             </div>
             <div>
-                <form action="Action.php" method="POST" class="form-login">
+                <form action="action.php" method="POST" class="form-login">
                     <div class="input-kolom">
                         <div class="input-email">
-                            <input type="email" placeholder="First Name" name="email" class="input-login" required>
+                            <input type="text" placeholder="First Name" name="firstname" class="input-login" required>
                         </div>
                         <div class="input-email">
-                            <input type="email" placeholder="Last Name" name="email" class="input-login" required>
+                            <input type="text" placeholder="Last Name" name="lastname" class="input-login" required>
                         </div>
                         <div class="input-email">
                             <input type="email" placeholder="Your Email" name="email" class="input-login" required>
