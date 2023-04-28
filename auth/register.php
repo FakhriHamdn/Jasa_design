@@ -42,7 +42,7 @@
                             <input type="password" placeholder="Password" name="password" class="input-login" autocomplete="off" required>
                         </div>
                         <div class="input-pass">
-                            <input type="password" placeholder="Confirm Password" name="password" class="input-login" autocomplete="off" required>
+                            <input type="password" placeholder="Confirm Password" name="cpassword" class="input-login" autocomplete="off" required>
                         </div>
                             <button type="submit" class="btn" name="submit">Submit</button>
                         <div class="register-container">

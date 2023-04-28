@@ -2,7 +2,6 @@
 require '../includes/functions.php';
 
 $query = "SELECT * FROM tb_klien";
-
 ?>
 
 <!DOCTYPE html>
@@ -18,9 +17,9 @@ $query = "SELECT * FROM tb_klien";
     <a href="form_klien.php">Tambah Data</a>
     <nav>
         <ul>
-            <li><a href="data_jasa.php">Data Produk</a></li>
-            <li><a href="data_klien.php">Data Klien</a></li>
-            <li><a href="data_transaksi.php">Data Transaksi</a></li>
+            <li><a href="data_product.php">Data Product</a></li>
+            <li><a href="data_cust.php">Data Customer</a></li>
+            <li><a href="data_transaction.php">Data Transaksi</a></li>
             <li><a href="data_user.php">Data Personal User</a></li>
         </ul>
     </nav>

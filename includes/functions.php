@@ -2,25 +2,7 @@
 require 'connect.php';
 $conn = new myConnection();
 $getConnect = $conn->getConnection();
-
-
-// function registerUser(){
-//     global $getConnect;
-//     $firstName = $_POST['firstname'];
-//     $lastName = $_POST['lastname'];
-//     $email = $_POST['email'];
-//     $password = $_POST['password'];
-//     $confirmPass = $_POST['cpassword'];
-
-//     $result = mysqli_query($getConnect, "SELECT * FROM users WHERE")
-
-    
-
-
-
-
-
-// }
+//END CONNECTION
 
 
 function getDatas($query){
@@ -33,59 +15,26 @@ function getDatas($query){
     return $rows;
 }
 
-
-
-function getDataJasa() {
+function insertDataJasa($nama_product, $harga){
     global $getConnect;
-    $result = mysqli_query($getConnect, "SELECT * FROM tb_jasa");
-    $rows = [];
-    while($row = mysqli_fetch_assoc($result)){
-        $rows[] = $row;
-    }
-    return $rows;
-}
-
-function getDataKlien() {
-    global $getConnect;
-    $result = mysqli_query($getConnect, "SELECT * FROM tb_klien");
-    $rows = [];
-    while($row = mysqli_fetch_assoc($result)){
-        $rows[] = $row;
-    }
-    return $rows;
-}
-
-function getDataTransaksi(){
-    global $getConnect;
-    $query = "SELECT tb_transaksi.id_transaksi, 
-            tb_klien.nama_klien, 
-            tb_jasa.nama_jasa, 
-            tb_transaksi.tanggal, 
-            tb_transaksi.jumlah_jasa, 
-            tb_jasa.harga, 
-            tb_transaksi.total_pembayaran
-            FROM tb_klien INNER JOIN tb_transaksi ON tb_klien.id_klien = tb_transaksi.id_klien INNER JOIN tb_jasa ON tb_jasa.id_jasa = tb_transaksi.id_jasa";
+    $query = "INSERT INTO products VALUES('', '$nama_product', '$harga')";
     $result = mysqli_query($getConnect, $query);
-    $rows = [];
-    while($row = mysqli_fetch_assoc($result)){
-        $rows[] = $row;
-    }
-    return $rows;
+    return $result;
 }
 
-function getDataUsers() {
+function getProductId($id_product){
     global $getConnect;
-    $result = mysqli_query($getConnect, "SELECT * FROM users");
-    $rows = [];
-    while($row = mysqli_fetch_assoc($result)){
-        $rows[] = $row;
-    }
-    return $rows;
+    $result = mysqli_query($getConnect, "SELECT * FROM products WHERE id_product = '$id_product'");
+    $row = mysqli_fetch_assoc($result);
+    return $row;
 }
 
-
-
-
+function updateDataJasa($id_jasa, $produk, $harga) {
+    global $getConnect;
+    $query = "UPDATE tb_jasa SET nama_jasa = '$produk', harga = '$harga' WHERE id_jasa = '$id_jasa'";
+    $result = mysqli_query($getConnect, $query);
+    return $result;
+}
 
 
 

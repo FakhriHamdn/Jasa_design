@@ -23,9 +23,9 @@ $query = "SELECT tb_transaksi.id_transaksi,
     <a href="form_transaksi">Tambah Data</a>
     <nav>
         <ul>
-            <li><a href="data_jasa.php">Data Produk</a></li>
-            <li><a href="data_klien.php">Data Klien</a></li>
-            <li><a href="data_transaksi.php">Data Transaksi</a></li>
+        <li><a href="data_product.php">Data Product</a></li>
+            <li><a href="data_cust.php">Data Customer</a></li>
+            <li><a href="data_transaction.php">Data Transaksi</a></li>
             <li><a href="data_user.php">Data Personal User</a></li>
         </ul>
     </nav>

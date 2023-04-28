@@ -4,7 +4,7 @@ class myConnection {
     private $username = "root";
     private $password = "";
     private $db_name = "jasa_design";
-    public $conn;
+    private $conn;
     
     public function __construct() {
         // buat koneksi ke database
@@ -20,3 +20,4 @@ class myConnection {
         return $this->conn;
     }
 }
+
