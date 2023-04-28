@@ -38,7 +38,7 @@ $query = "SELECT * FROM products";
             <td><?= $row['nama_product'];?></td>
             <td><?= $row['harga'];?></td>
             <td>
-                <a href="form_product.php?idProduct=<?= $row['id_product'];?>" name="editJasa">Edit</a> |
+                <a href="form_product.php?product=<?=$row['id_product'];?>">Edit</a> |
                 <a href="">Delete</a>
             </td>
         </tr>

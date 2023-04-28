@@ -36,7 +36,27 @@ function updateDataJasa($id_jasa, $produk, $harga) {
     return $result;
 }
 
+function updateProduct($id_product, $nama_product, $harga){
+    global $getConnect;
+    
+    $query = "UPDATE products SET nama_product = ?, harga = ? WHERE id_product = ?";
+    $stmt = mysqli_prepare($getConnect, $query);
+    mysqli_stmt_bind_param($stmt, 'sii', $nama_product, $harga, $id_product);
+    mysqli_stmt_execute($stmt);
+    
+    mysqli_stmt_close($stmt);
+    mysqli_close($getConnect);
+  }
 
+  function getDataById($table, $id) {
+    global $getConnect;
+    $query = "SELECT * FROM $table WHERE id_product = $id";
+    $result = mysqli_query($getConnect, $query);
+    $data = mysqli_fetch_assoc($result);
+    return $data;
+}
+
+  
 
 
 

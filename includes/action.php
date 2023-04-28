@@ -1,13 +1,24 @@
 <?php 
 require 'functions.php';
 
+$action = $_POST['action'];
+if($action === 'insertProduct'){
+    $nama_product = htmlspecialchars($_POST['product']);
+    $harga = htmlspecialchars($_POST['harga']);
+    
 
+  // cek apakah ada ID produk, jika ada maka lakukan update
+    if(isset($_POST['id_product'])){
+        $id_product = htmlspecialchars($_POST['id_product']);
+        updateProduct($id_product, $nama_product, $harga);
+    } else {
+        $title = 'test';
+    insertdataJasa($nama_product, $harga);
+    }
+    header('Location: ../admin2/data_product.php');
+    exit;
+}
 
-
-
-$idProduct = $_GET['product'];
-
-var_dump('halo');
 
 
 // if('jasa_submit'){
