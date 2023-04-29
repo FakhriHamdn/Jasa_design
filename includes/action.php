@@ -1,23 +1,38 @@
 <?php 
 require 'functions.php';
 
-$action = $_POST['action'];
-if($action === 'insertProduct'){
-    $nama_product = htmlspecialchars($_POST['product']);
-    $harga = htmlspecialchars($_POST['harga']);
-    
 
-  // cek apakah ada ID produk, jika ada maka lakukan update
-    if(isset($_POST['id_product'])){
-        $id_product = htmlspecialchars($_POST['id_product']);
-        updateProduct($id_product, $nama_product, $harga);
-    } else {
-        $title = 'test';
-    insertdataJasa($nama_product, $harga);
+if(isset($_POST['action'])) {
+    if($_POST['action'] === 'insertProduct') {
+        echo 'ini form tambah';
+        // code untuk memasukkan data produk baru ke dalam database
+    } else if($_POST['action'] === 'editProduct') {
+        echo 'ini form edit';
+        // code untuk mengedit data produk yang sudah ada dalam database
     }
-    header('Location: ../admin2/data_product.php');
-    exit;
 }
+
+
+
+
+
+
+
+
+// if($action === 'insertProduct'){
+//     $nama_product = htmlspecialchars($_POST['product']);
+//     $harga = htmlspecialchars($_POST['harga']);
+    
+//     if(isset($_POST['id_product'])){
+//         $id_product = htmlspecialchars($_POST['id_product']);
+//         $result = updateProduct($id_product, $nama_product, $harga);
+//     } else {
+//         $result = insertdataJasa($nama_product, $harga);
+//     }
+
+//     header('Location: ../admin2/data_product.php');
+//     exit;
+// }
 
 
 

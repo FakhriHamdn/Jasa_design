@@ -1,22 +1,28 @@
 <?php
 require '../includes/functions.php';
 
+
+// if(isset($_GET['action']) === 'editProduct'){
+//     $id_product = $_GET['product'];
+
+//     var_dump($id_product);
+// }
 // ambil id produk dari query string
-if (isset($_GET['product'])) {
-    $id_product = $_GET['product'];
-}
+// if (isset($_GET['product'])) {
+//     $id_product = $_GET['product'];
+// }
 
-// ambil data produk berdasarkan id
-$product = getDataById('products', $id_product);
+// // ambil data produk berdasarkan id
+// $product = getDataById('products', $id_product);
 
-// cek jika data produk ditemukan
-if ($product) {
-    $title = 'Edit Produk';
-} else {
-    // tampilkan pesan error jika produk tidak ditemukan
-    echo 'Error: Produk tidak ditemukan';
-    exit;
-}
+// // cek jika data produk ditemukan
+// if ($product) {
+//     $title = 'Edit Produk';
+// } else {
+//     // tampilkan pesan error jika produk tidak ditemukan
+//     echo 'Error: Produk tidak ditemukan';
+//     exit;
+// }
 ?>
 
 
@@ -33,9 +39,11 @@ if ($product) {
     <form action="../includes/action.php" method="POST">
         <input type="hidden" name="action" value="insertProduct">
     
-        <?php if(isset($_GET['product'])): ?>
+        <?php if(isset($_GET['action']) && $_GET['action'] === 'editProduct'): ?>
         <input type="hidden" name="id_product" value="<?= $_GET['product'] ?>">
+        <input type="hidden" name="action" value="editProduct">
         <?php endif; ?>
+
 
         <ul>
             <li>
