@@ -2,27 +2,18 @@
 require '../includes/functions.php';
 
 
-// if(isset($_GET['action']) === 'editProduct'){
-//     $id_product = $_GET['product'];
+if(isset($_GET['id_product']) && $_GET['id_product'] > 0){
+    $id_product = $_GET['id_product'];
+    $row = getProductId($id_product);
+    $title = 'Admin | Form Edit Data Product';
+    $h1 = 'Form Edit Data Product';
+} else {
+    $row = [];
+    $title = 'Admin | Form Tambah Data Product';
+    $h1 = 'Form Tambah Data Product';
+}
 
-//     var_dump($id_product);
-// }
-// ambil id produk dari query string
-// if (isset($_GET['product'])) {
-//     $id_product = $_GET['product'];
-// }
 
-// // ambil data produk berdasarkan id
-// $product = getDataById('products', $id_product);
-
-// // cek jika data produk ditemukan
-// if ($product) {
-//     $title = 'Edit Produk';
-// } else {
-//     // tampilkan pesan error jika produk tidak ditemukan
-//     echo 'Error: Produk tidak ditemukan';
-//     exit;
-// }
 ?>
 
 
@@ -35,24 +26,25 @@ require '../includes/functions.php';
     <title><?= $title ?></title>
 </head>
 <body>
-    <h1>Edit Produk</h1>
+    <h1><?= $h1; ?></h1>
     <form action="../includes/action.php" method="POST">
         <input type="hidden" name="action" value="insertProduct">
     
-        <?php if(isset($_GET['action']) && $_GET['action'] === 'editProduct'): ?>
-        <input type="hidden" name="id_product" value="<?= $_GET['product'] ?>">
-        <input type="hidden" name="action" value="editProduct">
-        <?php endif; ?>
+        <?php if($row) { ?>
+            <input type="hidden" name="id_product" value="<?= $_GET['id_product']; ?>">
+            <input type="hidden" name="action" value="editProduct">
+
+        <?php } ?>
 
 
         <ul>
             <li>
                 <label for="product">Produk</label>
-                <input type="text" name="product" id="product" value="<?= $product['nama_product'] ?>">
+                <input type="text" name="product" id="product" value="<?= ($row) ? $row['nama_product'] : ''; ?>">
             </li>
             <li>
                 <label for="harga">Harga</label>
-                <input type="number" name="harga" id="harga" value="<?= $product['harga'] ?>">
+                <input type="number" name="harga" id="harga" value="<?= ($row) ? $row['harga'] : ''; ?>">
             </li>
             <li>
                 <button type="submit" name="jasa_submit">Submit</button>

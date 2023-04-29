@@ -1,7 +1,7 @@
 <?php 
 require '../includes/functions.php';
 
-$query = "SELECT * FROM tb_klien";
+$query = "SELECT * FROM customers";
 ?>
 
 <!DOCTYPE html>
@@ -13,8 +13,15 @@ $query = "SELECT * FROM tb_klien";
     <title>Admin | Data Jasa</title>
 </head>
 <body>
+    <?php 
+    if(isset($_GET['message'])) {
+        $msg = $_GET['message'];
+        echo $msg;
+        }
+    
+    ?>
     <h1>Data Jasa Produk</h1>
-    <a href="form_klien.php">Tambah Data</a>
+    <a href="form_cust.php">Tambah Data</a>
     <nav>
         <ul>
             <li><a href="data_product.php">Data Product</a></li>
@@ -26,22 +33,22 @@ $query = "SELECT * FROM tb_klien";
     <table border="1" cellspacing="0.5" cellpadding="10">
         <tr>
             <th>Id</th>
-            <th>Pelanggan</th>
-            <th>alamat</th>
+            <th>Customer</th>
+            <th>Alamat</th>
             <th>No Telp</th>
             <th>Email</th>
             <th>Aksi</th>
         </tr>
         <?php foreach(getDatas($query) as $row): ?>
         <tr>
-            <td><?= $row['id_klien'];?></td>
-            <td><?= $row['nama_klien'];?></td>
+            <td><?= $row['id_cust'];?></td>
+            <td><?= $row['nama_cust'];?></td>
             <td><?= $row['alamat'];?></td>
             <td><?= $row['no_telp'];?></td>
             <td><?= $row['email'];?></td>
             <td>
-                <a href="">Edit</a> |
-                <a href="">Delete</a>
+                <a href="form_cust.php?id_cust=<?= $row['id_cust'];?>">Edit</a> |
+                <a href="../includes/action.php?id_delete=<?= $row['id_cust']?>&page=customer">Delete</a>
             </td>
         </tr>
         <?php endforeach; ?>

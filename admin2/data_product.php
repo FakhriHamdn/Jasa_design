@@ -14,7 +14,15 @@ $query = "SELECT * FROM products";
     <title>Admin | Data Product</title>
 </head>
 <body>
+    <?php
+        if (isset($_GET['message'])) {
+        $message = $_GET['message'];
+        echo $message;
+        }
+    ?>
     <h1>Data Product</h1>
+
+    <br>
     <a href="form_product.php">Tambah Data</a>
     <nav>
         <ul>
@@ -38,8 +46,8 @@ $query = "SELECT * FROM products";
             <td><?= $row['nama_product'];?></td>
             <td><?= $row['harga'];?></td>
             <td>
-                <a href="form_product.php?product=<?=$row['id_product'];?>&action=editProduct">Edit</a> |
-                <a href="">Delete</a>
+                <a href="form_product.php?id_product=<?=$row['id_product'];?>">Edit</a> |
+                <a href="../includes/action.php?id_delete=<?=$row['id_product'];?>&page=product">Delete</a>
             </td>
         </tr>
         <?php endforeach; ?>

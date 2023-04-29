@@ -1,15 +1,62 @@
 <?php 
 require 'functions.php';
 
-
+//ACTION FOR INSERT & UPDATE
 if(isset($_POST['action'])) {
+    $nama_product = htmlspecialchars($_POST['product']);
+    $harga = htmlspecialchars($_POST['harga']);
+
     if($_POST['action'] === 'insertProduct') {
-        echo 'ini form tambah';
-        // code untuk memasukkan data produk baru ke dalam database
-    } else if($_POST['action'] === 'editProduct') {
-        echo 'ini form edit';
-        // code untuk mengedit data produk yang sudah ada dalam database
+        $result = insertDataProduct($nama_product, $harga);
+        if ($result) {
+            $msg = "Product data has been successfully added";
+            header("Location: ../admin2/data_product.php?message=" . urlencode($msg));
+            exit();
+        } else {
+            header("Location: ../admin2/data_product.php");
+        }
+
+    } else if($_POST['action'] === 'editProduct' && isset($_POST['id_product'])) {
+        $id_product = $_POST['id_product'];
+        $row = getProductId($id_product);
+        if($row){
+            $result = updateDataProduct($id_product, $nama_product, $harga);            
+            if($result){
+                $msg = "Product data has been successfully updated";
+                header("Location: ../admin2/data_product.php?message=" . urlencode($msg));
+                exit();
+            }
+        }
     }
+}
+
+if(isset($_POST['cust_submit'])){
+    $nama_cust = htmlspecialchars($_POST['cust']);
+    $alamat = htmlspecialchars($_POST['alamat']);
+    $no_telp = htmlspecialchars($_POST['no_telp']);
+    $email = strtolower(htmlspecialchars($_POST['email']));
+
+    if($_GET['action'] === 'insertCustomer'){
+        $result = insertCustomer($nama_cust, $alamat, $no_telp, $email);
+        if($result){
+            $msg = "Customer data has been successfully added";
+            header("Location: ../admin2/data_cust.php?" . urlencode($msg));
+            exit;
+        } else {
+            header("Location: ../admin2/data_product.php");
+        }
+    } else if($_GET['action'] === 'editCustomer'){
+        $id_cust = $_POST['id_cust'];
+        $row = getCustomerId($id_cust);
+        if($row){
+            $result = updateDataCustomer($id_cust, $nama_cust, $alamat, $no_telp, $email);
+            if($result){
+                $msg = "Customer data has been successfully updated";
+                header("Location: ../admin2/data_cust.php?message=" . urlencode($msg));
+                exit();
+            }
+        }
+    }   
 }
 
 
@@ -19,86 +66,23 @@ if(isset($_POST['action'])) {
 
 
 
-// if($action === 'insertProduct'){
-//     $nama_product = htmlspecialchars($_POST['product']);
-//     $harga = htmlspecialchars($_POST['harga']);
-    
-//     if(isset($_POST['id_product'])){
-//         $id_product = htmlspecialchars($_POST['id_product']);
-//         $result = updateProduct($id_product, $nama_product, $harga);
-//     } else {
-//         $result = insertdataJasa($nama_product, $harga);
-//     }
-
-//     header('Location: ../admin2/data_product.php');
-//     exit;
-// }
-
-
-
-// if('jasa_submit'){
-//     $title = 'Admin | Tambah Data Product';
-//     $main_title = 'Form Tambah Data Product';
-//     $form_action = '../includes/action.php?action=insertJasa';
-//     if(isset($_POST['jasa_submit'])){
-//             // $id_product = ($_POST['id_product']);
-//             $nama_product = htmlspecialchars($_POST['product']);
-//             $harga = htmlspecialchars($_POST['harga']);
-//             $result = insertDataJasa($nama_jasa, $harga);
-            
-//             if($result) {
-//                 header("Location: ../admin2/data_jasa.php");
-//             } else{
-//                 echo 'gagal menambahkan data produk';
-//             }
-    // } else{
-    //     // $id_jasa = $_GET['jasaId'];
-
-    //     if(isset($_GET['jasaId'])) {
-    //         $row = getJasaId($id_jasa);
-            
-    //         $id_jasa = $row['id_jasa'];
-    //         $nama_jasa = htmlspecialchars($row['nama_jasa']);
-    //         $harga = htmlspecialchars($row['harga']);
-            
-    //         $form_action = "action.php?action=update_services";
-    //         $title = " Admin | Form Edit Jasa Design";
-    //         $main_title = "Form Edit Data Jasa";
-            
-    //         $result2 = updateDataJasa($id_jasa, $produk, $harga);
-
-
-    //     }
-//     }
-// }
-
-
-
-
-
-// if(isset($_POST['jasa_submit'])) {
-//     $dataJasa = $_GET['action'] ?? 0;
-
-//     if($dataJasa === 'insertJasa' || $dataJasa === 0){
-//         $produk = htmlspecialchars($_POST['produk']);
-//         $harga = htmlspecialchars($_POST['harga']);
-
-//         $result = insertDataJasa($produk, $harga);
-        
-//         if($result) {
-//             header("Location: ../admin2/data_jasa.php");
-//         } else{
-//             echo 'gagal menambahkan data';
-//         }
-//     } else {
-//         $row = getJasaId($dataJasa);
-//         $id_jasa = $row['id_jasa'];
-//         $nama_jasa = $row['nama_jasa'];
-//         $harga = $row['harga'];
-        
-//         $form_action = "action.php?action=update_services";
-//         $title = " Admin | Form Edit Jasa Design";
-//         $main_title = "Form Edit Data Jasa";
-//     }
-// }
-?>
+//ACTION FOR DELETING DATA
+if(isset($_GET['id_delete'])) {
+    if($_GET['page'] === 'product'){
+        $id_product = $_GET['id_delete'];
+        $result = deleteDataProduct($id_product);
+        if($result){
+            $msg = "Product data has been successfully deleted";
+            header("Location: ../admin2/data_product.php?message=" . urlencode($msg));
+            exit();
+        }
+    } else if($_GET['page'] === 'customer') {
+        $id_cust = $_GET['id_delete'];
+        $result = deleteDataCustomer($id_cust);
+        if($result){
+            $msg = "Customer data has been successfully deleted";
+            header("Location: ../admin2/data_cust.php?message=" . urlencode($msg));
+            exit();
+        }
+    }
+}
