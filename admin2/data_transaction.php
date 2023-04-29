@@ -20,7 +20,7 @@ $query = "SELECT transactions.id_transaction,
 </head>
 <body>
     <h1>Data Jasa Produk</h1>
-    <a href="form_transaksi">Tambah Data</a>
+    <a href="form_transaction.php">Tambah Data</a>
     <nav>
         <ul>
             <li><a href="data_product.php">Data Product</a></li>
@@ -50,7 +50,7 @@ $query = "SELECT transactions.id_transaction,
             <td><?= $row['harga'];?></td>
             <td><?= $row['total_pembayaran'];?></td>
             <td>
-                <a href="">Edit</a> |
+                <a href="form_transaction.php?id_transaction=<?= $row['id_transaction'];?>">Edit</a> |
                 <a href="../includes/action.php?id_delete<?= $row['id_transaction'];?>&page=transaction">Delete</a>
             </td>
         </tr>

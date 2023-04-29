@@ -64,7 +64,6 @@ function updateDataCustomer($id_cust, $nama_cust, $alamat, $no_telp, $email){
     return $result;
 }
 
-
 function deleteDataCustomer($id_cust){
     global $getConnect;
     $query = "DELETE FROM customers WHERE id_cust = $id_cust";
@@ -72,7 +71,11 @@ function deleteDataCustomer($id_cust){
     return $result;
 }
 
-
+function getTransactionId($id_transaction){
+    global $getConnect;
+    $result = mysqli_query($getConnect, "SELECT * FROM transactions WHERE id_transaction = '$id_transaction'");
+    return $result;
+}
 
 
 
