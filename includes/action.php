@@ -64,6 +64,7 @@ if(isset($_POST['cust_submit'])){
 //END CUSTOMERS
 
 
+//ACTION FOR INSERT & UPDATE TRANSACTIONS
 
 
 

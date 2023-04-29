@@ -1,7 +1,6 @@
 <?php 
 require '../includes/functions.php';
 
-
 if(isset($_GET['id_cust']) && ($_GET['id_cust'] > 0)){
     $id_cust = $_GET['id_cust'];
     $row = getCustomerId($id_cust);
