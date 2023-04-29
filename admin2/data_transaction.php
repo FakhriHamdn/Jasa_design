@@ -1,13 +1,13 @@
 <?php 
 require '../includes/functions.php';
-$query = "SELECT tb_transaksi.id_transaksi, 
-            tb_klien.nama_klien, 
-            tb_jasa.nama_jasa, 
-            tb_transaksi.tanggal, 
-            tb_transaksi.jumlah_jasa, 
-            tb_jasa.harga, 
-            tb_transaksi.total_pembayaran
-            FROM tb_klien INNER JOIN tb_transaksi ON tb_klien.id_klien = tb_transaksi.id_klien INNER JOIN tb_jasa ON tb_jasa.id_jasa = tb_transaksi.id_jasa";
+$query = "SELECT transactions.id_transaction, 
+            customers.nama_cust, 
+            products.nama_product, 
+            transactions.tanggal, 
+            transactions.jumlah_product, 
+            products.harga, 
+            transactions.total_pembayaran
+            FROM customers INNER JOIN transactions ON customers.id_cust = transactions.id_cust INNER JOIN products ON products.id_product = transactions.id_product";
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +23,7 @@ $query = "SELECT tb_transaksi.id_transaksi,
     <a href="form_transaksi">Tambah Data</a>
     <nav>
         <ul>
-        <li><a href="data_product.php">Data Product</a></li>
+            <li><a href="data_product.php">Data Product</a></li>
             <li><a href="data_cust.php">Data Customer</a></li>
             <li><a href="data_transaction.php">Data Transaksi</a></li>
             <li><a href="data_user.php">Data Personal User</a></li>
@@ -32,8 +32,8 @@ $query = "SELECT tb_transaksi.id_transaksi,
     <table border="1" cellspacing="0.5" cellpadding="10">
         <tr>
             <th>Id</th>
-            <th>Nama Pelanggan</th>
-            <th>Nama Produk</th>
+            <th>Nama Customer</th>
+            <th>Nama Product</th>
             <th>Tanggal</th>
             <th>Jumlah</th>
             <th>Harga</th>
@@ -42,16 +42,16 @@ $query = "SELECT tb_transaksi.id_transaksi,
         </tr>
         <?php foreach(getDatas($query) as $row): ?>
         <tr>
-            <td><?= $row['id_transaksi'];?></td>
-            <td><?= $row['nama_klien'];?></td>
-            <td><?= $row['nama_jasa'];?></td>
+            <td><?= $row['id_transaction'];?></td>
+            <td><?= $row['nama_cust'];?></td>
+            <td><?= $row['nama_product'];?></td>
             <td><?= $row['tanggal'];?></td>
-            <td><?= $row['jumlah_jasa'];?></td>
+            <td><?= $row['jumlah_product'];?></td>
             <td><?= $row['harga'];?></td>
             <td><?= $row['total_pembayaran'];?></td>
             <td>
                 <a href="">Edit</a> |
-                <a href="">Delete</a>
+                <a href="../includes/action.php?id_delete<?= $row['id_transaction'];?>&page=transaction">Delete</a>
             </td>
         </tr>
         <?php endforeach; ?>

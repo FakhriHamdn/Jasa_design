@@ -1,7 +1,7 @@
 <?php 
 require 'functions.php';
 
-//ACTION FOR INSERT & UPDATE
+//ACTION FOR INSERT & UPDATE PRODUCTS
 if(isset($_POST['action'])) {
     $nama_product = htmlspecialchars($_POST['product']);
     $harga = htmlspecialchars($_POST['harga']);
@@ -29,7 +29,9 @@ if(isset($_POST['action'])) {
         }
     }
 }
+//END PRODUCTS
 
+//ACTION FOR INSERT & UPDATE CUSTOMERS
 if(isset($_POST['cust_submit'])){
     $nama_cust = htmlspecialchars($_POST['cust']);
     $alamat = htmlspecialchars($_POST['alamat']);
@@ -45,6 +47,7 @@ if(isset($_POST['cust_submit'])){
         } else {
             header("Location: ../admin2/data_product.php");
         }
+
     } else if($_GET['action'] === 'editCustomer'){
         $id_cust = $_POST['id_cust'];
         $row = getCustomerId($id_cust);
@@ -58,6 +61,7 @@ if(isset($_POST['cust_submit'])){
         }
     }   
 }
+//END CUSTOMERS
 
 
 
@@ -65,8 +69,7 @@ if(isset($_POST['cust_submit'])){
 
 
 
-
-//ACTION FOR DELETING DATA
+//ACTION FOR DELETING DATAS
 if(isset($_GET['id_delete'])) {
     if($_GET['page'] === 'product'){
         $id_product = $_GET['id_delete'];
@@ -86,3 +89,4 @@ if(isset($_GET['id_delete'])) {
         }
     }
 }
+//END DELETING DATAS
