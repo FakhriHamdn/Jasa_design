@@ -1,32 +1,31 @@
 <?php 
-require_once '../includes/functions.php';
-
-$query = "SELECT * FROM customers";
-$query1 = "SELECT * FROM products";
+require '../includes/functions.php';
 
 if(isset($_GET['id_transaction']) && $_GET['id_transaction'] > 0){
     $id_transaction = $_GET['id_transaction'];
-    $id_cust = $_POST['id_cust'] ?? '';
-    $id_product = $_POST['id_product'] ?? '';
-    $jumlah = $_POST['jumlah'] ?? '';
-
     $row = getTransactionId($id_transaction);
-    if($row){
-        $title = "Admin | Edit Data Transactions";
-        $h1 = "Form Edit Data Transaction";
-        $form_action = "../includes/action.php?action=updateTransaction";
-    } 
+    
+    $id_transaction = $row['id_transaction'];
+    $id_cust = $row['id_cust'];
+    $id_product = $row['id_product'];
+    $nama_cust = $row['nama_cust'];
+    $nama_product = $row['nama_product'];
+    $tanggal = $row['tanggal'];
+    $jumlah_product = $row['jumlah_product'];
+    $harga = $row['harga'];
+    $total_pembayaran = $row['total_pembayaran'];
+    $title = 'Admin | Update Data Transaction';
+    $h1 = 'Form Update Data Transaction';
+    $form_action = '../inludes/action.php?action=updateTransaction';
+
 } else {
-    $id_transaction = '';
-    $id_cust = '';
-    $id_product = '';
-    $jumlah = '';
-    $title = "Admin | Tambah Data Transactions";
-    $h1 = "Form Tambah Data Transaction";
-    $form_action = "../includes/action.php?action=insertTransaction";
+    $title = 'Admin | Tambah Data Transaction';
+    $h1 = 'Form Tambah Data Transaction';
+    $form_action = '../inludes/action.php?action=insertTransaction';
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,47 +33,37 @@ if(isset($_GET['id_transaction']) && $_GET['id_transaction'] > 0){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title ?></title>
+    <title><?=$title?></title>
 </head>
 <body>
-    <h1><?= $h1 ?></h1>
-    <form action="<?= $form_action ?>" method="POST">
-        <input type="hidden" name="id_transaction" value="<?= $id_transaction ?>">
+    <h1><?=$h1?></h1>
+    <form action="<?=$form_action?>" method="POST">
+        <?php if ($row) : ?>
+            <input type="hidden" name="id_transaction" value="<?= $row['id_transaction'] ?>">
+        <?php endif; ?>
         <ul>
             <li>
-                <label for="nama_cust">Nama Customer</label>
-                <select name="id_cust" id="id_cust">
-                    <option disable selected>Pilih Nama Customer</option>
-                    <?php foreach(getDatas($query) as $opsi) : ?>
-                        <?php $select = $opsi['id_cust'] === $id_cust ? 'selected' : '';?>
-                        <option value="<?= $opsi['id_cust'] ?>" <?= $select ?> ><?= $opsi['nama_cust']  . ' - ' . $opsi['alamat']  . ' - ' . $opsi['no_telp']?></option>
-                    <?php endforeach; ?>
-                </select>
+                <label for="cust">customers</label>
+                <input type="text" name="cust" id="cust" value="<?= ($row) ? $row['nama_cust'] : '' ?>">
             </li>
-            
             <li>
-                <label for="nama_product">Product</label>
-                <select name="id_product" id="id_product">
-                    <option disable selected>Pilih Product</option>
-                    <?php foreach(getDatas($query1) as $opsi) : ?>
-                        <?php $select = $opsi['id_product'] === $id_product ? 'selected' : '';?>
-                        <option value="<?= $opsi['id_product'] ?>" <?= $select ?> ><?= $opsi['nama_product']  . ' ' . '- Rp ' . $opsi['harga']?>
-                    <?php endforeach; ?>
-                </select>
+                <label for="alamat">Alamat</label>
+                <input type="text" name="alamat" id="alamat" value="<?= ($row) ? $row['alamat'] : '' ?>">
             </li>
             <li>
                 <label for="tanggal">Tanggal</label>
-                <input type="date" name="tanggal" id="tanggal" value="<?= $tanggal?>">
+                <input type="date" name="tanggal" id="tanggal" value="<?=$tanggal?>">
             </li>
             <li>
-                <label for="jumlah">Jumlah</label>
-                <input type="number" name="jumlah" id="jumlah" value="<?= $jumlah ?>">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" value="<?= ($row) ? $row['email'] : '' ?>">
             </li>
             <li>
-                <button type="submit" name="transaction_submit">Submit</button>
+                <button type="submit" name="cust_submit">Submit</button>
             </li>
         </ul>
     </form>
 
 </body>
 </html>
+

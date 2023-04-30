@@ -73,8 +73,17 @@ function deleteDataCustomer($id_cust){
 
 function getTransactionId($id_transaction){
     global $getConnect;
-    $result = mysqli_query($getConnect, "SELECT * FROM transactions WHERE id_transaction = '$id_transaction'");
-    return $result;
+    $query = "SELECT transactions.id_transaction, 
+            customers.nama_cust, 
+            products.nama_product, 
+            transactions.tanggal, 
+            transactions.jumlah_product, 
+            products.harga, 
+            transactions.total_pembayaran
+            FROM customers INNER JOIN transactions ON customers.id_cust = transactions.id_cust INNER JOIN products ON products.id_product = transactions.id_product WHERE transactions.id_transaction = '$id_transaction'";
+    $result = mysqli_query($getConnect, $query);
+    $row = mysqli_fetch_assoc($result);
+    return $row;
 }
 
 
