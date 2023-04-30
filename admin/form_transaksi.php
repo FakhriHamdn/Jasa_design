@@ -56,7 +56,7 @@ if ($id_transaksi > 0) {
         <h2 style="text-align: center; margin: 30px 0 25px 0;"><?=$main_title;?></h2>
         <table>
             <form action="<?php echo $form_action ?>" method="POST">
-                <input type="hidden" name="id_transaksi" value="<?php echo $id_transaksi  ?>">
+                <input type="hidden" name="id_transaksi" value="<?= $id_transaksi  ?>">
                 <tr>
                     <label for="nama_klien">Nama Pelanggan</label>
                     <select name="id_klien" id="nama_klien">

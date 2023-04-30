@@ -51,7 +51,7 @@ $query = "SELECT transactions.id_transaction,
             <td><?= $row['total_pembayaran'];?></td>
             <td>
                 <a href="form_transaction.php?id_transaction=<?= $row['id_transaction'];?>">Edit</a> |
-                <a href="../includes/action.php?id_delete<?= $row['id_transaction'];?>&page=transaction">Delete</a>
+                <a href="../includes/action.php?id_delete=<?= $row['id_transaction'];?>&page=transaction">Delete</a>
             </td>
         </tr>
         <?php endforeach; ?>

@@ -78,6 +78,19 @@ function getTransactionId($id_transaction){
 }
 
 
+function insertDataTransaction($id_cust, $id_product, $tanggal, $jumlah){
+    global $getConnect;
+    $query = "INSERT INTO transactions VALUES('', '$id_cust', '$id_product', '$tanggal', '$jumlah')";
+    $result = mysqli_query($getConnect, $query);
+    return $result;
+}
+
+function deleteDataTransaction($id_transaction){
+    global $getConnect;
+    $query = "DELETE FROM transactions WHERE id_transaction = '$id_transaction'";
+    $result = mysqli_query($getConnect, $query);
+    return $result;
+}
 
 
 ?>

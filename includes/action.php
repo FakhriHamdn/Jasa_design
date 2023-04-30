@@ -65,6 +65,25 @@ if(isset($_POST['cust_submit'])){
 
 
 //ACTION FOR INSERT & UPDATE TRANSACTIONS
+if(isset($_POST['transaction_submit'])){
+    $id_transaction = $_POST['id_transaction'];
+    $id_cust = htmlspecialchars($_POST['id_cust']);
+    $id_product = htmlspecialchars($_POST['id_product']);
+    $tanggal = $_POST['tanggal'];
+    $jumlah = $_POST['jumlah'];
+
+    if($_GET['action'] === 'insertTransaction'){
+        $result = insertDataTransaction($id_cust, $id_product, $tanggal, $jumlah);
+        if($result){
+            $msg = "Transaction data has been successfully updated";
+                header("Location: ../admin2/data_transaction.php?message=" . urlencode($msg));
+                exit();
+        }
+    }
+
+
+}
+
 
 
 
@@ -80,12 +99,22 @@ if(isset($_GET['id_delete'])) {
             header("Location: ../admin2/data_product.php?message=" . urlencode($msg));
             exit();
         }
+
     } else if($_GET['page'] === 'customer') {
         $id_cust = $_GET['id_delete'];
         $result = deleteDataCustomer($id_cust);
         if($result){
             $msg = "Customer data has been successfully deleted";
             header("Location: ../admin2/data_cust.php?message=" . urlencode($msg));
+            exit();
+        }
+
+    } else if($_GET['page'] === 'transaction'){
+        $id_transaction = $_GET['id_delete'];
+        $result = deleteDataTransaction($id_transaction);
+        if($result){
+            $msg = "Transaction data has been successfully deleted";
+            header("Location: ../admin2/data_transaction.php?message=" . urlencode($msg));
             exit();
         }
     }
