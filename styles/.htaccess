@@ -1,3 +1,0 @@
-Require all denied
-RewriteEngine On
-RewriteRule ^(.*)$ - [R=404,L]

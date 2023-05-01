@@ -3,7 +3,7 @@ session_start();
 
 if(isset($_POST['logout'])) {
     session_destroy();
-    header("location: ../login/index.php?message=logout");
+    header("location: ../auth2/login.php?message=logout");
 }
 
 ?>

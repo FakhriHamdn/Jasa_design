@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,15 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../image/login.png" type="image/x-icon">
     <link rel="stylesheet" href="../styles/auth.css">
-    <title>Page Login MultipleUser</title>
+    <title>Login to Rofara Store Account</title>
 </head>
-
 <body>
     <div class="container">
         <section class="wrapper">
             <div class="title">
-                <h2 class="page-title">Login Page</h2>
-                <h3 class="welcome-message">Welcome to Login Multiple User</h3>
+                <h2 class="page-title">Unleash Your Creativity with ROFARA Store</h2>
+                <h3 class="welcome-message">Login to your account and start designing today</h3>
                 <span class="login-text">login</span>
                 <!-- buat munculin notif -->
                 <?php
@@ -27,24 +25,33 @@
                 ?>
             </div>
             <div>
-                <form action="action.php" method="POST" class="form-login">
+                <form action="../includes/action.php?auth=login" method="post">
                     <div class="input-kolom">
-                        <div class="input-email">
-                            <label for="email">Input Email</label>
-                            <input type="email" placeholder="Email" name="email" class="input-login" required>
-                        </div>
-                        <div class="input-pass">
-                            <label for="password">Input Password</label>
-                            <input type="password" placeholder="******" name="password" class="input-login" autocomplete="off" required>
-                        </div>
-                            <button type="submit" class="btn" name="submit">Submit</button>
+                        <ul style="list-style-type: none;">
+                            <li>
+                                <div class="input-email">
+                                <label for="email">Email</label>
+                                <input type="email"name="email" id="email" placeholder="Email" class="input-login" autocomplete="off" required>
+                                </div>
+                            </li>
+                            <li class="input-pass">
+                                <label for="password">Password</label>
+                                <input type="password"name="password" id="password" placeholder="******" class="input-login" autocomplete="off" required>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="remember" id="remember">
+                                <label for="remember">Remember Me</label>
+                            </li>
+                            <li>
+                                <button type="submit" name="auth_submit" class="btn">Login</button>
+                            </li>
+                        </ul>
                         <div class="register-container">
                         <p class="acc-text">Don't have an account?
                         <span class="register-text"><a href="register.php">Register</a></span>
                         </p>
                         </div>
                     </div>
-                    <br>
                 </form>
             </div>
         </section>
