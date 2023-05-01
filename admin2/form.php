@@ -1,17 +1,32 @@
-<?php
-require '../includes/functions.php';
+<?php 
+require_once '../includes/functions.php';
 
-$id_product = isset($_GET['id_product']) && $_GET['id_product'] > 0 ? $_GET['id_product'] : null;
-$product = null;
-if($id_product) {
-    $product = getProductId($id_product);
+$query = "SELECT * FROM customers";
+$query1 = "SELECT * FROM products";
+
+if(isset($_GET['id_transaction']) && $_GET['id_transaction'] > 0){
+    $id_transaction = $_GET['id_transaction'];
+    $id_cust = $_POST['id_cust'] ?? '';
+    $id_product = $_POST['id_product'] ?? '';
+    $jumlah = $_POST['jumlah'] ?? '';
+
+    $row = getTransactionId($id_transaction);
+    if($row){
+        $title = "Admin | Edit Data Transactions";
+        $h1 = "Form Edit Data Transaction";
+        $form_action = "../includes/action.php?action=updateTransaction";
+    } 
+} else {
+    $id_transaction = '';
+    $id_cust = '';
+    $id_product = '';
+    $jumlah = '';
+    $title = "Admin | Tambah Data Transactions";
+    $h1 = "Form Tambah Data Transaction";
+    $form_action = "../includes/action.php?action=insertTransaction";
 }
 
-$title = $product ? 'Admin | Form Edit Data Product' : 'Admin | Form Tambah Data Product';
-$h1 = $product ? 'Form Edit Data Product' : 'Form Tambah Data Product';
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,25 +37,41 @@ $h1 = $product ? 'Form Edit Data Product' : 'Form Tambah Data Product';
     <title><?= $title ?></title>
 </head>
 <body>
-    <h1><?= $h1; ?></h1>
-    <form action="../includes/action.php" method="POST">
-        <input type="hidden" name="action" value="<?= $product ? 'editProduct' : 'insertProduct' ?>">
-    
-        <?php if($product): ?>
-            <input type="hidden" name="id_product" value="<?= $id_product ?>">
-        <?php endif; ?>
-
+    <h1><?= $h1 ?></h1>
+    <form action="<?= $form_action ?>" method="POST">
+        <input type="hidden" name="id_transaction" value="<?= $id_transaction ?>">
         <ul>
             <li>
-                <label for="product">Produk</label>
-                <input type="text" name="product" id="product" value="<?= $product ? $product['nama_product'] : '' ?>">
+                <label for="nama_cust">Nama Customer</label>
+                <select name="id_cust" id="id_cust">
+                    <option disable selected>Pilih Nama Customer</option>
+                    <?php foreach(getDatas($query) as $opsi) : ?>
+                        <?php $select = $opsi['id_cust'] === $id_cust ? 'selected' : '';?>
+                        <option value="<?= $opsi['id_cust'] ?>" <?= $select ?> ><?= $opsi['nama_cust']  . ' - ' . $opsi['alamat']  . ' - ' . $opsi['no_telp']?></option>
+                    <?php endforeach; ?>
+                </select>
+            </li>
+            
+            <li>
+                <label for="nama_product">Product</label>
+                <select name="id_product" id="id_product">
+                    <option disable selected>Pilih Product</option>
+                    <?php foreach(getDatas($query1) as $opsi) : ?>
+                        <?php $select = $opsi['id_product'] === $id_product ? 'selected' : '';?>
+                        <option value="<?= $opsi['id_product'] ?>" <?= $select ?> ><?= $opsi['nama_product']  . ' ' . '- Rp ' . $opsi['harga']?>
+                    <?php endforeach; ?>
+                </select>
             </li>
             <li>
-                <label for="harga">Harga</label>
-                <input type="number" name="harga" id="harga" value="<?= $product ? $product['harga'] : '' ?>">
+                <label for="tanggal">Tanggal</label>
+                <input type="date" name="tanggal" id="tanggal" value="<?= $tanggal?>">
             </li>
             <li>
-                <button type="submit" name="jasa_submit">Submit</button>
+                <label for="jumlah">Jumlah</label>
+                <input type="number" name="jumlah" id="jumlah" value="<?= $jumlah ?>">
+            </li>
+            <li>
+                <button type="submit" name="transaction_submit">Submit</button>
             </li>
         </ul>
     </form>

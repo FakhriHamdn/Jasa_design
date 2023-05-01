@@ -1,7 +1,9 @@
 <?php 
 require 'functions.php';
 
-//ACTION FOR INSERT & UPDATE PRODUCTS
+
+//================= ACTION FOR CRUD DATA =================
+// CRUD DATA PRODUCT
 if(isset($_POST['action'])) {
     $nama_product = htmlspecialchars($_POST['product']);
     $harga = htmlspecialchars($_POST['harga']);
@@ -31,7 +33,7 @@ if(isset($_POST['action'])) {
 }
 //END PRODUCTS
 
-//ACTION FOR INSERT & UPDATE CUSTOMERS
+//ACTION DATA CUSTOMERS
 if(isset($_POST['cust_submit'])){
     $nama_cust = htmlspecialchars($_POST['cust']);
     $alamat = htmlspecialchars($_POST['alamat']);
@@ -64,7 +66,7 @@ if(isset($_POST['cust_submit'])){
 //END CUSTOMERS
 
 
-//ACTION FOR INSERT & UPDATE TRANSACTIONS
+//ACTION DATA TRANSACTIONS
 if(isset($_POST['transaction_submit'])){
     $id_transaction = $_POST['id_transaction'];
     $id_cust = htmlspecialchars($_POST['id_cust']);
@@ -89,7 +91,7 @@ if(isset($_POST['transaction_submit'])){
 
 
 
-//ACTION FOR DELETING DATAS
+//ACTION DELETING DATAS
 if(isset($_GET['id_delete'])) {
     if($_GET['page'] === 'product'){
         $id_product = $_GET['id_delete'];
@@ -120,3 +122,62 @@ if(isset($_GET['id_delete'])) {
     }
 }
 //END DELETING DATAS
+//================== END CRUD DATAS ==================
+
+
+//================= VALIDASI / CONDITION FOR AUTHENTICATION =================
+if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
+    //data yang diketikkan user bakal ditampung ke variable
+    $email = htmlspecialchars(strtolower($_POST['email']));
+    $password = htmlspecialchars($_POST['password']);
+    $fullname = htmlspecialchars($_POST['fname']) . ' ' . htmlspecialchars($_POST['lname']);
+    $confirm_password = htmlspecialchars($_POST['cpassword']);
+    $role = $_POST['role'];
+
+    //Validasi dikit & membuat enkripsi password
+    if(strlen($password) && strlen($confirm_password)>= 3){
+        if($password === $confirm_password){
+            $pass = password_hash($password, PASSWORD_DEFAULT);
+            $result = addUsersData($email, $pass, $fullname, $role);
+            if($result){
+                $msg = "Yayy! You have successfully registered on our page";
+                header("Location: ../auth2/login.php?message=" . urlencode($msg));
+                exit();
+            }
+        } else {
+            $msg = "Passwords are not equal";
+            header("Location: ../auth2/register.php?message=" . urlencode($msg));
+        }
+    } else {
+        $msg = "Password must contain at least 3 words";
+        header("Location: ../auth2/register.php?message=" . urlencode($msg));
+    }
+
+} else if (isset($_POST['auth_submit']) && $_GET['auth'] === 'login'){
+    //data yang diketikkan user bakal ditampung divariable ini
+    $email = htmlspecialchars(strtolower($_POST['email']));
+    $password = htmlspecialchars($_POST['password']);
+
+    //validasi apakah data ada atau tidak didatabase
+    $result = getUsersData($email);
+    if($result->num_rows > 0){
+        $row = mysqli_fetch_assoc($result);
+            
+        if(password_verify($password, $row['password'])){
+
+            $_SESSION['login'] = true;
+
+            $msg = "Yayy! you have successfully logged in!";
+            header("Location: ../auth2/home.php?message=" . urlencode($msg));
+        } else{
+            $msg = "Incorrect email or password";
+            header("Location: ../auth2/login.php?message=" . urlencode($msg));
+        }
+
+    } else {
+        $msg = "Data invalid";
+        header("Location: ../auth2/login.php?message=" . urlencode($msg));
+    }
+}
+
+//================== END AUTHENTICATION ==================

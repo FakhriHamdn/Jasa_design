@@ -4,9 +4,34 @@ $conn = new myConnection();
 $getConnect = $conn->getConnection();
 //END CONNECTION
 
-
+//================= FUNCTION SELECT DATA FROM DATABASE =================
 function getDatas($query){
     global $getConnect;
+    $result = mysqli_query($getConnect, $query);
+    $rows = [];
+    while($row = mysqli_fetch_assoc($result)){
+        $rows[] = $row;
+    }
+    return $rows;
+}
+//================== END SELECT DATA ==================
+
+
+//================= FUNCTION FOR CRUD DATA =================
+function fetchCustomer(){
+    global $getConnect;
+    $query = "SELECT id_cust, nama_cust, no_telp FROM customers";
+    $result = mysqli_query($getConnect, $query);
+    $rows = [];
+    while($row = mysqli_fetch_assoc($result)){
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
+function fetchProduct(){
+    global $getConnect;
+    $query = "SELECT id_product, nama_product, harga FROM products";
     $result = mysqli_query($getConnect, $query);
     $rows = [];
     while($row = mysqli_fetch_assoc($result)){
@@ -86,7 +111,6 @@ function getTransactionId($id_transaction){
     return $row;
 }
 
-
 function insertDataTransaction($id_cust, $id_product, $tanggal, $jumlah){
     global $getConnect;
     $query = "INSERT INTO transactions VALUES('', '$id_cust', '$id_product', '$tanggal', '$jumlah')";
@@ -100,6 +124,34 @@ function deleteDataTransaction($id_transaction){
     $result = mysqli_query($getConnect, $query);
     return $result;
 }
+//================== END CRUD DATA ==================
+
+
+//================= FUNCTION FOR AUTHENTICATION =================
+function addUsersData($email, $password, $fullname, $role){
+    global $getConnect;
+    $query = "INSERT INTO users VALUES('', '$email', '$password', '$fullname', '$role')";
+    $result = mysqli_query($getConnect, $query);
+    return $result;
+}
+
+function getUsersData($email){
+    global $getConnect;
+    $query = "SELECT * FROM users WHERE email = '$email'";
+    $result = mysqli_query($getConnect, $query);
+    return $result;
+    
+}
+
+
+
+
+
+
+
+
+//================== END AUTHENTICATION ==================
+
 
 
 ?>

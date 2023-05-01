@@ -1,31 +1,24 @@
 <?php 
 require '../includes/functions.php';
 
+
+
 if(isset($_GET['id_transaction']) && $_GET['id_transaction'] > 0){
     $id_transaction = $_GET['id_transaction'];
-    $row = getTransactionId($id_transaction);
-    
-    $id_transaction = $row['id_transaction'];
-    $id_cust = $row['id_cust'];
-    $id_product = $row['id_product'];
-    $nama_cust = $row['nama_cust'];
-    $nama_product = $row['nama_product'];
-    $tanggal = $row['tanggal'];
-    $jumlah_product = $row['jumlah_product'];
-    $harga = $row['harga'];
-    $total_pembayaran = $row['total_pembayaran'];
+    $row = getTransactionId($id_transaction);    
+
     $title = 'Admin | Update Data Transaction';
     $h1 = 'Form Update Data Transaction';
-    $form_action = '../inludes/action.php?action=updateTransaction';
+    $form_action = '../includes/action.php?action=updateTransaction';
 
 } else {
+    $row = '';
     $title = 'Admin | Tambah Data Transaction';
     $h1 = 'Form Tambah Data Transaction';
-    $form_action = '../inludes/action.php?action=insertTransaction';
+    $form_action = '../includes/action.php?action=insertTransaction';
 }
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,28 +31,43 @@ if(isset($_GET['id_transaction']) && $_GET['id_transaction'] > 0){
 <body>
     <h1><?=$h1?></h1>
     <form action="<?=$form_action?>" method="POST">
-        <?php if ($row) : ?>
+        <?php if($row) : ?>
             <input type="hidden" name="id_transaction" value="<?= $row['id_transaction'] ?>">
         <?php endif; ?>
         <ul>
             <li>
-                <label for="cust">customers</label>
-                <input type="text" name="cust" id="cust" value="<?= ($row) ? $row['nama_cust'] : '' ?>">
+                <label for="cust">Customer</label>
+                <select name="cust" id="cust">
+                    <option disabled selected>Pilih Customer</option> 
+
+                    <?php foreach(fetchCustomer() as $opsi) : ?>
+                        <?php $selected = $opsi['id_cust'] === $id_transaction ? 'selected="selected"' : '';?>
+                        <option value="<?= $opsi['id_cust'];?>" <?= $selected?>><?= $opsi['nama_cust'] . ' - ' . $opsi['no_telp'];?></option>
+                    <?php endforeach;?>
+
+                </select>
             </li>
             <li>
-                <label for="alamat">Alamat</label>
-                <input type="text" name="alamat" id="alamat" value="<?= ($row) ? $row['alamat'] : '' ?>">
+                <label for="product">Product</label>
+                <select name="product" id="product">
+                    <option disabled selected>Pilih Product</option>   
+
+                    <?php foreach(fetchProduct() as $opsi) : ?>
+                        <?php $selected = $opsi['id_product'] === $id_product ? 'selected' : '';?>
+                        <option value="<?= $opsi['id_product'];?>" <?= $selected?> ><?= $opsi['nama_product'] . ' -Rp ' . $opsi['harga'];?></option>
+                    <?php endforeach;?>
+                </select>
             </li>
             <li>
                 <label for="tanggal">Tanggal</label>
-                <input type="date" name="tanggal" id="tanggal" value="<?=$tanggal?>">
+                <input type="date" name="tanggal" id="tanggal" value="<?= ($row) ? $row['tanggal'] : '' ?>">
             </li>
             <li>
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" value="<?= ($row) ? $row['email'] : '' ?>">
+                <label for="jumlah">Jumlah</label>
+                <input type="number" name="jumlah" id="jumlah" value="<?= ($row) ? $row['jumlah_product'] : '' ?>">
             </li>
             <li>
-                <button type="submit" name="cust_submit">Submit</button>
+                <button type="submit" name="transaction_submit">Submit</button>
             </li>
         </ul>
     </form>
