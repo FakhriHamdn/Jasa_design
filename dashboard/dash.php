@@ -21,11 +21,11 @@ if(isset($_POST['logout'])) {
 
     <!-- INI KLO MAU PAKE YANG LANGSUNG SATU FILE, BUKA AJA COMMENT AN INI, TAPI YANG BAWAH TUH DI BIKIN COMMENT JUGA -->
     <?php 
-if($_SESSION['role'] == 'admin'){
+if($_SESSION['role'] === 'admin'){
     echo "<h2>Selamat datang</h2>" . $_SESSION['fullname'];
     echo "<h4>Status :</h4>" . $_SESSION['role'];
     echo "<a href='database.php'>Database</a>";
-} else {
+} else if($_SESSION['role'] === 'user'){
     echo "<h2>Selamat datang</h2>" . $_SESSION['fullname'];
     echo "<h4>Status :</h4>" . $_SESSION['role'];
 }

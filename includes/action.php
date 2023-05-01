@@ -1,5 +1,7 @@
 <?php 
 require 'functions.php';
+session_start();
+
 
 
 //================= ACTION FOR CRUD DATA =================
@@ -165,10 +167,14 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
             
         if(password_verify($password, $row['password'])){
 
-            $_SESSION['login'] = true;
+            //nampung data dibrowser
+            $_SESSION['status'] = true;
+            $_SESSION['email'] = $row['email']; 
+            $_SESSION['fullname'] = $row['fullname']; 
+            $_SESSION['role'] = $row['role']; 
 
             $msg = "Yayy! you have successfully logged in!";
-            header("Location: ../auth2/home.php?message=" . urlencode($msg));
+            header("Location: ../dashboard/dash.php?message=" . urlencode($msg));
         } else{
             $msg = "Incorrect email or password";
             header("Location: ../auth2/login.php?message=" . urlencode($msg));
