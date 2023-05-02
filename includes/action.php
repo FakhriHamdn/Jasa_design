@@ -143,16 +143,16 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
             $result = addUsersData($email, $pass, $fullname, $role);
             if($result){
                 $msg = "Yayy! You have successfully registered on our page";
-                header("Location: ../auth2/login.php?message=" . urlencode($msg));
+                header("Location: ../auth/login.php?message=" . urlencode($msg));
                 exit();
             }
         } else {
             $msg = "Passwords are not equal";
-            header("Location: ../auth2/register.php?message=" . urlencode($msg));
+            header("Location: ../auth/register.php?message=" . urlencode($msg));
         }
     } else {
         $msg = "Password must contain at least 3 words";
-        header("Location: ../auth2/register.php?message=" . urlencode($msg));
+        header("Location: ../auth/register.php?message=" . urlencode($msg));
     }
 
 } else if (isset($_POST['auth_submit']) && $_GET['auth'] === 'login'){
@@ -177,12 +177,12 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
             header("Location: ../dashboard/dash.php?message=" . urlencode($msg));
         } else{
             $msg = "Incorrect email or password";
-            header("Location: ../auth2/login.php?message=" . urlencode($msg));
+            header("Location: ../auth/login.php?message=" . urlencode($msg));
         }
 
     } else {
         $msg = "Data invalid";
-        header("Location: ../auth2/login.php?message=" . urlencode($msg));
+        header("Location: ../auth/login.php?message=" . urlencode($msg));
     }
 }
 

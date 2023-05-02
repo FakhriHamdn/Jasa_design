@@ -1,7 +1,7 @@
+/* MENGHILANGKAN TOMBOL PUTAT PADA INPUT NUMBER */
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+    margin: 0; 
 }
 
 
@@ -10,30 +10,51 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    /* background: #ff00000d !important; */
 }
 
 html {
     background: beige;
 }
 
+#box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* BUAT NGATUR LETAR CONTAINER FILED */
 .title {
     text-align: center;
-    /* border: 2px solid tomato; */
     text-transform: capitalize;
     margin: 4% 0.5em 0 0.5em;
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 12px;
+    color: #fff;
 }
 
 .title h2 {
-    font-weight: bold;
+    font-weight: 900;
     font-size: 0.7em;
 }
 
 .title h3 {
     font-size: 0.33em;
     font-weight: 300;
-    color: #5e5e5f;
+    color: #fff;
 
 }
+
+h3.log_your{
+    font-weight: 600;
+    color: #24242a;
+    text-align: center;
+    font-size: 1em;
+}
+
 
 
 .container {
@@ -45,62 +66,118 @@ html {
 }
 
 .wrapper {
-    background: #fff;
+    background: url(../image/login_bg.jpg);
+    background-size: cover;
+    background-position: -9em 0;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-    width: 24em;
-    height: 30em;
-    padding: 16px;
-}
-
-
-.input-kolom {
-    margin: -0.3em 1.5em auto;
-    /* border: 2px solid black; */
-}
-
-.input-pass {
-    margin-top: 2%;
-}
-
-.form-login {
+    border-radius: 5px;
+    width: 48em;
+    height: 25em;
+    padding: 2em 1em;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    /* border: 2px solid tomato; */
+    gap: 4em;
+
+}
+/* WRAPPER REGISTER FORM */
+.wrapper_reg {
+    background: url(../image/regis_bg.jpg);
+    background-size: cover;
+
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    width: 48em;
+    height: 25em;
+    padding: 2em 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4em;
+}
+/* END */
+
+
+
+
+
+
+
+
+/* BUAT ATUR INPUTAN */
+.input-kolom {
+    /* border: 2px solid black; */
+    width: 15.5em;
 }
 
-.input-login, .btn {
+.input-con li {
+    margin-bottom: 4px; 
+}
+
+
+label {
+    font-size: 0.8em;
+    font-weight: 550;
+}
+
+.input-bar{
+    margin-top: 1px;
+}
+.input-bar, .btn {
     border: none;
-    padding: 0.8em;
-    font-size: 15px;
+    padding: 0.95em;
+    font-size: 0.8em;
     width: 100%;
     border-radius: 4px;
-    margin-top: 1px;
-    background: #eee;
-
+    background: #fff;
 }
 
 input::placeholder {
-    font-size: 0.8em;
+    font-size: 0.95em;
 
 }
+/* BLM */
+.input-bar:focus, .input-bar:hover {
+    outline: none;
+    border-color: #bf202f;
+    background-color: #fff;
+    box-shadow: 0 0 0 2px #bf202f1a;
+}
 
+/* ATUR CHECKBOX */
+.checkbox_container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6%;
+    margin-top: 4%;
+}
+
+.checkbox {
+    width: 16.5px;
+    height: 16.5px;
+    border: 1px solid rgb(233, 231, 231);
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+label.remember {
+    font-size: 0.8em;
+    font-weight: 550;
+    color: #333;
+}
+/* END CHECKBOX */
 
 
 .btn {
     border: none;
-    font-size: 1em;
+    font-size: 0.9em;
     font-weight: 550;
-    background: #24242a;
+    background: #bf202f;
     cursor: pointer;
+    padding: 0.85em 0;
     color: #eaeaea;
     transition: 0.4s;
-    margin-top: 7%;
-    -webkit-transition: 0.4s;
-    -moz-transition: 0.4s;
-    -ms-transition: 0.4s;
-    -o-transition: 0.4s;
 }
 
 .btn:hover{
@@ -108,31 +185,19 @@ input::placeholder {
     color: #24242a;
     font-weight: 550;
     transition: 0.2s;
-    -webkit-transition: 0.2s;
-    -moz-transition: 0.2s;
-    -ms-transition: 0.2s;
-    -o-transition: 0.2s;
 } 
 
-.title {
-    font-size: 3em;
-    text-align: center;
-    margin-bottom: 12px;
-}
 
-label {
-    font-size: 0.8em;
 
-}
-
+/* ATUR NOTIF YANG MUNCUL */
 .notif-login {
-    background-color: #FF0000;
+    background-color: red;
     text-transform: none;
     padding: 2px;
     position: relative;
     font-style: italic;
     text-align: center;
-    font-size: 0.25em;
+    font-size: 0.7em;
     color: #fff;
 }
 
@@ -140,8 +205,7 @@ label {
 span.login-text {
     color: #5e5e5f;
     display: flex;
-    font-size: 0.27em;
-    text-transform: lowercase;
+    font-size: 0.6em;
     margin: 2% auto;
 }
 
@@ -155,36 +219,35 @@ span.login-text:before, span.login-text:after {
 
 span.login-text:before {
     margin-right: 0.7rem;
-    background: black;
+    background: #24242a;
 }
 span.login-text:after {
     margin-left: 0.7rem;
-    background-color: black;
+    background-color: #24242a;
 }
 /* END ATUR GARIS */
 
 
-.register-container {
+.cta {
     align-items: center;
     display: flex;
     justify-content: center;
-    margin-top: 5%;
+    margin-top: 6%;
 }
 
-p.acc-text {
-    font-size: 0.85em;
+p.cta-text {
+    font-size: 0.8em;
     font-weight: 550;
     width: 15em;
     text-align: center;
-    color: #24242a;
 }
 
-span.register-text a {
+span.cta-text2 a {
     text-decoration: none;
     font-size: 1em;
 }
 
-span.register-text a:hover {
+span.cta-text2 a:hover {
     text-decoration: underline;
-
 }
+

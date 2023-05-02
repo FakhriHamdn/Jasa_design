@@ -12,47 +12,50 @@
 <body>
     <div class="container">
         <section class="wrapper">
-            <div class="title">
-                <h2 class="page-title">Unleash Your Creativity with ROFARA Store</h2>
-                <h3 class="welcome-message">Login to your account and start designing today</h3>
-                <span class="login-text">login</span>
-                <!-- buat munculin notif -->
+            <div id="box" class="box1">
+                <div class="title">
+                    <h2 class="page-title">Unleash Your Creativity with ROFARA STORE</h2>
+                    <h3 class="welcome-message">Login to your account and start designing today</h3>
+                </div>
+            </div>
+            <div id="box" class="box2">
+
+            <div>
+                <h3 class="log_your">Login to your account</h3>
+                <span class="login-text">Login</span>
                 <?php
                 if (isset($_GET['message'])) {
                     $msg = $_GET['message'];
                     echo "<div class= 'notif-login'>$msg</div>";
-                }
-                ?>
-            </div>
-            <div>
-                <form action="../includes/action.php?auth=login" method="post">
-                    <div class="input-kolom">
-                        <ul style="list-style-type: none;">
-                            <li>
-                                <div class="input-email">
-                                <label for="email">Email</label>
-                                <input type="email"name="email" id="email" placeholder="Email" class="input-login" autocomplete="off" required>
-                                </div>
-                            </li>
-                            <li class="input-pass">
-                                <label for="password">Password</label>
-                                <input type="password"name="password" id="password" placeholder="******" class="input-login" autocomplete="off" required>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="remember" id="remember">
-                                <label for="remember">Remember Me</label>
-                            </li>
-                            <li>
-                                <button type="submit" name="auth_submit" class="btn">Login</button>
-                            </li>
-                        </ul>
-                        <div class="register-container">
-                        <p class="acc-text">Don't have an account?
-                        <span class="register-text"><a href="register.php">Register</a></span>
-                        </p>
+                }?>
+            <form action="../includes/action.php?auth=login" method="post">
+                <div class="input-kolom">
+                            <ul style="list-style-type: none;">
+                            <div class="input-con">
+                                <li>
+                                    <label for="email">Email</label>
+                                    <input type="email"name="email" id="email" placeholder="Email" class="input-bar" autocomplete="off" required>
+                                </li>
+                                <li>
+                                    <label for="password">Password</label>
+                                    <input type="password"name="password" id="password" placeholder="******" class="input-bar" autocomplete="off" required>
+                                </li>
+                            </div>
+                                <li class="checkbox_container">
+                                    <input type="checkbox" name="remember" id="remember" class="checkbox">
+                                    <label for="remember" class="remember">Remember my account</label>
+                                </li>
+                                <li>
+                                    <button type="submit" name="auth_submit" class="btn">Login</button>
+                                </li>
+                            </ul>
+                            <div class="cta">
+                                <p class="cta-text">Don't have an account?
+                                <span class="cta-text2"><a href="register.php">Register</a></span></p>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>         
+                </div>
             </div>
         </section>
     </div>
