@@ -53,7 +53,7 @@
                         </ul>
                         <div class="cta">
                             <p class="cta_text">Don't have an account?
-                                <span class="cta_text2"><a href="register.php">Register</a></span>
+                                <span class="cta_text2"><a href="register.php" id="register-form">Register</a></span>
                             </p>
                         </div>
                     </form>
@@ -62,6 +62,5 @@
 
         </div>
     </main>
-    <script src="js/script.js"></script>
 </body>
 </html>
