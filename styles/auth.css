@@ -25,25 +25,31 @@ html {
     align-items: center;
 }
 
+
+
+
 /* BUAT NGATUR LETAR CONTAINER FILED */
 .title {
     text-align: center;
     text-transform: capitalize;
-    margin: 4% 0.5em 0 0.5em;
-    font-size: 3em;
-    text-align: center;
+    margin-top: 0.3em;
+    
+    /* margin: 4% 0.5em 0 0.5em; */
+    font-size: 3.25em;
     margin-bottom: 12px;
     color: #fff;
 }
-
-.title h2 {
+h2.page-title {
     font-weight: 900;
-    font-size: 0.7em;
+    letter-spacing: 0.3px;
+    font-size: 0.73em;
 }
 
 .title h3 {
-    font-size: 0.33em;
-    font-weight: 300;
+    padding: 0 1.9em;
+    margin-top: 2.3em;
+    font-size: 0.27em;
+    font-weight: 550;
     color: #fff;
 
 }
@@ -84,7 +90,9 @@ h3.log_your{
 .wrapper_reg {
     background: url(../image/regis_bg.jpg);
     background-size: cover;
-
+    background-position: 7em 0;
+    background-repeat: no-repeat;
+    background-color: #f1f1f1;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     width: 48em;
@@ -107,7 +115,10 @@ h3.log_your{
 /* BUAT ATUR INPUTAN */
 .input-kolom {
     /* border: 2px solid black; */
-    width: 15.5em;
+    /* width: 15.5em; */
+    width: 100%;
+    max-width: 25em;
+    
 }
 
 .input-con li {
@@ -122,6 +133,7 @@ label {
 
 .input-bar{
     margin-top: 1px;
+    transition: 0.3s;
 }
 .input-bar, .btn {
     border: none;
@@ -139,9 +151,10 @@ input::placeholder {
 /* BLM */
 .input-bar:focus, .input-bar:hover {
     outline: none;
-    border-color: #bf202f;
+    border-color: #fec112;
     background-color: #fff;
-    box-shadow: 0 0 0 2px #bf202f1a;
+    box-shadow: 0 0 0 1.5px #fec112;
+    transition: 0.3s;
 }
 
 /* ATUR CHECKBOX */
@@ -172,20 +185,52 @@ label.remember {
 .btn {
     border: none;
     font-size: 0.9em;
-    font-weight: 550;
-    background: #bf202f;
+    font-weight: 800;
+    background:  #fec112;
     cursor: pointer;
-    padding: 0.85em 0;
-    color: #eaeaea;
+    padding: 0.84em 0;
+    letter-spacing: 0.5px;
+    color: #24242a;
     transition: 0.4s;
 }
 
 .btn:hover{
-    background: #eee;
+    background: #d7a900;
     color: #24242a;
-    font-weight: 550;
     transition: 0.2s;
 } 
+
+.input-con li {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.input-con li > label {
+    flex-basis: 100%;
+}
+
+.input-con li > input {
+    flex-basis: calc(50% - 5px);
+    margin-right: 10px;
+}
+
+/* .input-con li:nth-of-type(4),
+.input-con li:nth-of-type(5) {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.input-con li:nth-of-type(4) > label,
+.input-con li:nth-of-type(5) > label {
+    flex-basis: 100%;
+}
+
+.input-con li:nth-of-type(4) > input,
+.input-con li:nth-of-type(5) > input {
+    flex-basis: calc(50% - 5px);
+    margin-right: 10px;
+} */
+
 
 
 

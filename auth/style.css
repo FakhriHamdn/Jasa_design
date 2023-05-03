@@ -1,0 +1,41 @@
+.container{
+    width: 20em;
+}
+
+
+.form-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .form-group {
+    flex-basis: 45%;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    border: 1px solid purple;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  button[type="submit"] {
+    margin-top: 10px;
+  }
+  

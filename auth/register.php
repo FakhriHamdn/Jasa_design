@@ -13,47 +13,49 @@
     <div class="container">
         <section class="wrapper_reg">
             <div id="box" class="box2">
-            <!-- <span class="login-text">login</span> -->
-
+            <div>
+                <h3 class="log_your">Create your account</h3>
+                <span class="login-text">Register</span>
                 <?php
                 if (isset($_GET['message'])) {
                     $msg = $_GET['message'];
                     echo "<div class= 'notif-login'>$msg</div>";
                 }?>
-                <div>
                     <form action="../includes/action.php?auth=login" method="post" target="blank">
                         <div class="input-kolom">
                             <ul style="list-style-type: none;">
+                            <div class="input-con">
                                 <li>
-                                    <label for="fname">First Name</label>
-                                    <input type="text" name="fname" id="fname" placeholder="First Name" class="input-login" required>
+                                    <label for="fname" class="label-wrap">First Name</label>
+                                    <input type="text" name="fname" id="fname" placeholder="First Name" class="input-wrap" required>
                                 </li>
                                 <li>
-                                    <label for="lname">Last Name</label>
-                                    <input type="text" name="lname" id="lname" placeholder="Last Name" class="input-login" required>
+                                    <label for="lname" class="label-wrap">Last Name</label>
+                                    <input type="text" name="lname" id="lname" placeholder="Last Name" class="input-wrap" required>
                                 </li>
                                 <li>
                                     <label for="email">Email</label>
-                                    <input type="email" name="email" id="email" placeholder="Email" class="input-login" required>
+                                    <input type="email" name="email" id="email" placeholder="Email" class="input-bar" required>
                                 </li>
                                 <li>
-                                    <label for="password">Password</label>
-                                    <input type="password" name="password" id="password" placeholder="******" class="input-login" autocomplete="off" required>
+                                    <label for="password" class="label-wrap">Password</label>
+                                    <input type="password" name="password" id="password" placeholder="******" class="input-wrap" autocomplete="off" required>
                                 </li>
                                 <li>
-                                    <label for="cpassword">Confirm Password</label>
-                                    <input type="password" name="cpassword" id="cpassword" placeholder="******" class="input-login" autocomplete="off" required>
+                                    <label for="cpassword" class="label-wrap">Confirm Password</label>
+                                    <input type="password" name="cpassword" id="cpassword" placeholder="******" class="input-wrap" autocomplete="off" required>
                                 </li>
                                 <li>
+                            </div>
                                     <input type="hidden" name="role" value="user">
                                 </li>
                                 <li>
-                                    <button type="submit" name="auth_submit" class="btn">Login</button>
+                                    <button type="submit" name="auth_submit" class="btn">Register</button>
                                 </li>
                             </ul>
-                            <div class="register-container">
-                                <p class="acc-text">Already have an account?
-                                <span class="register-text"><a href="login.php">Login</a></span></p>
+                            <div class="cta">
+                                <p class="cta-text">Already have an account?
+                                <span class="cta-text2"><a href="login.php">Login</a></span></p>
                             </div>
                         </div>
                     </form>

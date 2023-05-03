@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../image/login.png" type="image/x-icon">
     <link rel="stylesheet" href="../styles/auth.css">
-    <title>Login to Rofara Store Account</title>
+    <title>Login to your account</title>
 </head>
 <body>
     <div class="container">
@@ -30,32 +30,32 @@
                 }?>
             <form action="../includes/action.php?auth=login" method="post">
                 <div class="input-kolom">
-                            <ul style="list-style-type: none;">
-                            <div class="input-con">
-                                <li>
-                                    <label for="email">Email</label>
-                                    <input type="email"name="email" id="email" placeholder="Email" class="input-bar" autocomplete="off" required>
-                                </li>
-                                <li>
-                                    <label for="password">Password</label>
-                                    <input type="password"name="password" id="password" placeholder="******" class="input-bar" autocomplete="off" required>
-                                </li>
-                            </div>
-                                <li class="checkbox_container">
-                                    <input type="checkbox" name="remember" id="remember" class="checkbox">
-                                    <label for="remember" class="remember">Remember my account</label>
-                                </li>
-                                <li>
-                                    <button type="submit" name="auth_submit" class="btn">Login</button>
-                                </li>
-                            </ul>
-                            <div class="cta">
-                                <p class="cta-text">Don't have an account?
-                                <span class="cta-text2"><a href="register.php">Register</a></span></p>
-                            </div>
-                        </div>
-                    </form>         
+                    <ul style="list-style-type: none;">
+                    <div class="input-con">
+                        <li>
+                            <label for="email">Email</label>
+                            <input type="email"name="email" id="email" placeholder="Email" class="input-bar" autocomplete="off" required>
+                        </li>
+                        <li>
+                            <label for="password">Password</label>
+                            <input type="password"name="password" id="password" placeholder="******" class="input-bar" autocomplete="off" required>
+                        </li>
+                    </div>
+                        <li class="checkbox_container">
+                            <input type="checkbox" name="remember" id="remember" class="checkbox">
+                            <label for="remember" class="remember">Remember my account</label>
+                        </li>
+                        <li>
+                            <button type="submit" name="auth_submit" class="btn">Login</button>
+                        </li>
+                    </ul>
+                    <div class="cta">
+                        <p class="cta-text">Don't have an account?
+                        <span class="cta-text2"><a href="register.php">Register</a></span></p>
+                    </div>
                 </div>
+            </form>         
+            </div>
             </div>
         </section>
     </div>
