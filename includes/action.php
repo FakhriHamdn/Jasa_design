@@ -151,7 +151,7 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
             header("Location: ../auth/register.php?message=" . urlencode($msg));
         }
     } else {
-        $msg = "Password must contain at least 3 words";
+        $msg = "Password must contain at least 3 characters";
         header("Location: ../auth/register.php?message=" . urlencode($msg));
     }
 
@@ -164,7 +164,6 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
     $result = getUsersData($email);
     if($result->num_rows > 0){
         $row = mysqli_fetch_assoc($result);
-            
         if(password_verify($password, $row['password'])){
 
             //nampung data dibrowser
@@ -173,15 +172,18 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
             $_SESSION['fullname'] = $row['fullname']; 
             $_SESSION['role'] = $row['role']; 
 
+            if(isset($_POST['remember'])){
+                setcookie('id', 'apakek',time()+3600);
+            }
+
             $msg = "Yayy! you have successfully logged in!";
-            header("Location: ../dashboard/dash.php?message=" . urlencode($msg));
+            header("Location: ../admin2/data_cust.php?message=" . urlencode($msg));
         } else{
             $msg = "Incorrect email or password";
             header("Location: ../auth/login.php?message=" . urlencode($msg));
-        }
-
+        } 
     } else {
-        $msg = "Data invalid";
+        $msg = "Incorrect email or password";
         header("Location: ../auth/login.php?message=" . urlencode($msg));
     }
 }

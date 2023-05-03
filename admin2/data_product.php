@@ -20,6 +20,7 @@ $query = "SELECT * FROM products";
         echo $message;
         }
     ?>
+    <a href="../auth/logout.php">Logout</a>
     <h1>Data Product</h1>
 
     <br>

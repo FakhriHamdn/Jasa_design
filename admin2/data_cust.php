@@ -10,16 +10,16 @@ $query = "SELECT * FROM customers";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Admin | Data Jasa</title>
 </head>
 <body>
-    <?php 
-    if(isset($_GET['message'])) {
+<?php
+    if (isset($_GET['message'])) {
         $msg = $_GET['message'];
-        echo $msg;
-        }
-    
-    ?>
+        echo "<div class= 'notif'>$msg</div>";
+    } ?>
+    <a href="logout.php">Logout</a>
     <h1>Data Jasa Produk</h1>
     <a href="form_cust.php">Tambah Data</a>
     <nav>

@@ -3,8 +3,11 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { 
     margin: 0; 
 }
+/* END MENGHILANGKAN TOMBOL PUTAR */
 
 
+
+/*============ SETTINGAN WEBSITE & BACKGROUND ============*/
 * {
     padding: 0;
     margin: 0;
@@ -16,8 +19,52 @@ input[type=number]::-webkit-outer-spin-button {
 html {
     background: beige;
 }
+/*============ END SETTINGAN WEBSITE ============*/
 
-#box {
+
+
+/*============ MAIN CONTAINER ============*/
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+/*============ END MAIN ============*/
+
+
+
+/*============ TEMPAT BUAT BACKGROUND ============*/
+#wrapper {
+    background-size: cover;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    width: 48em;
+    height: 25em;
+    padding: 2em 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4em;
+}
+
+.login_wrapper{
+    background: url(../image/login_bg.jpg);
+    background-position: -9em 0;
+}
+
+.register_wrapper {
+    background: url(../image/regis_bg.jpg);
+    background-position: 8em 0;
+    background-repeat: no-repeat;
+    background-color: #f1f1f1;
+}
+/*============ END BACKGROUND ============*/
+
+
+
+/*============ NGATUR PAGE CONTENT ============*/
+#content {
     width: 100%;
     height: 100%;
     display: flex;
@@ -25,117 +72,109 @@ html {
     align-items: center;
 }
 
-
-
-
-/* BUAT NGATUR LETAR CONTAINER FILED */
-.title {
+.page_header {
     text-align: center;
     text-transform: capitalize;
     margin-top: 0.3em;
-    
     /* margin: 4% 0.5em 0 0.5em; */
     font-size: 3.25em;
     margin-bottom: 12px;
     color: #fff;
 }
-h2.page-title {
+
+.page_title {
     font-weight: 900;
     letter-spacing: 0.3px;
     font-size: 0.73em;
 }
 
-.title h3 {
+.page_subtitle {
     padding: 0 1.9em;
     margin-top: 2.3em;
     font-size: 0.27em;
     font-weight: 550;
     color: #fff;
-
 }
+/*============ END PAGE CONTENT ============*/
 
-h3.log_your{
+
+
+/*============ NGATUR FORM CONTENT ============*/
+
+.form_container{
+    width: 15.5em;
+}
+.form_container_register{
+    width: 16em;
+}
+.auth_title{
     font-weight: 600;
     color: #24242a;
     text-align: center;
     font-size: 1em;
 }
 
-
-
-.container {
+/*===== MENGATUR SPAN TEXT  */
+span.text_span {
+    color: #5e5e5f;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    
+    font-size: 0.6em;
+    margin: 2% auto;
 }
 
-.wrapper {
-    background: url(../image/login_bg.jpg);
-    background-size: cover;
-    background-position: -9em 0;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    width: 48em;
-    height: 25em;
-    padding: 2em 1em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4em;
-
-}
-/* WRAPPER REGISTER FORM */
-.wrapper_reg {
-    background: url(../image/regis_bg.jpg);
-    background-size: cover;
-    background-position: 7em 0;
-    background-repeat: no-repeat;
-    background-color: #f1f1f1;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    width: 48em;
-    height: 25em;
-    padding: 2em 1em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4em;
-}
-/* END */
-
-
-
-
-
-
-
-
-/* BUAT ATUR INPUTAN */
-.input-kolom {
-    /* border: 2px solid black; */
-    /* width: 15.5em; */
+span.text_span:before, span.text_span:after {
+    content: '';
     width: 100%;
-    max-width: 25em;
-    
+    height: 1px;
+    background-color: #24242a;
+    margin: auto;
 }
 
-.input-con li {
+span.text_span:before {
+    margin-right: 0.7rem;
+    background: #24242a;
+}
+span.text_span:after {
+    margin-left: 0.7rem;
+    background-color: #24242a;
+}
+/*===== END SPAN */
+
+
+/*===== ATUR NOTIF */
+.notif {
+    background-color: red;
+    text-transform: none;
+    padding: 2px;
+    position: relative;
+    font-style: italic;
+    text-align: center;
+    font-size: 0.7em;
+    color: #fff;
+}
+/*===== END NOTIF  */
+
+
+/*===== BUAT ATUR INPUTAN */
+ul{
+    list-style-type: none;
+}
+.input_container li {
     margin-bottom: 4px; 
 }
 
-
 label {
+    /* display: block; */
     font-size: 0.8em;
     font-weight: 550;
+    /* margin: 5px 0; */
 }
 
-.input-bar{
+.input_bar{
     margin-top: 1px;
     transition: 0.3s;
 }
-.input-bar, .btn {
+.input_bar, .btn {
     border: none;
     padding: 0.95em;
     font-size: 0.8em;
@@ -146,10 +185,9 @@ label {
 
 input::placeholder {
     font-size: 0.95em;
-
 }
-/* BLM */
-.input-bar:focus, .input-bar:hover {
+
+.input_bar:focus, .input_bar:hover {
     outline: none;
     border-color: #fec112;
     background-color: #fff;
@@ -157,7 +195,22 @@ input::placeholder {
     transition: 0.3s;
 }
 
-/* ATUR CHECKBOX */
+
+.form_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.form_group {
+    flex-basis: 50%;
+}
+
+/*===== END ATUR INPUTAN */
+
+
+/*===== ATUR CHECKBOX */
 .checkbox_container {
     display: flex;
     align-items: center;
@@ -179,9 +232,10 @@ label.remember {
     font-weight: 550;
     color: #333;
 }
-/* END CHECKBOX */
+/*===== END CHECKBOX */
 
 
+/*===== ATUR BUTTON */
 .btn {
     border: none;
     font-size: 0.9em;
@@ -199,80 +253,10 @@ label.remember {
     color: #24242a;
     transition: 0.2s;
 } 
-
-.input-con li {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.input-con li > label {
-    flex-basis: 100%;
-}
-
-.input-con li > input {
-    flex-basis: calc(50% - 5px);
-    margin-right: 10px;
-}
-
-/* .input-con li:nth-of-type(4),
-.input-con li:nth-of-type(5) {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.input-con li:nth-of-type(4) > label,
-.input-con li:nth-of-type(5) > label {
-    flex-basis: 100%;
-}
-
-.input-con li:nth-of-type(4) > input,
-.input-con li:nth-of-type(5) > input {
-    flex-basis: calc(50% - 5px);
-    margin-right: 10px;
-} */
+/*===== END ATUR BUTTON */
 
 
-
-
-/* ATUR NOTIF YANG MUNCUL */
-.notif-login {
-    background-color: red;
-    text-transform: none;
-    padding: 2px;
-    position: relative;
-    font-style: italic;
-    text-align: center;
-    font-size: 0.7em;
-    color: #fff;
-}
-
-/* MENGATUR GARIS OR  */
-span.login-text {
-    color: #5e5e5f;
-    display: flex;
-    font-size: 0.6em;
-    margin: 2% auto;
-}
-
-span.login-text:before, span.login-text:after {
-    content: '';
-    width: 100%;
-    height: 1px;
-    background-color: #24242a;
-    margin: auto;
-}
-
-span.login-text:before {
-    margin-right: 0.7rem;
-    background: #24242a;
-}
-span.login-text:after {
-    margin-left: 0.7rem;
-    background-color: #24242a;
-}
-/* END ATUR GARIS */
-
-
+/*===== ATUR CALL ACTION */
 .cta {
     align-items: center;
     display: flex;
@@ -280,19 +264,21 @@ span.login-text:after {
     margin-top: 6%;
 }
 
-p.cta-text {
+p.cta_text {
     font-size: 0.8em;
     font-weight: 550;
     width: 15em;
     text-align: center;
 }
 
-span.cta-text2 a {
+span.cta_text2 a {
     text-decoration: none;
     font-size: 1em;
 }
 
-span.cta-text2 a:hover {
+span.cta_text2 a:hover {
     text-decoration: underline;
 }
+/*==== END CTA  */
 
+/*============  END FORM CONTENT============*/

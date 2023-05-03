@@ -19,6 +19,7 @@ $query = "SELECT transactions.id_transaction,
     <title>Admin | Data Transaction</title>
 </head>
 <body>
+<a href="../auth/logout.php">Logout</a>
     <h1>Data Transactions</h1>
     <a href="form_transaction.php">Tambah Data</a>
     <nav>

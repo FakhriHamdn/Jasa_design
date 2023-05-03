@@ -10,65 +10,69 @@
     <title>Create your account</title>
 </head>
 <body>
-    <div class="container">
-        <section class="wrapper_reg">
-            <div id="box" class="box2">
-            <div>
-                <h3 class="log_your">Create your account</h3>
-                <span class="login-text">Register</span>
+    <main>
+        <div id="wrapper" class="register_wrapper">
+            <section id="content" class="form_content">
+            <div class="form_container_register">
+                <h3 class="auth_title">Create your account</h3>
+                <span class="text_span">Register</span>
                 <?php
                 if (isset($_GET['message'])) {
                     $msg = $_GET['message'];
-                    echo "<div class= 'notif-login'>$msg</div>";
+                    echo "<div class= 'notif'>$msg</div>";
                 }?>
-                    <form action="../includes/action.php?auth=login" method="post" target="blank">
-                        <div class="input-kolom">
-                            <ul style="list-style-type: none;">
-                            <div class="input-con">
-                                <li>
-                                    <label for="fname" class="label-wrap">First Name</label>
-                                    <input type="text" name="fname" id="fname" placeholder="First Name" class="input-wrap" required>
-                                </li>
-                                <li>
-                                    <label for="lname" class="label-wrap">Last Name</label>
-                                    <input type="text" name="lname" id="lname" placeholder="Last Name" class="input-wrap" required>
-                                </li>
+                    <form action="../includes/action.php?auth=register" method="POST">
+                        <ul style="list-style-type: none;">
+                            <div class="input_container">
+                                <div class="form_row">
+                                    <li class="form_group">
+                                        <label for="fname" class="label-wrap">First Name</label>
+                                        <input type="text" name="fname" id="fname" placeholder="First Name" class="input_bar" required>
+                                    </li>
+                                    <li class="form_group">
+                                        <label for="lname" class="label-wrap">Last Name</label>
+                                        <input type="text" name="lname" id="lname" placeholder="Last Name" class="input_bar" required>
+                                    </li>
+                                </div>
                                 <li>
                                     <label for="email">Email</label>
-                                    <input type="email" name="email" id="email" placeholder="Email" class="input-bar" required>
+                                    <input type="email" name="email" id="email" placeholder="Email" class="input_bar" required>
                                 </li>
-                                <li>
-                                    <label for="password" class="label-wrap">Password</label>
-                                    <input type="password" name="password" id="password" placeholder="******" class="input-wrap" autocomplete="off" required>
-                                </li>
-                                <li>
-                                    <label for="cpassword" class="label-wrap">Confirm Password</label>
-                                    <input type="password" name="cpassword" id="cpassword" placeholder="******" class="input-wrap" autocomplete="off" required>
-                                </li>
-                                <li>
+                                <div class="form_row">
+                                    <li class="form_group">
+                                        <label for="password" class="label-wrap">Password</label>
+                                        <input type="password" name="password" id="password" placeholder="******" class="input_bar" autocomplete="off" required>
+                                    </li>
+                                    <li class="form_group">
+                                        <label for="cpassword" class="label-wrap">Confirm</label>
+                                        <input type="password" name="cpassword" id="cpassword" placeholder="******" class="input_bar" autocomplete="off" required>
+                                    </li>
+                                </div>
                             </div>
-                                    <input type="hidden" name="role" value="user">
-                                </li>
                                 <li>
-                                    <button type="submit" name="auth_submit" class="btn">Register</button>
-                                </li>
-                            </ul>
-                            <div class="cta">
-                                <p class="cta-text">Already have an account?
-                                <span class="cta-text2"><a href="login.php">Login</a></span></p>
-                            </div>
+                                <input type="hidden" name="role" value="user">
+                            </li>
+                            <li>
+                                <button type="submit" name="auth_submit" class="btn">Register</button>
+                            </li>
+                        </ul>
+                        <div class="cta">
+                            <p class="cta_text">Already have an account?
+                            <span class="cta_text2"><a href="login.php">Login</a></span></p>
                         </div>
                     </form>
-                </div>
-            </div>
-            <div id="box" class="box1">
-                <div class="title">
-                    <h2 class="page-title">Unleash Your Creativity with ROFARA STORE</h2>
-                    <h3 class="welcome-message">Login to your account and start designing today</h3>
-                </div>
-            </div>
-        </section>
-    </div>
+            </section>
 
+            <section id="content" class="page_content">
+                <div class="page_header">
+                    <h2 class="page_title">Unleash Your Creativity with ROFARA STORE</h2>
+                    <h3 class="page_subtitle">Login to your account and start designing today</h3>
+                </div>
+            </section>
+
+            </div>
+            </div>
+    </main>
+    <script src="js/script.js"></script>
 </body>
 </html>
