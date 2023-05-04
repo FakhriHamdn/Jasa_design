@@ -177,7 +177,7 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
             }
 
             $msg = "Yayy! you have successfully logged in!";
-            header("Location: ../admin2/data_cust.php?message=" . urlencode($msg));
+            header("Location: ../index.php?message=" . urlencode($msg));
         } else{
             $msg = "Incorrect email or password";
             header("Location: ../auth/login.php?message=" . urlencode($msg));

@@ -31,10 +31,13 @@ if(!isset($_SESSION['status'])) {
             <li><a href="#">Marketplace</a></li>
           </ul>
         </nav>
+        <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin') : ?>
+        
         <div class="login-register">
             <button><a class="login" href="auth/login.php">Login</a></button>
             <button><a class="register" href="auth/register.php">Register</a></button>
         </div>
+        <?php endif; ?>
     </header>
 
 <!-- Background Image -->
