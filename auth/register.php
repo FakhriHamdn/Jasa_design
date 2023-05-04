@@ -53,7 +53,7 @@
                                 <input type="hidden" name="role" value="user">
                             </li>
                             <li>
-                                <button type="submit" name="auth_submit" class="btn">Register</button>
+                                <button type="submit" name="auth_submit" class="btn_register">Register</button>
                             </li>
                         </ul>
                         <div class="cta">

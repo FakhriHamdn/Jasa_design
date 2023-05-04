@@ -236,7 +236,7 @@ label.remember {
 
 
 /*===== ATUR BUTTON */
-.btn {
+.btn, .btn_register {
     border: none;
     font-size: 0.9em;
     font-weight: 800;
@@ -246,7 +246,15 @@ label.remember {
     letter-spacing: 0.5px;
     color: #24242a;
     transition: 0.4s;
+    width: 100%;
+    border-radius: 4px;
 }
+
+.btn_register{
+    border: 1px solid black;
+    margin: 50px;
+}
+
 
 .btn:hover{
     background: #d7a900;
