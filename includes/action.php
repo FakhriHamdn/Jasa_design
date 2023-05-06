@@ -99,9 +99,7 @@ if(isset($_POST['transaction_submit'])){
         }
     }
 }
-
-
-
+//END TRANSACTIONS
 
 
 //ACTION DELETING DATAS
@@ -167,7 +165,7 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
             header("Location: ../auth/register.php?message=" . urlencode($msg));
         }
     } else {
-        $msg = "email sudah ada";
+        $msg = "Email already registered";
         header("Location: ../auth/register.php?message=" . urlencode($msg));
     }
 

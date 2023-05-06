@@ -16,7 +16,7 @@ if(isset($_SESSION['status'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="../image/login.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../image/Logo-rofara2.png" type="image/x-icon">
     <link rel="stylesheet" href="../styles/auth.css">
     <title>Create your account</title>
 </head>
@@ -34,7 +34,7 @@ if(isset($_SESSION['status'])){
                 }?>
                     <form action="../includes/action.php?auth=register" method="POST">
                         <ul style="list-style-type: none;">
-                            <div class="input_container">
+                            <div class="input_container_register">
                                 <div class="form_row">
                                     <li class="form_group">
                                         <label for="fname" class="label-wrap">First Name</label>
@@ -75,9 +75,9 @@ if(isset($_SESSION['status'])){
             </section>
 
             <section id="content" class="page_content">
-                <div class="page_header">
+                <div class="page_header_register">
                     <h2 class="page_title">Get Started on Your Creative Journey</h2>
-                    <h3 class="page_subtitle">Sign Up with ROFARA STORE</h3>
+                    <p class="page_subtitle_register">Ready to Unleash Your Creativity? Register now</p>
                 </div>
             </section>
 

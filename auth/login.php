@@ -18,7 +18,7 @@ if(isset($_SESSION['status'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="../image/login.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../image/Logo-rofara2.png" type="image/x-icon">
     <link rel="stylesheet" href="../styles/auth.css">
     <title>Login to your account</title>
 </head>
@@ -29,8 +29,8 @@ if(isset($_SESSION['status'])){
 
             <section id="content" class="page_content">
                 <div class="page_header">
-                    <h2 class="page_title">Unleash Your Creativity with ROFARA STORE</h2>
-                    <h3 class="page_subtitle">Login to your account and start designing today</h3>
+                    <h2 class="page_title">Unleash Your <span class="creativity">Creativity</span> with <span class="rofara">ROFARA STORE</span></h2>
+                    <p class="page_subtitle">Login to your account and start designing today!</p>
                 </div>
             </section>
 
@@ -48,7 +48,7 @@ if(isset($_SESSION['status'])){
                             <div class="input_container">
                                 <li>
                                     <label for="email">Email</label>
-                                    <input type="email" name="email" id="email" placeholder="Email" class="input_bar" autocomplete="off" required>
+                                    <input type="email" name="email" id="email" placeholder="Email" class="input_bar" required>
                                 </li>
                                 <li>
                                     <label for="password">Password</label>

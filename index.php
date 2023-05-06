@@ -1,9 +1,9 @@
 <?php 
-session_start();
-if(!isset($_SESSION['status'])) {
-  header("Location: auth/login.php");
-  exit;
-}
+// session_start();
+// if(!isset($_SESSION['status'])) {
+//   header("Location: auth/login.php");
+//   exit;
+// }
 
 ?>
 

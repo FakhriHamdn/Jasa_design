@@ -39,7 +39,7 @@ main {
     background-size: cover;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
-    width: 50em;
+    width: 49em;
     height: 27em;
     padding: 2em 1em;
     display: flex;
@@ -50,12 +50,12 @@ main {
 
 .login_wrapper{
     background: url(../image/login_bg.jpg);
-    background-position: -9em 0;
+    background-position: -10em 0;
 }
 
 .register_wrapper {
     background: url(../image/register_bg.jpg);
-    background-position: 7.2em 0;
+    background-position: 5.7em 0;
     background-repeat: no-repeat;
     background-color: #f1f1f1;
 }
@@ -70,14 +70,25 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    /* border: 1px solid black; */
 }
 
 .page_header {
     text-align: center;
     text-transform: capitalize;
-    margin-top: 0.3em;
+    padding: 0.4em 0 0 0.5em;
+    /* margin-top: 0.5em; */
     /* margin: 4% 0.5em 0 0.5em; */
     font-size: 3.25em;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.page_header_register{
+    text-align: center;
+    padding: 0.5em 0.5em 0 0;
+    text-transform: capitalize;
+    font-size: 3em;
     margin-bottom: 12px;
     color: #fff;
 }
@@ -85,14 +96,37 @@ main {
 .page_title {
     font-weight: 900;
     letter-spacing: 0.3px;
-    font-size: 0.73em;
+    font-size: 0.82em;
+    line-height: 1.35em;
+}
+
+.page_title span.rofara{
+    font-size: 0.83em;
+    
+    font-style: italic;
+}
+
+.page_title span.creativity{
+    font-weight: bolder;
+    font-size: 1em;
+    
 }
 
 .page_subtitle {
-    padding: 0 1.9em;
-    margin-top: 2.3em;
-    font-size: 0.27em;
-    font-weight: 550;
+    text-transform: none;
+    padding: 0 3em;
+    margin-top: 2.5em;
+    font-size: 0.26em;
+    font-weight: 500;
+    color: #fff;
+}
+
+.page_subtitle_register{
+    text-transform: none;
+    padding: 0 2.5em;
+    margin-top: 2.5em;
+    font-size: 0.28em;
+    font-weight: 500;
     color: #fff;
 }
 /*============ END PAGE CONTENT ============*/
@@ -162,6 +196,10 @@ ul{
 }
 .input_container li {
     margin-bottom: 4px; 
+}
+
+.input_container_register li{
+    margin-bottom: auto;
 }
 
 label {
