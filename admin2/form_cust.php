@@ -5,12 +5,12 @@ if(isset($_GET['id_cust']) && ($_GET['id_cust'] > 0)){
     $id_cust = $_GET['id_cust'];
     $row = getCustomerId($id_cust);
 
-    $form_action = '../includes/action.php?action=editCustomer';
+    $form_action = '../includes/action.php?action=updateCustomer';
     $title = 'Admin | Edit Data Customers';
     $h1 = 'Form Edit Data Customers';
 } else {
     $row = [];
-    $form_action = '../includes/action.php?action=insertCustomer';
+    $form_action = '../includes/action.php?action=addCustomer';
     $title = 'Admin | Tambah Data Customers';
     $h1 = 'Form Tambah Data Customers';
 }
@@ -27,9 +27,9 @@ if(isset($_GET['id_cust']) && ($_GET['id_cust'] > 0)){
 <body>
     <h1><?= $h1; ?></h1>
     <form action="<?= $form_action ?>" method="POST">
-        <?php if ($row) { ?>
+        <?php if ($row) : ?>
             <input type="hidden" name="id_cust" value="<?= $row['id_cust'] ?>">
-        <?php } ?>
+        <?php endif; ?>
         <ul>
             <li>
                 <label for="cust">customers</label>

@@ -2,7 +2,7 @@
 // require '../includes/action.php';
 require '../includes/functions.php';
 
-$query = "SELECT * FROM products";
+$query = "SELECT * FROM products ORDER BY id_product DESC";
 ?>
 
 <!DOCTYPE html>
@@ -14,12 +14,11 @@ $query = "SELECT * FROM products";
     <title>Admin | Data Product</title>
 </head>
 <body>
-    <?php
-        if (isset($_GET['message'])) {
-        $message = $_GET['message'];
-        echo $message;
-        }
-    ?>
+<?php
+    if (isset($_GET['message'])) {
+        $msg = $_GET['message'];
+        echo "<div class= 'notif'>$msg</div>";
+    } ?>
     <a href="../auth/logout.php">Logout</a>
     <h1>Data Product</h1>
 
@@ -43,7 +42,7 @@ $query = "SELECT * FROM products";
         <?php $no = 1;
         foreach(getDatas($query) as $row): ?>
         <tr>
-            <td><?= $no++;?></td>
+            <td><?= $row['id_product'];?></td>
             <td><?= $row['nama_product'];?></td>
             <td><?= $row['harga'];?></td>
             <td>

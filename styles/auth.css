@@ -34,13 +34,13 @@ main {
 
 
 
-/*============ TEMPAT BUAT BACKGROUND ============*/
+/*============ TEMPAT PEMBUNGKUS UTAMA ============*/
 #wrapper {
     background-size: cover;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
-    width: 48em;
-    height: 25em;
+    width: 50em;
+    height: 27em;
     padding: 2em 1em;
     display: flex;
     justify-content: center;
@@ -54,8 +54,8 @@ main {
 }
 
 .register_wrapper {
-    background: url(../image/regis_bg.jpg);
-    background-position: 8em 0;
+    background: url(../image/register_bg.jpg);
+    background-position: 7.2em 0;
     background-repeat: no-repeat;
     background-color: #f1f1f1;
 }
@@ -105,7 +105,8 @@ main {
     width: 15.5em;
 }
 .form_container_register{
-    width: 16em;
+    width: 15.5em;
+    /* border: 1px solid tomato; */
 }
 .auth_title{
     font-weight: 600;
@@ -251,8 +252,7 @@ label.remember {
 }
 
 .btn_register{
-    border: 1px solid black;
-    margin: 50px;
+    margin-top: 1em;
 }
 
 

@@ -10,12 +10,10 @@ if ($id_transaksi > 0) {
     $id_transaksi = $row['id_transaksi'];
     $id_klien = $row['id_klien'];
     $id_jasa = $row['id_jasa'];
-    $nama_klien = $row['nama_klien'];
-    $nama_jasa = $row['nama_jasa'];
+
     $tanggal = $row['tanggal'];
     $jumlah_jasa = $row['jumlah_jasa'];
-    $harga = $row['harga'];
-    $total_pembayaran = $row['total_pembayaran'];
+
     $form_action = "action.php?action=update_transactions";
     $title = " Admin | Form Edit Transaksi";
     $main_title = "Form Tambah Data Transaksi";
@@ -24,12 +22,8 @@ if ($id_transaksi > 0) {
     $id_transaksi = '';
     $id_klien = '';
     $id_jasa = '';
-    $nama_klien = '';
-    $nama_jasa = '';
     $tanggal = '';
     $jumlah_jasa = '';
-    $harga = '';
-    $total_pembayaran = '';
     $form_action = "action.php?action=insertTransactions";
     $title = " Admin | Form Tambah Transaksi";
     $main_title = "Form Tambah Data Transaksi";

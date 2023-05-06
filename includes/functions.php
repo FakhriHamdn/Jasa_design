@@ -22,7 +22,6 @@ function fetchCustomer(){
     global $getConnect;
     $query = "SELECT id_cust, nama_cust, no_telp FROM customers";
     $result = mysqli_query($getConnect, $query);
-    $rows = [];
     while($row = mysqli_fetch_assoc($result)){
         $rows[] = $row;
     }
@@ -39,8 +38,15 @@ function fetchProduct(){
     }
     return $rows;
 }
+function getHargaProduct($id_product){
+    global $getConnect;
+    $query = "SELECT harga FROM products WHERE id_product = '$id_product'";
+    $result = mysqli_query($getConnect, $query);
+    $row = mysqli_fetch_assoc($result);
+    return $row;
+}
 
-function insertDataProduct($nama_product, $harga){
+function addDataProduct($nama_product, $harga){
     global $getConnect;
     $query = "INSERT INTO products VALUES('', '$nama_product', '$harga')";
     $result = mysqli_query($getConnect, $query);
@@ -75,7 +81,7 @@ function getCustomerId($id_cust){
     return $row;
 }
 
-function insertCustomer($nama_cust, $alamat, $no_telp, $email){
+function addDataCustomer($nama_cust, $alamat, $no_telp, $email){
     global $getConnect;
     $query = "INSERT INTO customers VALUES('', '$nama_cust', '$alamat', '$no_telp', '$email')";
     $result = mysqli_query($getConnect, $query);
@@ -99,21 +105,31 @@ function deleteDataCustomer($id_cust){
 function getTransactionId($id_transaction){
     global $getConnect;
     $query = "SELECT transactions.id_transaction, 
-            customers.nama_cust, 
-            products.nama_product, 
+            customers.id_cust, 
+            products.id_product, 
             transactions.tanggal, 
             transactions.jumlah_product, 
             products.harga, 
             transactions.total_pembayaran
-            FROM customers INNER JOIN transactions ON customers.id_cust = transactions.id_cust INNER JOIN products ON products.id_product = transactions.id_product WHERE transactions.id_transaction = '$id_transaction'";
+            FROM customers 
+            INNER JOIN transactions ON customers.id_cust = transactions.id_cust 
+            INNER JOIN products ON products.id_product = transactions.id_product WHERE transactions.id_transaction = '$id_transaction'";
     $result = mysqli_query($getConnect, $query);
-    $row = mysqli_fetch_assoc($result);
+    $row = mysqli_fetch_array($result);
     return $row;
 }
 
-function insertDataTransaction($id_cust, $id_product, $tanggal, $jumlah){
+function addDataTransaction($id_cust, $id_product, $tanggal, $jumlah, $harga, $total_pembayaran){
     global $getConnect;
-    $query = "INSERT INTO transactions VALUES('', '$id_cust', '$id_product', '$tanggal', '$jumlah')";
+    $query = "INSERT INTO transactions VALUES('', '$id_cust', '$id_product', '$tanggal', '$jumlah', '$harga', '$total_pembayaran')";
+    $result = mysqli_query($getConnect, $query);
+    return $result;
+}
+
+
+function updateDataTransaction($id_transaction, $id_cust, $id_product, $tanggal, $jumlah, $harga, $total_pembayaran){
+    global $getConnect;
+    $query = "UPDATE transactions SET id_cust = '$id_cust', id_product = '$id_product', tanggal = '$tanggal', jumlah_product = '$jumlah', harga = '$harga', total_pembayaran = '$total_pembayaran' WHERE id_transaction = '$id_transaction'";
     $result = mysqli_query($getConnect, $query);
     return $result;
 }

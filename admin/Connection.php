@@ -144,8 +144,16 @@ function insertTransactions($id_klien, $id_jasa, $tanggal, $jumlah_jasa, $harga,
 function getTransactionsID($id_transaksi){
     $adminConn = new adminConnection();
     $conn = $adminConn->getConnection();
-    $sql = "SELECT tb_transaksi.id_transaksi, tb_klien.id_klien, tb_jasa.id_jasa, tb_klien.nama_klien, tb_jasa.nama_jasa, tb_transaksi.tanggal, tb_transaksi.jumlah_jasa, tb_transaksi.harga, tb_transaksi.total_pembayaran 
-    FROM tb_klien INNER JOIN tb_transaksi ON tb_klien.id_klien = tb_transaksi.id_klien INNER JOIN tb_jasa ON tb_jasa.id_jasa = tb_transaksi.id_jasa WHERE tb_transaksi.id_transaksi = '$id_transaksi'";
+    $sql = "SELECT tb_transaksi.id_transaksi, 
+            tb_klien.id_klien, 
+            tb_jasa.id_jasa, 
+            tb_transaksi.tanggal, 
+            tb_transaksi.jumlah_jasa, 
+            tb_transaksi.harga, 
+            tb_transaksi.total_pembayaran 
+            FROM tb_klien 
+            INNER JOIN tb_transaksi ON tb_klien.id_klien = tb_transaksi.id_klien 
+            INNER JOIN tb_jasa ON tb_jasa.id_jasa = tb_transaksi.id_jasa WHERE tb_transaksi.id_transaksi = '$id_transaksi'";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result);
     return $row;

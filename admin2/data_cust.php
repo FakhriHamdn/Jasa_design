@@ -1,7 +1,7 @@
 <?php 
 require '../includes/functions.php';
 
-$query = "SELECT * FROM customers";
+$query = "SELECT * FROM customers ORDER BY id_cust DESC";
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +19,7 @@ $query = "SELECT * FROM customers";
         $msg = $_GET['message'];
         echo "<div class= 'notif'>$msg</div>";
     } ?>
-    <a href="logout.php">Logout</a>
+    <a href="../auth/logout.php">Logout</a>
     <h1>Data Jasa Produk</h1>
     <a href="form_cust.php">Tambah Data</a>
     <nav>

@@ -31,6 +31,7 @@ if(!isset($_SESSION['status'])) {
             <li><a href="#">Marketplace</a></li>
           </ul>
         </nav>
+        <a href="auth/logout.php">Logout</a>
         <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin') : ?>
         
         <div class="login-register">

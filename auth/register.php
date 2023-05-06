@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if(isset($_SESSION['status'])){
+    header('Location: ../index.php');
+    exit;
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,8 +76,8 @@
 
             <section id="content" class="page_content">
                 <div class="page_header">
-                    <h2 class="page_title">Unleash Your Creativity with ROFARA STORE</h2>
-                    <h3 class="page_subtitle">Login to your account and start designing today</h3>
+                    <h2 class="page_title">Get Started on Your Creative Journey</h2>
+                    <h3 class="page_subtitle">Sign Up with ROFARA STORE</h3>
                 </div>
             </section>
 
