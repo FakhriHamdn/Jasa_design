@@ -21,7 +21,7 @@ session_start();
                 <li><a href="#">Profil</a></li>
                 <?php if (isset($_SESSION['status'])) : ?>
                     <?php if ($_SESSION['role'] === 'admin') : ?>
-                        <li><a href="#">Tabel Database</a></li>
+                        <li><a href="admin/data_cust.php">Tabel Database</a></li>
                     <?php endif; ?>
                     <?php else : ?>
                         <li><a href="auth/login.php">Login</a></li>

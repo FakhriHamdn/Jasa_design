@@ -130,6 +130,15 @@ if(isset($_GET['id_delete'])) {
             header("Location: ../admin2/data_transaction.php?message=" . urlencode($msg));
             exit();
         }
+
+    } else if($_GET['page'] === 'user'){
+        $id_user = $_GET['id_delete'];
+        $result = deleteDataUsers($id_user);
+        if($result){
+            $msg = "User data has been successfully deleted";
+            header("Location: ../admin/data_user.php?message=" . urlencode($msg));
+            exit();
+        }
     }
 }
 //END DELETING DATAS

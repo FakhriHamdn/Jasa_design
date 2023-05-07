@@ -46,7 +46,7 @@ $query = "SELECT * FROM users";
             <td><?= $row['role'];?></td>
             <td>
                 <a href="">Edit</a> |
-                <a href="">Delete</a>
+                <a href="../includes/action.php?id_delete=<?= $row['id_user'];?>&page=user">Delete</a>
             </td>
         </tr>
         <?php endforeach; ?>
