@@ -11,6 +11,7 @@ $query = "SELECT * FROM products ORDER BY id_product DESC";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../image/Logo-rofara2.png" type="image/x-icon">
     <title>Admin | Data Product</title>
 </head>
 <body>

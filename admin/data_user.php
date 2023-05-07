@@ -10,11 +10,18 @@ $query = "SELECT * FROM users";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Data Jasa</title>
+    <link rel="shortcut icon" href="../image/Logo-rofara2.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <title>Admin | Data Users</title>
 </head>
 <body>
-    <h1>Data Jasa Produk</h1>
-    <a href="form_user">Tambah Data</a>
+<?php
+    if (isset($_GET['message'])) {
+        $msg = $_GET['message'];
+        echo "<div class= 'notif'>$msg</div>";
+    } ?>
+    <a href="../auth/logout.php">Logout</a>
+    <h1>Data Users</h1>
     <nav>
         <ul>
             <li><a href="data_product.php">Data Product</a></li>
@@ -25,10 +32,9 @@ $query = "SELECT * FROM users";
     </nav>
     <table border="1" cellspacing="0.5" cellpadding="10">
         <tr>
-            <th>Id</th>
+            <th>Id user</th>
             <th>Email</th>
-            <th>Password</th>
-            <th>Fullname</th>
+            <th>Username</th>
             <th>Role</th>
             <th>Aksi</th>
         </tr>
@@ -36,7 +42,6 @@ $query = "SELECT * FROM users";
         <tr>
             <td><?= $row['id_user'];?></td>
             <td><?= $row['email'];?></td>
-            <td><?= $row['password'];?></td>
             <td><?= $row['fullname'];?></td>
             <td><?= $row['role'];?></td>
             <td>

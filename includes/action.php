@@ -141,7 +141,7 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
     //data yang diketikkan user bakal ditampung ke variable
     $email = htmlspecialchars(strtolower($_POST['email']));
     $password = htmlspecialchars($_POST['password']);
-    $fullname = htmlspecialchars($_POST['fname']) . ' ' . htmlspecialchars($_POST['lname']);
+    $fullname = htmlspecialchars(ucwords($_POST['fname'])) . ' ' . htmlspecialchars(ucwords($_POST['lname']));
     $confirm_password = htmlspecialchars($_POST['cpassword']);
     $role = $_POST['role'];
 
@@ -191,7 +191,7 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
             }
 
             $msg = "Yayy! you have successfully logged in!";
-            header("Location: ../index.php?message=" . urlencode($msg));
+            header("Location: ../home.php?message=" . urlencode($msg));
         } else{
             $msg = "Incorrect email or password";
             header("Location: ../auth/login.php?message=" . urlencode($msg));

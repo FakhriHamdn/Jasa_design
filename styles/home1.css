@@ -4,15 +4,23 @@
     box-sizing: border-box;
 }
 
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
 nav ul{
     height: 4em;
     background-color: beige;
 }
 
+nav ul li a {
+    font-size: 1.5em;
+}
 ul{
     list-style-type: none;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4em;
+    gap: 2em;
 }
