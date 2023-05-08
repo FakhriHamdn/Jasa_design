@@ -172,7 +172,6 @@ function deleteDataUsers($id_user){
 
 
 
-
 //================== END AUTHENTICATION ==================
 
 
