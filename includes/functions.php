@@ -155,9 +155,8 @@ function getUsersData($email){
     global $getConnect;
     $query = "SELECT * FROM users WHERE email = '$email'";
     $result = mysqli_query($getConnect, $query);
-    return $result;
-    
-
+    $info = mysqli_fetch_assoc($result);
+    return $info;
 }
 function deleteDataUsers($id_user){
     global $getConnect;

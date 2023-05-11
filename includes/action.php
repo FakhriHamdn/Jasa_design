@@ -188,8 +188,8 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
 
     //validasi apakah data ada atau tidak didatabase
     $result = getUsersData($email);
-    if($result->num_rows > 0){
-        $row = mysqli_fetch_assoc($result);
+    if($info->num_rows > 0){
+        $row = mysqli_fetch_assoc($info);
         if(password_verify($password, $row['password'])){
 
             //nampung data dibrowser
