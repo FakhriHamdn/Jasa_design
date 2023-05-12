@@ -130,6 +130,15 @@ if(isset($_GET['id_delete'])) {
             header("Location: ../admin2/data_transaction.php?message=" . urlencode($msg));
             exit();
         }
+
+    } else if($_GET['page'] === 'user'){
+        $id_user = $_GET['id_delete'];
+        $result = deleteDataUsers($id_user);
+        if($result){
+            $msg = "User data has been successfully deleted";
+            header("Location: ../admin/data_user.php?message=" . urlencode($msg));
+            exit();
+        }
     }
 }
 //END DELETING DATAS
@@ -146,7 +155,7 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
     $role = $_POST['role'];
 
     //Validasi dikit & membuat enkripsi password
-    if($email === 0){
+    if(getUsersData($email) == 0){
         if(strlen($password) && strlen($confirm_password)>= 3){
             if($password === $confirm_password){
                 $pass = password_hash($password, PASSWORD_DEFAULT);
@@ -159,14 +168,17 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
             } else {
                 $msg = "Passwords are not equal";
                 header("Location: ../auth/register.php?message=" . urlencode($msg));
+                exit();
             }
         } else {
             $msg = "Password must contain at least 3 characters";
             header("Location: ../auth/register.php?message=" . urlencode($msg));
+            exit();
         }
     } else {
         $msg = "Email already registered";
         header("Location: ../auth/register.php?message=" . urlencode($msg));
+        exit();
     }
 
 } else if (isset($_POST['auth_submit']) && $_GET['auth'] === 'login'){
