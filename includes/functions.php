@@ -155,8 +155,8 @@ function getUsersByEmail($email){
     global $getConnect;
     $query = "SELECT * FROM users WHERE email = '$email'";
     $result = mysqli_query($getConnect, $query);
-    $info = mysqli_fetch_assoc($result);
-    return $info;
+    $row = mysqli_fetch_assoc($result);
+    return $row;
 }
 
 function getUsersData(){

@@ -190,7 +190,7 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
 } else if (isset($_POST['auth_submit']) && $_GET['auth'] === 'login'){
     //data yang diketikkan user bakal ditampung divariable ini
     $email = htmlspecialchars(strtolower($_POST['email']));
-    $password = htmlspecialchars($_POST['password']);
+    $password = $_POST['password'];
 
     //validasi apakah data ada atau tidak didatabase
 
@@ -209,7 +209,7 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
             }
 
             $msg = "Yayy! you have successfully logged in!";
-            header("Location: ../home.php?message=" . urlencode($msg));
+            header("Location: ../index.php?message=" . urlencode($msg));
             exit();
 
         } else{
