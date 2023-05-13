@@ -191,7 +191,7 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
     //data yang diketikkan user bakal ditampung divariable ini
     $email = strtolower($_POST['email']);
     $password = $_POST['password'];
-
+    
     //validasi apakah data ada atau tidak didatabase
     $result = getUsersData($email);
     if($result->num_rows > 0){
@@ -207,7 +207,7 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
             if(isset($_POST['remember'])){
                 setcookie('id', 'apakek',time()+3600);
             }
-
+        
             $msg = "Yayy! you have successfully logged in!";
             header("Location: ../index.php?message=" . urlencode($msg));
             exit();
@@ -216,7 +216,8 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
             $msg = "Incorrect email or password";
             header("Location: ../auth/login.php?message=" . urlencode($msg));
             exit();
-        } 
+        }
+        
     } else {
         $msg = "User undefined";
         header("Location: ../auth/login.php?message=" . urlencode($msg));
@@ -225,3 +226,4 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
 }
 
 //================== END AUTHENTICATION ==================
+?>

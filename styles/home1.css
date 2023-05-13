@@ -2,14 +2,134 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
+/*============ NAVIGATION BAR ============*/
+.nav_container{
+    width: 100%;
+    height: 4em;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.logo_wrapper{
+    cursor: default;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 20%;
+    height: auto;
+}
+
+.nav_menu{
+    justify-content: space-around;
+    text-align: center;
+    display: flex;
+}
+
+.nav_wrapper{
+    width: 35%;
+    margin: 0 8em;
+}
+
+.nav_menu li {
+    list-style: none;
+    display: inline-block;
+}
+
+.nav_menu li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 550;
+    position: relative;
+    font-size: 0.95em;
+}
+
+.nav_menu li a:after {
+    content: "";
+    position: absolute;
+    background-color:  #fec112;
+    height: 2px;
+    width: 0;
+    left: 0;
+    bottom: -5px;
+    transition: 0.3s;
+}
+
+.nav_menu li a:hover {
+    color:  #fec112;
+}
+
+.nav_menu li a:hover:after {
+    color:  #fec112;
+    width: 100%;
+}
+
+.auth {
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    width: 20%;
+}
+
+button {
+    border: none;
+    background-color: white;
+}
+
+button a.register {
+    font-size: 1.2em;
+    padding: 6px 2.5em;
+    margin: 0 40px 0 15px;
+    text-decoration: none;
+    color: white;
+    background-color:   #bf202f;
+    border-radius: 5px;
+    border: 2px solid  #bf202f;
+    font-weight: 500;
+    transition: 0.15s;
+
+}
+
+button a.login {
+    font-size: 1.2em;
+    padding: 6px 3em;
+    margin: 0 5px 0 0;
+    text-decoration: none;
+    color:  #bf202f;
+    background-color:  #fff;
+    border-radius: 5px;
+    border: 2px solid  #bf202f;
+    font-weight: 500;
+    transition: 0.15s;
+}
+
+button a.register:hover {
+    background-color:  #8d1925;
+    color: white;
+    transition: 0.4s;
+    border: 2px solid #8d1925;
+}
+
+
+button a.login:hover {
+    background-color:  #bf202f;
+    color: white;
+    transition: 0.4s;
+}
+
+/* 
 body {
     display: flex;
-    align-items: center;
     justify-content: center;
     height: 100vh;
 }
+
 
 nav ul{
     height: 4em;
@@ -17,10 +137,14 @@ nav ul{
 }
 
 nav ul li a {
-    font-size: 1.5em;
+    font-size: 1em;
+    text-decoration: none;
+    font-family: poppins;
+
 }
 ul{
     list-style-type: none;
     display: flex;
     gap: 2em;
 }
+ */

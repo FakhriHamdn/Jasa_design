@@ -3,6 +3,7 @@ session_start();
 session_destroy();
 setcookie('id', '', time()-3600);
 
-header('Location: login.php?message=You have logged out from our page');
+$msg = "You have logged out from our page";
+header("Location: login.php?message=" . urlencode($msg));
 
 ?>
