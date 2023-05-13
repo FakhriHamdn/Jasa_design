@@ -159,12 +159,11 @@ function getUsersByEmail($email){
     return $row;
 }
 
-function getUsersData(){
+function getUsersData($email){
     global $getConnect;
-    $query = "SELECT * FROM users";
+    $query = "SELECT * FROM users WHERE email = '$email'";
     $result = mysqli_query($getConnect, $query);
-    $row1 = mysqli_fetch_assoc($result);
-    return $row1;
+    return $result;
 }
 
 

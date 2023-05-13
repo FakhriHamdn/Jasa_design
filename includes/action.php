@@ -193,9 +193,9 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
     $password = $_POST['password'];
 
     //validasi apakah data ada atau tidak didatabase
-
-    if(getUsersByEmail($email) > 0){
-        $row = getUsersData();
+    $result = getUsersData($email);
+    if($result->num_rows > 0){
+        $row = mysqli_fetch_assoc($result);
         if(password_verify($password, $row['password'])){
 
             //nampung data dibrowser
