@@ -151,17 +151,36 @@ function addUsersData($email, $password, $fullname, $role){
     return $result;
 }
 
-function getUsersData($email){
+function getUsersByEmail($email){
     global $getConnect;
     $query = "SELECT * FROM users WHERE email = '$email'";
     $result = mysqli_query($getConnect, $query);
-    return $result;
+    $info = mysqli_fetch_assoc($result);
+    return $info;
 }
+
+function getUsersData(){
+    global $getConnect;
+    $query = "SELECT * FROM users";
+    $result = mysqli_query($getConnect, $query);
+    $row = mysqli_fetch_assoc($result);
+    return $row;
+}
+
+
 function deleteDataUsers($id_user){
     global $getConnect;
     $query = "DELETE FROM users WHERE id_user = '$id_user'";
     $result = mysqli_query($getConnect, $query);
     return $result;
+}
+
+
+function validatePassword($password) {
+    if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $password)) {
+        return true;
+    }
+    return false;
 }
 
 
