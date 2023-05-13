@@ -189,7 +189,7 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
 
 } else if (isset($_POST['auth_submit']) && $_GET['auth'] === 'login'){
     //data yang diketikkan user bakal ditampung divariable ini
-    $email = htmlspecialchars(strtolower($_POST['email']));
+    $email = strtolower($_POST['email']);
     $password = $_POST['password'];
 
     //validasi apakah data ada atau tidak didatabase
@@ -218,7 +218,7 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
             exit();
         } 
     } else {
-        $msg = "Incorrect email or password";
+        $msg = "User undefined";
         header("Location: ../auth/login.php?message=" . urlencode($msg));
         exit();
     }

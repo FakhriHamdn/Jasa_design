@@ -163,8 +163,8 @@ function getUsersData(){
     global $getConnect;
     $query = "SELECT * FROM users";
     $result = mysqli_query($getConnect, $query);
-    $row = mysqli_fetch_assoc($result);
-    return $row;
+    $row1 = mysqli_fetch_assoc($result);
+    return $row1;
 }
 
 
