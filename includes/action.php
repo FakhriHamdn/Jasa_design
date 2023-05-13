@@ -155,18 +155,24 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
     $role = $_POST['role'];
 
     //Validasi dikit & membuat enkripsi password
-    if(getUsersData($email) == 0){
-        if(strlen($password) && strlen($confirm_password)>= 3){
-            if($password === $confirm_password){
-                $pass = password_hash($password, PASSWORD_DEFAULT);
-                $result = addUsersData($email, $pass, $fullname, $role);
-                if($result){
-                    $msg = "Yayy! You have successfully registered on our page";
-                    header("Location: ../auth/login.php?message=" . urlencode($msg));
+    if(getUsersByEmail($email) == 0){
+        if(strlen($password) && strlen($confirm_password) >= 3){
+            if(validatePassword($password) >= 2) {
+                if($password === $confirm_password){
+                    $pass = password_hash($password, PASSWORD_DEFAULT);
+                    $result = addUsersData($email, $pass, $fullname, $role);
+                    if($result){
+                        $msg = "Yayy! You have successfully registered on our page";
+                        header("Location: ../auth/login.php?message=" . urlencode($msg));
+                        exit();
+                    }
+                } else {
+                    $msg = "Passwords are not equal";
+                    header("Location: ../auth/register.php?message=" . urlencode($msg));
                     exit();
                 }
             } else {
-                $msg = "Passwords are not equal";
+                $msg = "Password is not strong enough";
                 header("Location: ../auth/register.php?message=" . urlencode($msg));
                 exit();
             }
@@ -187,9 +193,9 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
     $password = htmlspecialchars($_POST['password']);
 
     //validasi apakah data ada atau tidak didatabase
-    $result = getUsersData($email);
-    if($info->num_rows > 0){
-        $row = mysqli_fetch_assoc($info);
+
+    if(getUsersByEmail($email) > 0){
+        $row = getUsersData();
         if(password_verify($password, $row['password'])){
 
             //nampung data dibrowser
@@ -204,13 +210,17 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
 
             $msg = "Yayy! you have successfully logged in!";
             header("Location: ../home.php?message=" . urlencode($msg));
+            exit();
+
         } else{
             $msg = "Incorrect email or password";
             header("Location: ../auth/login.php?message=" . urlencode($msg));
+            exit();
         } 
     } else {
         $msg = "Incorrect email or password";
         header("Location: ../auth/login.php?message=" . urlencode($msg));
+        exit();
     }
 }
 
