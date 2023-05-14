@@ -205,7 +205,7 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
             $_SESSION['role'] = $row['role']; 
 
             if(isset($_POST['remember'])){
-                setcookie('id', 'apakek',time()+3600);
+                setcookie('id', $row['id_user'], time()+60);
             }
         
             $msg = "Yayy! you have successfully logged in!";
