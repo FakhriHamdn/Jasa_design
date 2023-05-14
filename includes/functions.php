@@ -166,7 +166,6 @@ function getUsersData($email){
     return $result;
 }
 
-
 function deleteDataUsers($id_user){
     global $getConnect;
     $query = "DELETE FROM users WHERE id_user = '$id_user'";
@@ -174,19 +173,12 @@ function deleteDataUsers($id_user){
     return $result;
 }
 
-
 function validatePassword($password) {
     if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $password)) {
         return true;
     }
     return false;
 }
-
-
-
-
-
-
 
 //================== END AUTHENTICATION ==================
 
