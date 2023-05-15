@@ -205,8 +205,7 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
             $_SESSION['role'] = $row['role']; 
 
             if(isset($_POST['remember'])){
-                setcookie('id', $row['id_user'], time()+3600, "/");
-                setcookie('username', $row['fullname'], time()+3600, "/");
+                setcookie('id', $row['id_user'], time()+3600, "/"); //cookie pake "/" biar bisa diakses semua file diberbagai folder
             }
         
             $msg = "Yayy! you have successfully logged in!";
@@ -220,11 +219,18 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
         }
         
     } else {
-        $msg = "User undefined";
+        $msg = "Incorrect email or password";
         header("Location: ../auth/login.php?message=" . urlencode($msg));
         exit();
     }
 }
 
 //================== END AUTHENTICATION ==================
+
+
+
+
+
+
+
 ?>
