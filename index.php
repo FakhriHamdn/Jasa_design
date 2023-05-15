@@ -12,6 +12,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <link rel="shortcut icon" href="image/Logo-rofara2.png" type="image/x-icon">
     <link rel="stylesheet" href="styles/home1.css">
@@ -29,12 +30,13 @@ session_start();
                     <li><a href="">Home</a></li>
                     <li><a href="">About Us</a></li>
                     <li><a href="">Contact</a></li>
-                    <li><a href="">Marketplace</a></li>
+                    <li><a href="marketplace.php">Marketplace</a></li>
                 </ul>
                 <div class="auth">
                     <?php if (isset($_SESSION['status'])) : ?>
                         <?php if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'operator') : ?>
-                            <button><a href="admin/data_product.php"><i class="fa-regular fa-database"></i></a></button>
+                            <a href="admin/data_product.php">
+                                <i class='bx bx-data'></i></a>
                         <?php endif; ?>
                         <button class="btn_profil"><a href="#"><img src="image/logo-rofara.png" alt=""></a></button>
                         <button><a href="auth/logout.php">Logout</a></button>
@@ -55,6 +57,8 @@ session_start();
         <br><br><br><br><br><br><br><br><br><br><br>
         <br><br><br><br><br><br><br><br><br><br><br>
         <br><br><br><br><br><br><br><br><br><br><br>
+
+        <i class='bx bx-data'></i>
     </main>
 
 
