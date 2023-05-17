@@ -28,14 +28,17 @@ session_start();
                 </div>
                 <ul class="nav_menu">
                     <li><a href="">Home</a></li>
-                    <li><a href="">About Us</a></li>
-                    <li><a href="">Contact</a></li>
-                    <li><a href="marketplace.php">Marketplace</a></li>
+                    <li><a href="public/aboutUs.php">About Us</a></li>
+                    <li><a href="public/contact.php">Contact</a></li>
+                    <li><a href="public/marketplace/marketplace.php">Marketplace</a></li>
                 </ul>
                 <div class="auth">
                     <?php if (isset($_SESSION['status'])) : ?>
-                        <?php if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'operator') : ?>
+                        <?php if ($_SESSION['role'] === 'admin') : ?>
                             <a href="admin/data_product.php">
+                                <i class='bx bx-data'></i></a>
+                        <?php elseif($_SESSION['role'] === 'operator') : ?>
+                            <a href="operator/data_product.php">
                                 <i class='bx bx-data'></i></a>
                         <?php endif; ?>
                         <button class="btn_profil"><a href="#"><img src="image/logo-rofara.png" alt=""></a></button>

@@ -13,10 +13,10 @@ if(isset($_POST['product_submit'])) {
         $result = addDataProduct($nama_product, $harga);
         if ($result) {
             $msg = "Product data has been successfully added";
-            header("Location: ../admin2/data_product.php?message=" . urlencode($msg));
+            header("Location: ../admin/data_product.php?message=" . urlencode($msg));
             exit();
         } else {
-            header("Location: ../admin2/data_product.php");
+            header("Location: ../admin/data_product.php");
         }
 
     } else if($_GET['action'] === 'updateProduct'){
@@ -26,7 +26,7 @@ if(isset($_POST['product_submit'])) {
             $result = updateDataProduct($id_product, $nama_product, $harga);            
             if($result){
                 $msg = "Product data has been successfully updated";
-                header("Location: ../admin2/data_product.php?message=" . urlencode($msg));
+                header("Location: ../admin/data_product.php?message=" . urlencode($msg));
                 exit();
             }
         }
@@ -46,10 +46,10 @@ if(isset($_POST['cust_submit'])){
         $result = addDataCustomer($nama_cust, $alamat, $no_telp, $email);
         if($result){
             $msg = "Customer data has been successfully added";
-            header("Location: ../admin2/data_cust.php?" . urlencode($msg));
+            header("Location: ../admin/data_cust.php?" . urlencode($msg));
             exit;
         } else {
-            header("Location: ../admin2/data_product.php");
+            header("Location: ../admin/data_product.php");
         }
 
     } else if($_GET['action'] === 'updateCustomer'){
@@ -59,7 +59,7 @@ if(isset($_POST['cust_submit'])){
             $result = updateDataCustomer($id_cust, $nama_cust, $alamat, $no_telp, $email);
             if($result){
                 $msg = "Customer data has been successfully updated";
-                header("Location: ../admin2/data_cust.php?message=" . urlencode($msg));
+                header("Location: ../admin/data_cust.php?message=" . urlencode($msg));
                 exit();
             }
         }
@@ -85,7 +85,7 @@ if(isset($_POST['transaction_submit'])){
         $result = addDataTransaction($id_cust, $id_product, $tanggal, $jumlah, $harga, $total_pembayaran);
         if($result){
             $msg = "Transaction data has been successfully added";
-            header("Location: ../admin2/data_transaction.php?message=" . urlencode($msg));
+            header("Location: ../admin/data_transaction.php?message=" . urlencode($msg));
             exit();
         }
         }
@@ -94,7 +94,7 @@ if(isset($_POST['transaction_submit'])){
         $result = updateDataTransaction($id_transaction, $id_cust, $id_product, $tanggal, $jumlah, $harga, $total_pembayaran);
         if($result){
             $msg = "Transaction data has been successfully updated";
-            header("Location: ../admin2/data_transaction.php?message=" . urlencode($msg));
+            header("Location: ../admin/data_transaction.php?message=" . urlencode($msg));
             exit();
         }
     }
@@ -109,7 +109,7 @@ if(isset($_GET['id_delete'])) {
         $result = deleteDataProduct($id_product);
         if($result){
             $msg = "Product data has been successfully deleted";
-            header("Location: ../admin2/data_product.php?message=" . urlencode($msg));
+            header("Location: ../admin/data_product.php?message=" . urlencode($msg));
             exit();
         }
 
@@ -118,7 +118,7 @@ if(isset($_GET['id_delete'])) {
         $result = deleteDataCustomer($id_cust);
         if($result){
             $msg = "Customer data has been successfully deleted";
-            header("Location: ../admin2/data_cust.php?message=" . urlencode($msg));
+            header("Location: ../admin/data_cust.php?message=" . urlencode($msg));
             exit();
         }
 
@@ -127,7 +127,7 @@ if(isset($_GET['id_delete'])) {
         $result = deleteDataTransaction($id_transaction);
         if($result){
             $msg = "Transaction data has been successfully deleted";
-            header("Location: ../admin2/data_transaction.php?message=" . urlencode($msg));
+            header("Location: ../admin/data_transaction.php?message=" . urlencode($msg));
             exit();
         }
 
