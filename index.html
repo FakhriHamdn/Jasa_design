@@ -6,115 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .nav_menu li a {
-  text-decoration: none;
+        .sidebar {
+  width: 250px;
+  background-color: #f8f8f8;
+  padding: 20px;
+}
+
+.sidebar a {
+  display: block;
   color: #000;
-  font-size: 0.98em;
-}
-
-.nav_menu li a:after {
-  content: "";
-  position: absolute;
-  background-color:  #bf202f;
-  height: 2px;
-  width: 0;
-  left: 0;
-  bottom: -5px;
-  transition: 0.3s;
-}
-
-.nav_menu li a:hover {
-  color:  #bf202f;
-}
-
-.nav_menu li a:hover:after,
-.nav_menu li a:target:after {
-  color:  #bf202f;
-  width: 100%;
-}
-
-/* Styling for the active menu */
-.nav_menu li a:target {
-  font-weight: bold;
-  /* Add other styles as desired */
-}
-
-/* Hide the content of inactive menus */
-div:not(:target) {
-  display: none;
-}
-
-
-.profile {
-  position: relative;
-  display: inline-block;
-}
-
-.profile-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.profile-image {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
-.dropdown-content {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  padding: 8px;
-  border: 1px solid #ddd;
-  display: none;
-}
-
-.dropdown-content a {
-  display: block;
-  padding: 4px 8px;
   text-decoration: none;
-  color: #333;
+  margin-bottom: 10px;
 }
 
-.profile:hover .dropdown-content {
-  display: block;
+.sidebar a:hover {
+  color: #bf202f;
 }
+
 
 
     </style>
 </head>
 <body>
-    <nav>
-        <ul class="nav_menu">
-          <li id="menu1"><a href="#menu1">Menu 1</a></li>
-          <li><a href="#menu2">Menu 2</a></li>
-          <li><a href="#menu3">Menu 3</a></li>
-          <li><a href="#menu3">Menu 3</a></li>
-          <li><a href="#menu3">Menu 3</a></li>
-        </ul>
-      </nav>
-      
-     
-      <div id="menu2">Menu 2 Content</div>
-      <div id="menu3">Menu 3 Content</div>
-      
-
-      <div class="profile">
-        <button class="profile-button">
-          <img class="profile-image" src="path/to/profile-image.jpg" alt="Profile Photo">
-        </button>
-        <div class="dropdown-content">
-          <a href="#">Menu 1</a>
-          <a href="#">Menu 2</a>
-          <a href="#">Menu 3</a>
-          <a href="#">Menu 4</a>
-        </div>
-      </div>
-      
+  <div class="sidebar">
+    <a href="#">Home</a>
+    <a href="#">Trending</a>
+    <a href="#">Subscriptions</a>
+    <a href="#">Library</a>
+    <a href="#">History</a>
+    <a href="#">Your Videos</a>
+    <a href="#">Liked Videos</a>
+    <a href="#">Watch Later</a>
+    <a href="#">Music</a>
+    <a href="#">Gaming</a>
+    <a href="#">Sports</a>
+  </div>
+  
 </body>
 </html>

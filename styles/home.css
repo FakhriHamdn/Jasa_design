@@ -83,12 +83,14 @@ html {
     display: flex;
     align-items: center;
     gap: 1em;
-    /* border: 1px solid blue; */
     justify-content: center;
 }
 
+a {
+    text-decoration: none;
+}
 
-.auth a:not(.dashboard, .dropdown) {
+.auth a.auth_login, .auth a.auth_register {
     text-decoration: none;
     color: #000;
     font-weight: 550;
@@ -105,7 +107,7 @@ html {
     pointer-events: auto;
 }
 
-.auth a:not(.dashboard, .dropdown):hover{
+.auth a.auth_register:hover{
     background: #d7a900;
     transition: 0.3s;
 }
@@ -125,20 +127,12 @@ html {
     margin-right: 6px;
 }
 
-
-
-
-i.bx-data {
-    font-size: 2.2em;
-    /* border: 1px solid tomato; */
-}
-
 .after_auth {
     /* border: 1px solid blue;  */
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1em;
+    gap: 1.5em;
 
 }
 
@@ -157,6 +151,10 @@ i.bx-bell,
 i.bx-data {
     font-size: 1.5em;
     color: #24242a;
+    /* border: 1px solid tomato; */
+    display: flex;
+    align-items: center;
+    text-decoration: none;
 }
 
 .vertical_line {
@@ -164,6 +162,7 @@ i.bx-data {
     height: 1.6em;
     margin: 0 0.5em;
 }
+
 
 
 /*======== MENGATUR PROFIL ========*/
@@ -201,7 +200,7 @@ i.bx-data {
     position: absolute;
     top: 3.3em;
     right: 0;
-    min-width: 10em;
+    min-width: max-content;
     font-size: 0.85em;
     background-color: #fff;
     border: 1px solid rgba(27, 31, 35, 0.15);
@@ -211,12 +210,28 @@ i.bx-data {
     z-index: 1;
 }
 
-.dropdown-content a {
+.dropdown-content a, .dropdown-content p {
     display: block;
     padding: 8px 16px;
     text-decoration: none;
     color: #24242a;
     transition: background-color 0.3s;
+}
+
+.sign_info {
+    height: 4.5em;
+    line-height: 0.6em;
+    padding: 8px 0;
+    border-bottom: 1px solid #E0E0E0;
+}
+.dropdown-content p {
+    font-size: 1em;
+}
+
+p.fullname {
+    font-size: 1.1em;
+    font-weight: 550;
+    color: #000;
 }
 
 .dropdown-content a:hover {

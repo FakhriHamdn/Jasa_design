@@ -36,9 +36,9 @@ session_start();
                     
                     <!-- NAVBAR ICON -->
                     <div class="nav_icon">
-                        <i class='bx bx-cart'></i>
-                        <i class='bx bx-envelope'></i>
-                        <i class='bx bx-bell'></i>
+                        <a href=""><i class='bx bx-cart'></i></a>
+                        <a href=""><i class='bx bx-envelope'></i></a>
+                        <a href=""><i class='bx bx-bell'></i></a>
                     </div>
                     
                     <span class="vertical_line"></span>
@@ -56,18 +56,25 @@ session_start();
                             <?php endif; ?>
                             <div class="profile">
                                 <button class="profile-button">
-                                    <img class="profile-image" src="image/profile.jpg" alt="Profile Photo">
+                                    <img class="profile-image" src="image/no-picture.jpg" alt="Profile Photo">
                                     <span class="arrow-down"></span>
                                 </button>
                                 <div class="dropdown-content">
+                                    <div class="sign_info">
+                                        <p>Signed in as</p>
+                                        <p class="fullname"><?= $_SESSION['fullname']?></p>
+                                    </div>
+                    
                                     <a class="dropdown" href="#">Your profil</a>
+                                    <a class="dropdown" href="#">Purchase</a>
+                                    <a class="dropdown" href="#">Wishlist</a>
                                     <a class="dropdown" href="#">Help</a>
                                     <a class="dropdown" href="#">Settings</a>
 
                                     <?php if($_SESSION['role'] === 'admin') :?>
                                         <a class="dropdown" href="#">Admin Power</a>
                                         <?php elseif($_SESSION['role'] === 'operator') :?>
-                                            <a class="dropdown" href="#">OP POWER</a>
+                                            <a class="dropdown" href="#">Operator Power</a>
                                         <?php endif; ?>
                                     <a class="dropdown" href="auth/logout.php">Sign out</a>
 
