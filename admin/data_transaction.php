@@ -1,4 +1,13 @@
 <?php
+session_start();
+
+
+if(isset($_SESSION['role']) && $_SESSION['role'] !== 'admin'){
+    header('Location: ../index.php');
+    exit;
+}
+
+
 require '../includes/functions.php';
 $query = "SELECT transactions.id_transaction, 
             customers.nama_cust, 

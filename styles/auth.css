@@ -29,6 +29,9 @@ main {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    /* background: url(../image/backgroundHome.jpg);
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.5); */
 }
 /*============ END MAIN ============*/
 
@@ -46,6 +49,7 @@ main {
     justify-content: center;
     align-items: center;
     gap: 4em;
+    /* filter: brightness(100%); */
 }
 
 .login_wrapper{
@@ -109,7 +113,6 @@ main {
 .page_title span.creativity{
     font-weight: bolder;
     font-size: 1em;
-    
 }
 
 .page_subtitle {

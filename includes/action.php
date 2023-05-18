@@ -203,6 +203,7 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
             $_SESSION['email'] = $row['email']; 
             $_SESSION['fullname'] = $row['fullname']; 
             $_SESSION['role'] = $row['role']; 
+            
 
             if(isset($_POST['remember'])){
                 setcookie('id', $row['id_user'], time()+3600, "/"); //cookie pake "/" biar bisa diakses semua file diberbagai folder

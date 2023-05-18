@@ -1,91 +1,64 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Scroll Bar
-::-webkit-scrollbar {
-    visibility: hidden;
-    width: 0;
-  }
-
-
 *{
     padding: 0;
     margin: 0;
-    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 
-/* Navigation Bar */
-.header {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 4em;
+/*============ NAVIGATION BAR ============*/
+.nav_container {
+    padding: 0 0em;
     width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     position: fixed;
     z-index: 999;
-    background-color: rgba(255, 255, 255);
+    /* border: 1px solid #bf202f; */
 }
 
-.logo-wrapper{
-    cursor: default;
-    display: flex;
-    justify-content: flex-end;
+.nav_wrapper {
     align-items: center;
-    width: 20%;
-    height: auto;
-}
-
-
-.navigation-wrapper {
-    width: 35%;
-    margin: 0 8em;
-}
-
-ul.navigation-menu {
-    justify-content: space-around;
-    text-align: center;
+    justify-content: space-evenly;
     display: flex;
-    
+    width: 90%;
+    height: 4em;
+    background: #fff;
+    gap: 1em;
+    /* border: 1px solid red; */
 }
 
-ul.navigation-menu li {
-    list-style: none;
+.nav_menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    width: 50%;
+    /* border: 1px solid tomato; */
+    gap: 3em;
+    font-size: 0.95em;
+}
+
+.nav_menu li{
     display: inline-block;
 }
-
-ul.navigation-menu li a {
+.nav_menu li a {
     text-decoration: none;
-    color: #24242a;
-    font-weight: 600;
+    color: #000;
+    font-size: 0.98em;
     position: relative;
 }
 
-ul.navigation-menu li a:after {
+.nav_menu li a:after {
     content: "";
     position: absolute;
-    background-color:  #fec112;
+    background-color:  #bf202f;
     height: 2px;
     width: 0;
     left: 0;
@@ -93,109 +66,167 @@ ul.navigation-menu li a:after {
     transition: 0.3s;
 }
 
-ul.navigation-menu li a:hover {
-    color:  #fec112;
-}
-
-ul.navigation-menu li a:hover:after {
-    color:  #fec112;
-    width: 100%;
-}
-
-
-/* Atur tombol login & Register */
-.login-register{
-    padding: 10px;
-    display: flex;
-    justify-content: space-around;
-    width: 20%;
-}
-
-button {
-    border: none;
-    background-color: white;
-}
-
-button a.register {
-    font-size: 1.2em;
-    padding: 6px 2.5em;
-    margin: 0 40px 0 15px;
-    text-decoration: none;
-    color: white;
-    background-color:   #bf202f;
-    border-radius: 5px;
-    border: 2px solid  #bf202f;
-    font-weight: 500;
-    transition: 0.15s;
-
-}
-
-button a.login {
-    font-size: 1.2em;
-    padding: 6px 3em;
-    margin: 0 5px 0 0;
-    text-decoration: none;
+.nav_menu li a:hover {
     color:  #bf202f;
-    background-color:  #fff;
-    border-radius: 5px;
-    border: 2px solid  #bf202f;
-    font-weight: 500;
-    transition: 0.15s;
 }
 
-button a.register:hover {
-    background-color:  #8d1925;
-    color: white;
-    transition: 0.4s;
-    border: 2px solid #8d1925;
-}
-
-
-button a.login:hover {
-    background-color:  #bf202f;
-    color: white;
-    transition: 0.4s;
-}
-
-
-/* Setting background iamge */
-.bg-image img {
+.nav_menu li a:hover:after {
+    color:  #bf202f;
     width: 100%;
-    height: 100%;
-    background-size: cover;
-    z-index: -1;
-    filter: brightness(50%);
 }
 
-/* Mengatur content home */
-.container-content {
-    background-color: rgb(255, 255, 255);
-    align-items: center;
-    width: 95%;
-    height: 100vw;
-    position: absolute;
-    top: 35em;
-    left: 2em;
-    box-shadow: -5px -5px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-}
-
-.container-h1 {
-    align-items: center;
+.logo_wrapper {
     display: flex;
+}
+
+.auth:not(.after_auth){
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    /* border: 1px solid blue; */
     justify-content: center;
 }
-h1.head-text {
-    font-size: 4em;
-    color: orangered;
-    z-index: 100;
-    position: relative;
-    top: -30em;
-    text-align: center;
-    width: 40%;
+
+
+.auth a:not(.dashboard, .dropdown) {
+    text-decoration: none;
+    color: #000;
+    font-weight: 550;
+    font-size: 0.9em;
+    width: 9em;
+    height: 2.6em;
+    background: #fec112;
+    border-radius: 3.5px;
+    padding: 0 1.2em 0 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    pointer-events: auto;
 }
-@media screen and (max-width: 476px) {
-    ul.navigation-menu li a {
-        font-size: 5px;
-    }
+
+.auth a:not(.dashboard, .dropdown):hover{
+    background: #d7a900;
+    transition: 0.3s;
+}
+
+.auth a.auth_login {
+    background: #fff;
+    border: 1.5px solid #fec112;
+}
+
+.auth a.auth_login:hover {
+    background: #fec112;
+    transition: 0.3s;
+}
+
+.fa-sign-in-alt, 
+.fa-user {
+    margin-right: 6px;
+}
+
+
+
+
+i.bx-data {
+    font-size: 2.2em;
+    /* border: 1px solid tomato; */
+}
+
+.after_auth {
+    /* border: 1px solid blue;  */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+
+}
+
+
+
+/*==== NAVIGATION ICON ====*/
+.nav_icon {
+    display: flex;
+    align-items: center;
+    gap: 1.6em;
+}
+
+i.bx-cart,
+i.bx-envelope,
+i.bx-bell,
+i.bx-data {
+    font-size: 1.5em;
+    color: #24242a;
+}
+
+.vertical_line {
+    border-right: 1.5px solid #E0E0E0;
+    height: 1.6em;
+    margin: 0 0.5em;
+}
+
+
+/*======== MENGATUR PROFIL ========*/
+.profile {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.profile-image {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.arrow-down {
+    width: 8px;
+    height: 8px;
+    border: solid #555;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    transition: transform 0.3s;
+}
+
+.dropdown-content {
+    position: absolute;
+    top: 3.3em;
+    right: 0;
+    min-width: 10em;
+    font-size: 0.85em;
+    background-color: #fff;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 4px;
+    box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);
+    display: none;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #24242a;
+    transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: #f6f8fa;
+}
+
+.profile.active .arrow-down {
+    transform: rotate(-135deg);
+}
+
+.profile.active .dropdown-content {
+    display: block;
 }

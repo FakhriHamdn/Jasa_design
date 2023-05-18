@@ -1,5 +1,10 @@
 <?php 
-// require '../includes/action.php';
+session_start();
+if(isset($_SESSION['role']) && $_SESSION['role'] !== 'admin'){
+    header('Location: ../index.php');
+    exit;
+}
+
 require '../includes/functions.php';
 
 $query = "SELECT * FROM products ORDER BY id_product DESC";

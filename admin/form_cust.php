@@ -1,4 +1,12 @@
 <?php 
+session_start();
+
+if(isset($_SESSION['role']) && $_SESSION['role'] !== 'admin'){
+    header('Location: ../index.php');
+    exit;
+}
+
+
 require '../includes/functions.php';
 
 if(isset($_GET['id_cust']) && ($_GET['id_cust'] > 0)){
