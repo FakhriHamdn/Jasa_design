@@ -12,57 +12,26 @@ body {
     min-height: 100%;
 }
 
-container {
-    display: flex;
-}
-
-/* ATUR BAGIAN ATAS NAVBAR */
-.nav_side {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 70px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    background: #fff;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
-}
-
-.logo_wrapper {
-    display: flex;
-    align-items: center;
-    margin: 0 24px;
-}
-
-.logo .menu-icon {
-    color: #333;
-    font-size: 24px;
-    margin-right: 14px;
-    cursor: pointer;
-}
-
-.logo .logo-name {
-    color: #333;
-    font-size: 22px;
-    font-weight: 500;
-}
-
-section .content {
-    flex: 1;
+/* NGATUR CONTENT */
+.container {
+    margin: 1em 0 5em 16em;
+    /* border: 1px solid black; */
 }
 
 .sidebar {
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     top: 0;
     left: 0; 
     height: 100%;
-    width: 260px;
-    padding: 1.25em 0;
+    width: max-content;
+    padding: 1.25em 0 0 0;
     background: #fff;
     box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);
     transition: all 0.4s ease;
-    border: 1px solid tomato;
+    /* border: 1px solid pink; */
 }
 
 
@@ -71,7 +40,8 @@ section .content {
     height: 100%;
     flex-direction: column;
     justify-content: space-between;
-    padding: 30px 16px;
+    padding: 1em 16px 0 16px;
+    /* border: 1px solid tomato; */
 }
 
 .sidebar-content .list {
@@ -82,50 +52,28 @@ section .content {
     display: flex;
     align-items: center;
     margin: 8px 0;
-    padding: 14px 12px;
-    border-radius: 8px;
+    padding: 12px 12px;
+    border-radius: 4px;
     text-decoration: none;
 }
 
 .lists .nav-link:hover {
-    background-color: #4070f4;
+    background-color: #fec112;
 }
 
 .nav-link .icon {
     margin-right: 14px;
-    font-size: 20px;
-    color: #707070;
+    font-size: 18px;
+    color: #24242a;
 }
 
 .nav-link .link {
-    font-size: 16px;
-    color: #707070;
+    font-size: 0.85em;
+    color: #24242a;
     font-weight: 400;
 }
 
 .lists .nav-link:hover .icon,
 .lists .nav-link:hover .link {
-    color: #fff;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    height: 1000vh;
-    width: 200%;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.4s ease;
-    /* background: rgba(0, 0, 0, 0.3); */
-}
-
-nav.open~.overlay {
-    opacity: 1;
-    left: 260px;
-    pointer-events: auto;
-}
-
-table {
-    margin-left: 40em;
+    color: #24242a;
 }
