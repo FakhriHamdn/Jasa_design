@@ -246,3 +246,16 @@ p.fullname {
 .profile.active .dropdown-content {
     display: block;
 }
+
+
+
+/* content */
+
+content .content_container {
+    background: purple;
+    width: 100%;
+    min-height: 90vh;
+    margin-top: 20em;
+    padding: 2em 2em 2em 2em;
+    border-radius: 5px;
+}

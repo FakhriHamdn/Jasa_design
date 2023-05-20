@@ -106,30 +106,39 @@ $query = "SELECT * FROM customers ORDER BY id_cust DESC";
             } ?>
             <a href="../auth/logout.php">Logout</a>
             <h1>Data Jasa Produk</h1>
-            <a href="form_cust.php">Tambah Data</a>
-            <table border="1" cellspacing="0.5" cellpadding="10">
+
+            <div class="notif_operator">
+                <p></p>
+            </div>
+
+            <div class="table_container">
+            <a class="add_data" href="form_cust.php">Tambah Data</a>
+            <table border="1">
                 <tr>
-                    <th>Id</th>
+                    <th class="id">Id</th>
                     <th>Customer</th>
                     <th>Alamat</th>
                     <th>No Telp</th>
                     <th>Email</th>
-                    <th>Aksi</th>
+                    <th class="aksi">Aksi</th>
                 </tr>
                 <?php foreach (getDatas($query) as $row) : ?>
-                    <tr>
-                        <td><?= $row['id_cust']; ?></td>
+                    <tr class="data_table">
+                        <td class="id"><?= $row['id_cust']; ?></td>
                         <td><?= $row['nama_cust']; ?></td>
                         <td><?= $row['alamat']; ?></td>
                         <td><?= $row['no_telp']; ?></td>
                         <td><?= $row['email']; ?></td>
-                        <td>
-                            <a href="form_cust.php?id_cust=<?= $row['id_cust']; ?>">Edit</a> |
-                            <a href="../includes/action.php?id_delete=<?= $row['id_cust'] ?>&page=customer">Delete</a>
+                        <td class="aksi">
+                            <div class="aksi_wrapper">
+                                <a class="edit" href="form_cust.php?id_cust=<?= $row['id_cust']; ?>">Edit</a>
+                                <a class="delete" href="../includes/action.php?id_delete=<?= $row['id_cust'] ?>&page=customer">Delete</a>
+                            </div>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </table>
+            </div>
         </section>
     </div>
 </body>

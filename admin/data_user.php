@@ -103,29 +103,36 @@ $query = "SELECT * FROM users";
                 $msg = $_GET['message'];
                 echo "<div class= 'notif'>$msg</div>";
             } ?>
-            <a href="../auth/logout.php">Logout</a>
+
             <h1>Data Users</h1>
-            <table border="1" cellspacing="0.5" cellpadding="10">
+
+            <div class="notif_operator">
+                <p></p>
+            </div>
+
+            <div class="table_container">
+            <table border="1">
                 <tr>
-                    <th>Id user</th>
+                    <th class="id">Id</th>
                     <th>Email</th>
                     <th>Username</th>
                     <th>Role</th>
-                    <th>Aksi</th>
+                    <th class="aksi">Aksi</th>
                 </tr>
                 <?php foreach (getDatas($query) as $row) : ?>
                     <tr>
-                        <td><?= $row['id_user']; ?></td>
+                        <td class="id"><?= $row['id_user']; ?></td>
                         <td><?= $row['email']; ?></td>
                         <td><?= $row['fullname']; ?></td>
                         <td><?= $row['role']; ?></td>
-                        <td>
-                            <a href="">Edit</a> |
-                            <a href="../includes/action.php?id_delete=<?= $row['id_user']; ?>&page=user">Delete</a>
+                        <td class="aksi">
+                            <a class="edit" href="">Edit</a>
+                            <a class="delete" href="../includes/action.php?id_delete=<?= $row['id_user']; ?>&page=user">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </table>
+            </div>
         </section>
     </div>
 </body>
