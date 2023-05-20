@@ -36,6 +36,8 @@ $query = "SELECT * FROM customers ORDER BY id_cust DESC";
                 <div class="logo_wrapper">
                     <img src="../image/rofaralogo.png" alt="Logo Rofara" style="width: 180.6px; height: 53.235px;">
                 </div>
+                
+                <span class="vertical_line"></span>
 
                 <div class="sidebar-content">
                     <ul class="lists">

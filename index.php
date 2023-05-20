@@ -104,26 +104,6 @@ session_start();
 
 
 
-    <?php if (isset($_SESSION['status'])) : ?>
-        <?php if($_SESSION['role'] === 'admin') : ?>
-            <?php echo 'admin';?>
-        <?php elseif($_SESSION['role'] === 'operator') : ?>
-            <?php echo 'operator'; ?>
-        <?php endif; ?>
-        <div class="profile">
-            <button class="profile-button">
-                <img class="profile-image" src="image/no-picture.jpg" alt="Profile Photo">
-                <span class="arrow-down"></span>
-            </button>
-        </div>
-    <?php else : ?>
-        <a class="login" href="database/form_login.php">Login</a>
-        <a class="register" href="database/form_register.php">Register</a>
-    <?php endif; ?>
-
-
-
-
     <script>
         // Tambahkan kode berikut untuk mengaktifkan dropdown saat foto profil diklik
         const profileButton = document.querySelector('.profile-button');

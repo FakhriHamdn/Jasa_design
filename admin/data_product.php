@@ -36,6 +36,8 @@ $query = "SELECT * FROM products ORDER BY id_product DESC";
                 <div class="logo_wrapper">
                     <img src="../image/rofaralogo.png" alt="Logo Rofara" style="width: 180.6px; height: 53.235px;">
                 </div>
+                
+                <span class="vertical_line"></span>
 
                 <div class="sidebar-content">
                     <ul class="lists">
@@ -103,31 +105,39 @@ $query = "SELECT * FROM products ORDER BY id_product DESC";
                 echo "<div class= 'notif'>$msg</div>";
             } ?>
 
-            <h1>Data Product</h1>
+            <h1 class="header_text">Admin | Data Product</h1>
 
-            <br>
-            <a href="form_product.php">Tambah Data</a>
+            <div class="notif_operator">
+                <p></p>
+            </div>
 
-            <table border="1" cellspacing="0.5" cellpadding="10">
-                <tr>
-                    <th>Id</th>
-                    <th>Product</th>
-                    <th>Harga</th>
-                    <th>Aksi</th>
-                </tr>
-                <?php $no = 1;
-                foreach (getDatas($query) as $row) : ?>
-                    <tr>
-                        <td><?= $row['id_product']; ?></td>
-                        <td><?= $row['nama_product']; ?></td>
-                        <td><?= $row['harga']; ?></td>
-                        <td>
-                            <a href="form_product.php?id_product=<?= $row['id_product']; ?>">Edit</a> |
-                            <a href="../includes/action.php?id_delete=<?= $row['id_product']; ?>&page=product">Delete</a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
+            <div class="table_container">
+                <a href="form_product.php">Tambah Data</a>
+                <div class="container_table">
+                    <table border="1">
+                        <tr>
+                            <th>Id</th>
+                            <th>Product</th>
+                            <th>Harga</th>
+                            <th>Aksi</th>
+                        </tr>
+                        <?php $no = 1;
+                        foreach (getDatas($query) as $row) : ?>
+                            <tr>
+                                <td><?= $row['id_product']; ?></td>
+                                <td><?= $row['nama_product']; ?></td>
+                                <td><?= $row['harga']; ?></td>
+                                <td>
+                                    <a href="form_product.php?id_product=<?= $row['id_product']; ?>">Edit</a> |
+                                    <a href="../includes/action.php?id_delete=<?= $row['id_product']; ?>&page=product">Delete</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+                
+            </div>
+
         </section>
     </div>
 </body>

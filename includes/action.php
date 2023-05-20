@@ -10,7 +10,7 @@ if(isset($_POST['product_submit'])) {
     $harga = htmlspecialchars($_POST['harga']);
 
     if($_GET['action'] === 'addProduct') {
-        if(empty($nama) || empty($harga)){
+        if(empty($nama_product) || empty($harga)){
             $msg = "Cannot add null product";
             header("Location: ../admin/data_product.php?message=" . urlencode($msg));
             exit();
@@ -29,7 +29,7 @@ if(isset($_POST['product_submit'])) {
         $id_product = $_POST['id_product'];
         $row = getProductId($id_product);
         if($row){
-            
+
             $result = updateDataProduct($id_product, $nama_product, $harga);            
             if($result){
                 $msg = "Product data has been successfully updated";
