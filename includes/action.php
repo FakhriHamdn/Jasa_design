@@ -10,19 +10,26 @@ if(isset($_POST['product_submit'])) {
     $harga = htmlspecialchars($_POST['harga']);
 
     if($_GET['action'] === 'addProduct') {
-        $result = addDataProduct($nama_product, $harga);
-        if ($result) {
-            $msg = "Product data has been successfully added";
+        if(empty($nama) || empty($harga)){
+            $msg = "Cannot add null product";
             header("Location: ../admin/data_product.php?message=" . urlencode($msg));
             exit();
         } else {
-            header("Location: ../admin/data_product.php");
+            $result = addDataProduct($nama_product, $harga);
+            if ($result) {
+                $msg = "Product data has been successfully added";
+                header("Location: ../admin/data_product.php?message=" . urlencode($msg));
+                exit();
+            } else {
+                header("Location: ../admin/data_product.php");
+            }
         }
 
     } else if($_GET['action'] === 'updateProduct'){
         $id_product = $_POST['id_product'];
         $row = getProductId($id_product);
         if($row){
+            
             $result = updateDataProduct($id_product, $nama_product, $harga);            
             if($result){
                 $msg = "Product data has been successfully updated";
@@ -42,6 +49,7 @@ if(isset($_POST['cust_submit'])){
     $no_telp = htmlspecialchars($_POST['no_telp']);
     $email = strtolower(htmlspecialchars($_POST['email']));
 
+    if(empty($nama_cust))
     if($_GET['action'] === 'addCustomer'){
         $result = addDataCustomer($nama_cust, $alamat, $no_telp, $email);
         if($result){
@@ -204,11 +212,10 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
             $_SESSION['fullname'] = $row['fullname']; 
             $_SESSION['role'] = $row['role']; 
             
-
             if(isset($_POST['remember'])){
                 setcookie('id', $row['id_user'], time()+3600, "/"); //cookie pake "/" biar bisa diakses semua file diberbagai folder
             }
-        
+            
             $msg = "Yayy! you have successfully logged in!";
             header("Location: ../index.php?message=" . urlencode($msg));
             exit();

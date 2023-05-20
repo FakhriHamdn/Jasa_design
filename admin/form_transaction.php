@@ -1,10 +1,15 @@
 <?php 
 session_start();
 
+//====== VALIDASI AGAR USER TIDAK BISA ASAL MASUK
 if(isset($_SESSION['role']) && $_SESSION['role'] !== 'admin'){
     header('Location: ../index.php');
     exit;
+} else if(!isset($_SESSION['status'])){
+    header('Location: ../index.php');
+    exit;
 }
+//======= END VALIDASI
 
 require '../includes/functions.php';
 

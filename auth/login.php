@@ -31,6 +31,7 @@ if(isset($_SESSION['status'])){
                 <div class="page_header">
                     <h2 class="page_title">Unleash Your <span class="creativity">Creativity</span> with <span class="rofara">ROFARA STORE</span></h2>
                     <p class="page_subtitle">Login to your account and start designing today!</p>
+                    <a class="guest_text" href="../index.php">Explore as a guest</a>
                 </div>
             </section>
 
@@ -38,11 +39,13 @@ if(isset($_SESSION['status'])){
                 <div class="form_container">
                     <h3 class="auth_title">Login to your account</h3>
                     <span class="text_span">Login</span>
+
                     <?php
                     if (isset($_GET['message'])) {
                         $msg = $_GET['message'];
                         echo "<div class= 'notif'>$msg</div>";
                     } ?>
+                    
                     <form action="../includes/action.php?auth=login" method="POST">
                         <ul>
                             <div class="input_container">

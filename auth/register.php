@@ -78,6 +78,7 @@ if(isset($_SESSION['status'])){
                 <div class="page_header_register">
                     <h2 class="page_title">Get Started on Your Creative Journey</h2>
                     <p class="page_subtitle_register">Ready to Unleash Your Creativity? Register now</p>
+                    <a class="guest_text" href="../index.php">Explore as a guest</a>
                 </div>
             </section>
 

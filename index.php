@@ -64,7 +64,7 @@ session_start();
                                         <p>Signed in as</p>
                                         <p class="fullname"><?= $_SESSION['fullname']?></p>
                                     </div>
-                    
+                                    
                                     <a class="dropdown" href="#">Your profil</a>
                                     <a class="dropdown" href="#">Purchase</a>
                                     <a class="dropdown" href="#">Wishlist</a>
@@ -77,7 +77,7 @@ session_start();
                                             <a class="dropdown" href="#">Operator Power</a>
                                         <?php endif; ?>
                                     <a class="dropdown" href="auth/logout.php">Sign out</a>
-
+                                
                                 </div>
                             </div>
                             </div>
@@ -101,6 +101,25 @@ session_start();
     </main>
 
 
+
+
+
+    <?php if (isset($_SESSION['status'])) : ?>
+        <?php if($_SESSION['role'] === 'admin') : ?>
+            <?php echo 'admin';?>
+        <?php elseif($_SESSION['role'] === 'operator') : ?>
+            <?php echo 'operator'; ?>
+        <?php endif; ?>
+        <div class="profile">
+            <button class="profile-button">
+                <img class="profile-image" src="image/no-picture.jpg" alt="Profile Photo">
+                <span class="arrow-down"></span>
+            </button>
+        </div>
+    <?php else : ?>
+        <a class="login" href="database/form_login.php">Login</a>
+        <a class="register" href="database/form_register.php">Register</a>
+    <?php endif; ?>
 
 
 
