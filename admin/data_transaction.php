@@ -114,36 +114,43 @@ $query = "SELECT transactions.id_transaction,
                 $msg = $_GET['message'];
                 echo "<div class= 'notif'>$msg</div>";
             } ?>
-            <a href="../auth/logout.php">Logout</a>
             <h1>Data Transactions</h1>
-            <a href="form_transaction.php">Tambah Data</a>
-            <table border="1" cellspacing="0.5" cellpadding="10">
+
+            <div class="notif_operator">
+                <p></p>
+            </div>
+            <div class="table_container">
+            <a class="add_data" href="form_transaction.php">Tambah Data</a>
+            <table border="1">
                 <tr>
-                    <th>Id</th>
-                    <th>Nama Customer</th>
-                    <th>Nama Product</th>
+                    <th class="id">Id</th>
+                    <th>Customer</th>
+                    <th>Product</th>
                     <th>Tanggal</th>
                     <th>Jumlah</th>
                     <th>Harga</th>
-                    <th>Total Pembayaran</th>
-                    <th>Aksi</th>
+                    <th>Total</th>
+                    <th class="aksi">Aksi</th>
                 </tr>
                 <?php foreach (getDatas($query) as $row) : ?>
-                    <tr>
-                        <td><?= $row['id_transaction']; ?></td>
+                    <tr class="data_table">
+                        <td class="id"><?= $row['id_transaction']; ?></td>
                         <td><?= $row['nama_cust']; ?></td>
                         <td><?= $row['nama_product']; ?></td>
                         <td><?= $row['tanggal']; ?></td>
                         <td><?= $row['jumlah_product']; ?></td>
-                        <td><?= $row['harga']; ?></td>
-                        <td><?= $row['total_pembayaran']; ?></td>
-                        <td>
-                            <a href="form_transaction.php?id_transaction=<?= $row['id_transaction']; ?>">Edit</a> |
-                            <a href="../includes/action.php?id_delete=<?= $row['id_transaction']; ?>&page=transaction">Delete</a>
+                        <td>Rp. <?= $row['harga']; ?></td>
+                        <td>Rp. <?= $row['total_pembayaran']; ?></td>
+                        <td class="aksi">
+                            <div class="aksi_wrapper">
+                                <a class="edit" href="form_transaction.php?id_transaction=<?= $row['id_transaction']; ?>">Edit</a>
+                                <a class="delete" href="../includes/action.php?id_delete=<?= $row['id_transaction']; ?>&page=transaction">Delete</a>
+                            </div>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </table>
+            </div>
         </section>
     </div>
 

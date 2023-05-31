@@ -127,6 +127,7 @@ body {
     flex-direction: column;
     background: #fff;
     width: 80vw;
+    overflow-x: hidden;
     height: max-content;
     border: 1px solid #E0E0E0;
     /* border: 1px solid #bf202f; */
