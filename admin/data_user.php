@@ -126,8 +126,10 @@ $query = "SELECT * FROM users";
                         <td><?= $row['fullname']; ?></td>
                         <td><?= $row['role']; ?></td>
                         <td class="aksi">
-                            <a class="edit" href="">Edit</a>
-                            <a class="delete" href="../includes/action.php?id_delete=<?= $row['id_user']; ?>&page=user">Delete</a>
+                            <div class="aksi_wrapper">
+                                <a class="edit" href="">Edit</a>
+                                <a class="delete" href="../includes/action.php?id_delete=<?= $row['id_user']; ?>&page=user">Delete</a>
+                            </div>
                         </td>
                     </tr>
                 <?php endforeach; ?>

@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+require 'includes/functions.php';
+$query = "SELECT * FROM products";
+
+
 
 ?>
 <!DOCTYPE html>
@@ -33,22 +37,32 @@ session_start();
                     <li><a href="../marketplace.php">Marketplace</a></li>
                 </ul>
                 <div class="auth">
-                    
+
                     <!-- NAVBAR ICON -->
                     <div class="nav_icon">
-                        <a href=""><i class='bx bx-cart'></i></a>
+                        <a href="keranjang.php?cart"><i class='bx bx-cart'></i></a>
                         <a href=""><i class='bx bx-envelope'></i></a>
                         <a href=""><i class='bx bx-bell'></i></a>
                     </div>
-                    
+
                     <span class="vertical_line"></span>
 
                     <?php if (isset($_SESSION['status'])) : ?>
                         <?php if ($_SESSION['role'] === 'admin') : ?>
                             <div class="after_auth">
-                                <a class="dashboard" href="admin/data_product.php?dash=admin">
-                                    <i class='bx bx-data'></i>
-                                </a>
+                                <div class="dash_container">
+                                    <button class="dash-button">
+                                        <!-- <a class="dashboard" href="admin/data_product.php?dash=admin"> -->
+                                        <i class='bx bx-data'></i>
+                                        <!-- </a> -->
+                                    </button>
+                                    <div class="dash-content">
+                                        <form action="" method="post">
+                                            <input type="password" name="admin_password" placeholder="******">
+                                            <button type="submit">Verify</button>
+                                        </form>
+                                    </div>
+                                </div>
                             <?php elseif ($_SESSION['role'] === 'operator') : ?>
                                 <a class="dashboard" href="operator/data_product.php">
                                     <i class='bx bx-data'></i>
@@ -62,22 +76,22 @@ session_start();
                                 <div class="dropdown-content">
                                     <div class="sign_info">
                                         <p>Signed in as</p>
-                                        <p class="fullname"><?= $_SESSION['fullname']?></p>
+                                        <p class="fullname"><?= $_SESSION['fullname'] ?></p>
                                     </div>
-                                    
+
                                     <a class="dropdown" href="#">Your profil</a>
                                     <a class="dropdown" href="#">Purchase</a>
                                     <a class="dropdown" href="#">Wishlist</a>
                                     <a class="dropdown" href="#">Help</a>
                                     <a class="dropdown" href="#">Settings</a>
 
-                                    <?php if($_SESSION['role'] === 'admin') :?>
+                                    <?php if ($_SESSION['role'] === 'admin') : ?>
                                         <a class="dropdown" href="#">Admin Power</a>
-                                        <?php elseif($_SESSION['role'] === 'operator') :?>
-                                            <a class="dropdown" href="#">Operator Power</a>
-                                        <?php endif; ?>
+                                    <?php elseif ($_SESSION['role'] === 'operator') : ?>
+                                        <a class="dropdown" href="#">Operator Power</a>
+                                    <?php endif; ?>
                                     <a class="dropdown" href="auth/logout.php">Sign out</a>
-                                
+
                                 </div>
                             </div>
                             </div>
@@ -89,37 +103,44 @@ session_start();
             </div>
         </nav>
 
-        <content class="content_container">
-        </content>
+        <section class="content_container">
+            <div class="content_header">
+                <table border="1" cellspacing="0.5" cellpadding="10">
+                    <tr>
+                        <th>Product</th>
+                        <th>Harga</th>
+                        <th class="aksi">option</th>
+                    </tr>
+                    <?php $no = 1;
+                    foreach (getDatas($query) as $row) : ?>
+                        <tr class="data_table">
+                            <td><?= $row['nama_product']; ?></td>
+                            <td>Rp. <?= $row['harga']; ?></td>
+                            <td class="aksi">
+                                <div class="aksi_wrapper">
+                                    <a href="checkout.php?id_product=<?= $row['id_product']; ?>">Beli</a> |
+                                    <a href="includes/action.php?add_to_cart=<?= $row['id_product']; ?>">Keranjang</a>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
+        </section>
 
 
-
-        <br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br>
     </main>
 
 
 
 
-
-    <script>
-        // Tambahkan kode berikut untuk mengaktifkan dropdown saat foto profil diklik
-        const profileButton = document.querySelector('.profile-button');
-        const profile = document.querySelector('.profile');
-
-        profileButton.addEventListener('click', () => {
-            profile.classList.toggle('active');
-        });
-        // Event listener untuk menutup dropdown ketika mengklik di luar elemen profil
-        document.addEventListener('click', (event) => {
-            const targetElement = event.target;
-            // Periksa apakah elemen yang diklik berada di luar elemen profil
-            if (!profile.contains(targetElement)) {
-                profile.classList.remove('active');
-            }
-        });
-    </script>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br>
+    <script src="script.js"></script>
 
 </body>
+
 </html>

@@ -197,6 +197,7 @@ i.bx-data {
     transition: transform 0.3s;
 }
 
+/* penting nih */
 .dropdown-content {
     position: absolute;
     top: 3.3em;
@@ -211,6 +212,7 @@ i.bx-data {
     z-index: 1;
 }
 
+/* penting juga */
 .dropdown-content a, .dropdown-content p {
     display: block;
     padding: 8px 16px;
@@ -243,6 +245,7 @@ p.fullname {
     transform: rotate(-135deg);
 }
 
+/* penting nih buat munculin dropdown */
 .profile.active .dropdown-content {
     display: block;
 }
@@ -258,4 +261,75 @@ content .content_container {
     margin-top: 20em;
     padding: 2em 2em 2em 2em;
     border-radius: 5px;
+}
+
+
+/* DASHBAORD */
+.dash_container {
+    position: relative;
+    display: inline-block;
+}
+
+.dash-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    font-size: 1.1em;
+}
+
+.dash-content {
+    position: absolute;
+    top: 3.3em;
+    right: 0;
+    min-width: max-content;
+    font-size: 0.85em;
+    background-color: #fff;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 4px;
+    box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);
+    display: none;
+    z-index: 1;
+}
+
+.dash-content input, .dash-content p {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #24242a;
+    transition: background-color 0.3s;
+}
+
+
+
+.dash_container.active .dash-content {
+    display: block;
+}
+
+
+/* CONTENT */
+.content_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    /* border: 1px solid tomato; */
+    top: 4em;
+    left: 0;
+    right: 0;
+    height: 100vh;
+}
+
+.content_header {
+    border: 1px solid black;
+    width: 85%;
+    /* padding: 0 1.8em; */
+
+    /* height: 100vh; */
+}
+
+.main_content {
+    /* border: 1px solid green; */
 }

@@ -29,7 +29,6 @@ if(isset($_POST['product_submit'])) {
         $id_product = $_POST['id_product'];
         $row = getProductId($id_product);
         if($row){
-
             $result = updateDataProduct($id_product, $nama_product, $harga);            
             if($result){
                 $msg = "Product data has been successfully updated";
@@ -212,6 +211,7 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
             $_SESSION['fullname'] = $row['fullname']; 
             $_SESSION['role'] = $row['role']; 
             
+
             if(isset($_POST['remember'])){
                 setcookie('id', $row['id_user'], time()+3600, "/"); //cookie pake "/" biar bisa diakses semua file diberbagai folder
             }
@@ -234,6 +234,32 @@ if(isset($_POST['auth_submit']) && $_GET['auth'] === 'register'){
 }
 
 //================== END AUTHENTICATION ==================
+
+
+//================== CART SYSTEM ==================
+
+if(isset($_GET['add_to_cart'])) {
+    $id_product = $_GET['add_to_cart'];
+    $row = getProductId($id_product);
+
+    // MEMBUAT VARIABLE SUPER GLOBAL CART
+    $_SESSION['cart'][] = $row['id_product'];
+    
+    header('Location: ../index.php');
+}
+
+if (isset($_GET['remove_from_cart'])) {
+    $key = $_GET['remove_from_cart'];
+
+    // Hapus produk dari keranjang jika ada
+        unset($_SESSION['cart'][$key]);
+        header("Location: ../keranjang.php");
+
+    
+}
+
+
+
 
 
 
