@@ -242,17 +242,19 @@ if(isset($_GET['add_to_cart'])) {
     $id_product = $_GET['add_to_cart'];
     $row = getProductId($id_product);
 
+    $userIdentity = $_SESSION['email'];
+
     // MEMBUAT VARIABLE SUPER GLOBAL CART
-    $_SESSION['cart'][] = $row['id_product'];
+    $_SESSION['cart'][$userIdentity][] = $row['id_product'];
     
     header('Location: ../index.php');
 }
 
 if (isset($_GET['remove_from_cart'])) {
     $key = $_GET['remove_from_cart'];
-
+    $userIdentity = $_SESSION['email'];
     // Hapus produk dari keranjang jika ada
-        unset($_SESSION['cart'][$key]);
+        unset($_SESSION['cart'][$userIdentity][$key]);
         header("Location: ../keranjang.php");
 
     

@@ -20,7 +20,7 @@ $query = "SELECT * FROM products";
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="shortcut icon" href="image/Logo-rofara2.png" type="image/x-icon">
     <link rel="stylesheet" href="styles/home.css">
-    <title> Home | Rofara Store </title>
+    <title> Unleash your creativity | Rofara Store </title>
 </head>
 
 <body>
@@ -34,7 +34,7 @@ $query = "SELECT * FROM products";
                     <li><a href="">Home</a></li>
                     <li><a class="active" href="public/aboutUs.php">About Us</a></li>
                     <li><a href="public/contact.php">Contact</a></li>
-                    <li><a href="../marketplace.php">Marketplace</a></li>
+                    <li><a href="public/marketplace/marketplace.php">Marketplace</a></li>
                 </ul>
                 <div class="auth">
 

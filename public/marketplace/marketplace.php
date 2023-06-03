@@ -15,7 +15,7 @@ session_start();
     <link href="/your-path-to-fontawesome/css/solid.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="shortcut icon" href="../image/Logo-rofara2.png" type="image/x-icon">
-    <link rel="stylesheet" href="../styles/home.css">
+    <link rel="stylesheet" href="../../styles/home.css">
     <title> Marketplace | Rofara Store </title>
 </head>
 
@@ -29,8 +29,8 @@ session_start();
                 <ul class="nav_menu">
                     <li><a href="../index.php">Home</a></li>
                     <li><a class="active" href="">About Us</a></li>
-                    <li><a href="contact.php">Contact</a></li>
-                    <li><a href="marketplace/marketplace.php">Marketplace</a></li>
+                    <li><a href="../contact.php">Contact</a></li>
+                    <li><a href="">Marketplace</a></li>
                 </ul>
                 <div class="auth">
                     

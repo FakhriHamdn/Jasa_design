@@ -17,6 +17,8 @@ function getDatas($query){
 //================== END SELECT DATA ==================
 
 
+
+
 //================= FUNCTION FOR CRUD DATA =================
 function fetchCustomer(){
     global $getConnect;
