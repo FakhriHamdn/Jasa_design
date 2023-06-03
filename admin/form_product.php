@@ -40,12 +40,16 @@ if(isset($_GET['id_product']) && $_GET['id_product'] > 0){
 </head>
 <body>
     <h1><?= $h1; ?></h1>
-    <form action="<?= $form_action; ?>" method="POST">
+    <form action="<?= $form_action; ?>" method="POST" enctype="multipart/form-data">
         <?php if($row) : ?>
             <input type="hidden" name="id_product" value="<?= $row['id_product']; ?>">
         <?php endif; ?>
 
         <ul>
+            <li>
+                <label for="product_image">Image</label>
+                <input type="file" name="product_image" id="product_image" value="<?= ($row) ? $row['product_image'] : ''; ?>">
+            </li>
             <li>
                 <label for="product">Produk</label>
                 <input type="text" name="product" id="product" value="<?= ($row) ? $row['nama_product'] : ''; ?>">

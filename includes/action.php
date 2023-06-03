@@ -8,6 +8,10 @@ session_start();
 if(isset($_POST['product_submit'])) {
     $nama_product = htmlspecialchars($_POST['product']);
     $harga = htmlspecialchars($_POST['harga']);
+    $product_image = uploadImage();
+    if(!$product_image){
+        return false; //return false dia bakal memberhentikan eksekusi sampai sini, dan tidak ada menjalankan syntac selanjutnya
+    }
 
     if($_GET['action'] === 'addProduct') {
         if(empty($nama_product) || empty($harga)){
@@ -15,7 +19,7 @@ if(isset($_POST['product_submit'])) {
             header("Location: ../admin/data_product.php?message=" . urlencode($msg));
             exit();
         } else {
-            $result = addDataProduct($nama_product, $harga);
+            $result = addDataProduct($product_image, $nama_product, $harga);
             if ($result) {
                 $msg = "Product data has been successfully added";
                 header("Location: ../admin/data_product.php?message=" . urlencode($msg));
@@ -29,7 +33,7 @@ if(isset($_POST['product_submit'])) {
         $id_product = $_POST['id_product'];
         $row = getProductId($id_product);
         if($row){
-            $result = updateDataProduct($id_product, $nama_product, $harga);            
+            $result = updateDataProduct($id_product, $product_image, $nama_product, $harga);            
             if($result){
                 $msg = "Product data has been successfully updated";
                 header("Location: ../admin/data_product.php?message=" . urlencode($msg));
@@ -247,7 +251,7 @@ if(isset($_GET['add_to_cart'])) {
     // MEMBUAT VARIABLE SUPER GLOBAL CART
     $_SESSION['cart'][$userIdentity][] = $row['id_product'];
     
-    header('Location: ../index.php');
+    header('Location: ../public/marketplace/marketplace.php');
 }
 
 if (isset($_GET['remove_from_cart'])) {

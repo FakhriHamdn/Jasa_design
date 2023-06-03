@@ -5,7 +5,7 @@ require 'includes/functions.php';
 
 // VALIDASI HARUS LOGIN TERLEBIH DAHULU
 if (!isset($_SESSION['status'])) {
-    header('Location: index.php?message=login dulu');
+    header('Location: public/marketplace/marketplace.php?message=login dulu');
     exit;
 }
 
@@ -14,6 +14,11 @@ $userIdentity = $_SESSION['email'];
 // Buat keranjang belanja kosong jika belum ada
 if (!isset($_SESSION['cart'][$userIdentity])) {
     $_SESSION['cart'][$userIdentity] = [];
+}
+
+if (isset($_GET['deleteAll'])) {
+    unset($_SESSION['cart'][$userIdentity]);
+    header("location: keranjang.php");
 }
 
 ?>
@@ -120,40 +125,49 @@ if (!isset($_SESSION['cart'][$userIdentity])) {
                 <div class="content_header">
                     <div class="cart_container">
                         <div class="cart_list">
-                            <h1>Cart</h1>
+                            <h1>Your Shopping Cart</h1>
                             <form class="checkbox_items" action="" method="POST">
                                 <div class="checkbox_all_items">
                                     <input type="checkbox" name="cart">
                                     <label for="cart">Select All</label>
                                 </div>
-                                <a href="">Delete</a>
+                                <a href="?deleteAll">Delete All</a>
                             </form>
 
-                            <?php foreach ($_SESSION['cart'][$userIdentity] as $key => $product_id) : ?>
-                                <?php $row = getProductId($product_id); ?>
+                            <div class="cart_wrapper">
                                 <span class="bold_horizontal_line"></span>
-                                <div class="container_cart_items">
-                                    <div class="cart_items">
-                                        <form action="" method="POST">
-                                            <input type="checkbox" name="cart">
-                                        </form>
-                                    </div>
-                                    <p><?= $row['nama_product']; ?></p>
-                                    <p>Rp <?= $row['harga']; ?></p>
-                                    <div class="manage_cart">
-                                        <a href="">Tulis Catatan</a>
-                                        <div class="manage_items">
-                                            <p>Tambahkan ke wishlist</p>
-                                            <a href="includes/action.php?remove_from_cart=<?= $key; ?>"><i class='bx bx-trash'></i></a>
-                                            <span class="vertical_line"></span>
-                                            <i class='bx bx-plus-circle'></i>
-                                            <i class='bx bx-minus-circle'></i>
+                                <?php foreach ($_SESSION['cart'][$userIdentity] as $key => $product_id) : ?>
+                                    <?php $row = getProductId($product_id); ?>
+                                    <div class="container_cart_items">
+                                        <div class="product_container">
+                                            <div class="cart_items">
+                                                <form action="" method="POST">
+                                                    <input type="checkbox" name="cart">
+                                                </form>
+                                            </div>
+                                            <!-- <img class="img_product" src="image/product/<?php echo $row['product_image']; ?>" width="65" height="65"> -->
+                                            <img class="img_product" src="image/logo-rofara.png" width="65" height="65">
+                                            <div class="product_detail">
+                                                <p><?= $row['nama_product']; ?></p>
+                                                <p class="harga">Rp <?= $row['harga']; ?></p>
+                                            </div>
+                                        </div>
+                                        <div class="manage_cart">
+                                            <a class="note" href="">Add a Note</a>
+                                            <div class="manage_items">
+                                                <p>Add to Wishlist</p>
+                                                <a href="includes/action.php?remove_from_cart=<?= $key; ?>"><i class='bx bx-trash'></i></a>
+                                                <span class="vertical_line"></span>
+                                                <a href=""><i class='bx bx-minus-circle'></i></a>
+                                                <p>0</p>
+                                                <a href=""><i class='bx bx-plus-circle'></i></a>
 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php endforeach; ?>
-
+                                    <span class="bold_horizontal_line"></span>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
                     </div>
                     <hr>
@@ -163,14 +177,18 @@ if (!isset($_SESSION['cart'][$userIdentity])) {
                             </div>
                             <span class="horizontal_line"></span>
                             <div class="card_checkout">
-
-                                <h3>Ringkasan Belanja</h3>
-                                <p>Total Harga (0 Barang)</p>
+                                <h3>Shopping Summary</h3>
+                                <div class="summary_wrapper">
+                                <p>Total Price (0 Items)</p>
+                                <p>Rp0</p>
+                                </div>
 
                                 <span class="horizontal_line"></span>
-
-                                <h3>Total Harga</h3>
-                                <a href="checkout.php">Beli()</a>
+                                <div class="price_wrapper">
+                                <h3>Total Price</h3>
+                                <h3>-</h3>
+                                </div>
+                                <a href="checkout.php">Checkout()</a>
                             </div>
                         </div>
                     </div>
@@ -179,47 +197,14 @@ if (!isset($_SESSION['cart'][$userIdentity])) {
 
                 </div>
             <?php else : ?>
-                <p>keranjangmu kosong</p>
+                <div class="empty_message">
+                    <p>Your Shopping Cart is Empty</p>
+                    <a href="public/marketplace/marketplace.php">Explore our product</a>
+                </div>
             <?php endif; ?>
         </section>
 
-        <!-- <br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br> -->
         <script src="script.js"></script>
 </body>
 
 </html>
-
-<!-- <?php if (count($_SESSION['cart'][$userIdentity]) > 0) : ?>
-    <table border="1">
-        <tr>
-            <th>id</th>
-            <th>Product</th>
-            <th>Harga</th>
-            <th>Checkout</th>
-            <th>Hapus</th>
-        </tr>
-        <?php foreach ($_SESSION['cart'][$userIdentity] as $key => $product_id) : ?>
-            <?php $row = getProductId($product_id); ?>
-            <tr class="data_table">
-                <td><?= $row['id_product']; ?></td>
-                <td><?= $row['nama_product']; ?></td>
-                <td><?= $row['harga']; ?></td>
-                <td><a href="checkout.php">Checkout</a></td>
-                <td><a href="includes/action.php?remove_from_cart=<?= $key; ?>">Hapus</a></td>
-            </tr>
-        <?php endforeach; ?>
-
-    </table>
-<?php endif; ?> -->

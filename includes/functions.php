@@ -48,12 +48,65 @@ function getHargaProduct($id_product){
     return $row;
 }
 
-function addDataProduct($nama_product, $harga){
+function addDataProduct($product_image, $nama_product, $harga){
     global $getConnect;
-    $query = "INSERT INTO products VALUES('', '$nama_product', '$harga')";
+    $query = "INSERT INTO products VALUES('', '$product_image','$nama_product', '$harga')";
     $result = mysqli_query($getConnect, $query);
     return $result;
 }
+
+function uploadImage(){
+    //mengambil isi dari $_FILES
+    $namaFile = $_FILES['product_image']['name'];
+    $ukuranFile = $_FILES['product_image']['size'];
+    $error = $_FILES['product_image']['error'];
+    $tmpname = $_FILES['product_image']['tmp_name'];
+
+    //cek apakah gambar diupload atau tidak, 4 Situ tidak ada gambar yang diupload, caranya pake var_dump sebuah $_FILES
+    if($error === 4){
+        echo 
+        '<script>
+            alert("Pilih gambar terlebih dahulu");
+        </script>';
+
+        //setelah pesan tmpil kita berhentikan juga functionnya, jika upload()nya gagal jadi function tambahnya gagal juga
+        return false;
+    }
+
+    //yang diupload harus gambar
+    $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
+
+    //ngambil ekstensi file gambar yang akan diupload
+    //function exlode untuk memecah sebuah string menajdi array, memecahnya menggunakan delimiter
+    $ekstensiGambar = explode('.', $namaFile); //parameternya (delimiter, string)
+    $ekstensiGambar = strtolower(end($ekstensiGambar)); //strtolower buat maksa jadi huruf kecil semua
+
+    //cek ekstensi gambar yang diupload ada ngk disini
+    //in_array buat ngecek ada gk sebuah string didalam sebuah array, parameter defaultnya needle, haystack,
+    if(in_array($ekstensiGambar, $ekstensiGambarValid)); //fungsi ini menghasilkan nilai true jika sesuai dengan ..valid
+    echo 
+        '<script>
+            alert("yang anda upload bukan gambar");
+        </script>';
+
+    //untuk membatasi ukuran gambar yang diupload
+    if($ukuranFile > 1000000000){ //dalam byte
+        echo 
+        '<script>
+            alert("ukuran gambar terlalu besar");
+        </script>';
+    } 
+
+
+    //menggenerate nama gambar baru
+    $namaFileBaru = uniqid();
+    $namaFileBaru .= '.';
+    $namaFileBaru .= $ekstensiGambar;
+
+    move_uploaded_file($tmpname, '../image/product/' . $namaFileBaru);
+    return $namaFileBaru;
+}
+
 
 function getProductId($id_product){
     global $getConnect;
@@ -62,9 +115,9 @@ function getProductId($id_product){
     return $row;
 }
 
-function updateDataProduct($id_product, $nama_product, $harga) {
+function updateDataProduct($id_product, $product_image, $nama_product, $harga) {
     global $getConnect;
-    $query = "UPDATE products SET nama_product = '$nama_product', harga = '$harga' WHERE id_product = '$id_product'";
+    $query = "UPDATE products SET product_image = '$product_image', nama_product = '$nama_product', harga = '$harga' WHERE id_product = '$id_product'";
     $result = mysqli_query($getConnect, $query);
     return $result;
 }

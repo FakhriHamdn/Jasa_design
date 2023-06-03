@@ -2,7 +2,6 @@
 session_start();
 
 require 'includes/functions.php';
-$query = "SELECT * FROM products";
 
 
 
@@ -104,43 +103,11 @@ $query = "SELECT * FROM products";
         </nav>
 
         <section class="content_container">
-            <div class="content_header">
-                <table border="1" cellspacing="0.5" cellpadding="10">
-                    <tr>
-                        <th>Product</th>
-                        <th>Harga</th>
-                        <th class="aksi">option</th>
-                    </tr>
-                    <?php $no = 1;
-                    foreach (getDatas($query) as $row) : ?>
-                        <tr class="data_table">
-                            <td><?= $row['nama_product']; ?></td>
-                            <td>Rp. <?= $row['harga']; ?></td>
-                            <td class="aksi">
-                                <div class="aksi_wrapper">
-                                    <a href="checkout.php?id_product=<?= $row['id_product']; ?>">Beli</a> |
-                                    <a href="includes/action.php?add_to_cart=<?= $row['id_product']; ?>">Keranjang</a>
-                                </div>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </table>
-            </div>
+            <p>ini homepage</p>
         </section>
 
 
     </main>
-
-
-
-
-    <br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br>
     <script src="script.js"></script>
-
 </body>
-
 </html>

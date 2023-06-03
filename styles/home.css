@@ -339,3 +339,10 @@ content .content_container {
 .main_content {
     /* border: 1px solid green; */
 }
+
+.text_biasalah {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

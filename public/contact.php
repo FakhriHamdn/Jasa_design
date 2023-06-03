@@ -36,7 +36,7 @@ session_start();
                     
                     <!-- NAVBAR ICON -->
                     <div class="nav_icon">
-                        <a href=""><i class='bx bx-cart'></i></a>
+                        <a href="../keranjang.php"><i class='bx bx-cart'></i></a>
                         <a href=""><i class='bx bx-envelope'></i></a>
                         <a href=""><i class='bx bx-bell'></i></a>
                     </div>
@@ -89,38 +89,17 @@ session_start();
             </div>
         </nav>
 
-        <content class="content_container">
-            <p></p>
-        </content>
+        <section class="content_container">
+            <div class="text_biasalah">
+                <p>ini about us</p><br>
+                <h3>Ett dahh, udah tau ngk ada yang bagus..</h3>
+                <h3>Next aja klo masih penasaran</h3>
 
+            </div>
+            
+        </section>
 
-
-        <br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br>
     </main>
-
-
-
-
-
-    <script>
-        // Tambahkan kode berikut untuk mengaktifkan dropdown saat foto profil diklik
-        const profileButton = document.querySelector('.profile-button');
-        const profile = document.querySelector('.profile');
-
-        profileButton.addEventListener('click', () => {
-            profile.classList.toggle('active');
-        });
-        // Event listener untuk menutup dropdown ketika mengklik di luar elemen profil
-        document.addEventListener('click', (event) => {
-            const targetElement = event.target;
-            // Periksa apakah elemen yang diklik berada di luar elemen profil
-            if (!profile.contains(targetElement)) {
-                profile.classList.remove('active');
-            }
-        });
-    </script>
-
+    <script src="../script.js"></script>
 </body>
 </html>
