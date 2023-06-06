@@ -141,6 +141,8 @@ $query = "SELECT * FROM products ORDER BY id_product ASC LIMIT $dataAwal, $jumla
             </div>
 
             <div class="table_container">
+
+        <?php if(isset($_GET['id_product']) && $_GET['id_product'] > 0) :?>
             <?php if($halamanAktif > 1): ?>
                         <a href="?page=<?= $halamanAktif - 1?>">&laquo;</a>
                     <?php endif; ?>
@@ -182,7 +184,7 @@ $query = "SELECT * FROM products ORDER BY id_product ASC LIMIT $dataAwal, $jumla
                         <?php endforeach; ?>
                     </table>
 
-                
+                <?php endif; ?>
             </div>
 
         </section>
