@@ -145,8 +145,8 @@ if (isset($_GET['deleteAll'])) {
                                                     <input type="checkbox" name="cart">
                                                 </form>
                                             </div>
-                                            <!-- <img class="img_product" src="image/product/<?php echo $row['product_image']; ?>" width="65" height="65"> -->
-                                            <img class="img_product" src="image/logo-rofara.png" width="65" height="65">
+                                            <img class="img_product" src="image/product/<?php echo $row['product_image']; ?>" width="65" height="65">
+                                            <!-- <img class="img_product" src="image/logo-rofara.png" width="65" height="65"> -->
                                             <div class="product_detail">
                                                 <p><?= $row['nama_product']; ?></p>
                                                 <p class="harga">Rp <?= $row['harga']; ?></p>

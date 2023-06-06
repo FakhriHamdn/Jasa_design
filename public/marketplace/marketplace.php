@@ -36,14 +36,14 @@ $query = "SELECT * FROM products";
                     <li><a href="">Marketplace</a></li>
                 </ul>
                 <div class="auth">
-                    
+
                     <!-- NAVBAR ICON -->
                     <div class="nav_icon">
                         <a href="../../keranjang.php"><i class='bx bx-cart'></i></a>
                         <a href=""><i class='bx bx-envelope'></i></a>
                         <a href=""><i class='bx bx-bell'></i></a>
                     </div>
-                    
+
                     <span class="vertical_line"></span>
 
                     <?php if (isset($_SESSION['status'])) : ?>
@@ -65,22 +65,22 @@ $query = "SELECT * FROM products";
                                 <div class="dropdown-content">
                                     <div class="sign_info">
                                         <p>Signed in as</p>
-                                        <p class="fullname"><?= $_SESSION['fullname']?></p>
+                                        <p class="fullname"><?= $_SESSION['fullname'] ?></p>
                                     </div>
-                                    
+
                                     <a class="dropdown" href="#">Your profil</a>
                                     <a class="dropdown" href="#">Purchase</a>
                                     <a class="dropdown" href="#">Wishlist</a>
                                     <a class="dropdown" href="#">Help</a>
                                     <a class="dropdown" href="#">Settings</a>
 
-                                    <?php if($_SESSION['role'] === 'admin') :?>
+                                    <?php if ($_SESSION['role'] === 'admin') : ?>
                                         <a class="dropdown" href="#">Admin Power</a>
-                                        <?php elseif($_SESSION['role'] === 'operator') :?>
-                                            <a class="dropdown" href="#">Operator Power</a>
-                                        <?php endif; ?>
+                                    <?php elseif ($_SESSION['role'] === 'operator') : ?>
+                                        <a class="dropdown" href="#">Operator Power</a>
+                                    <?php endif; ?>
                                     <a class="dropdown" href="../../auth/logout.php">Sign out</a>
-                                
+
                                 </div>
                             </div>
                             </div>
@@ -93,26 +93,30 @@ $query = "SELECT * FROM products";
         </nav>
         <section class="content_container">
             <div class="content_header">
-                <table border="1" cellspacing="0.5" cellpadding="10">
-                    <tr>
-                        <th>Product</th>
-                        <th>Harga</th>
-                        <th class="aksi">option</th>
-                    </tr>
-                    <?php $no = 1;
-                    foreach (getDatas($query) as $row) : ?>
-                        <tr class="data_table">
-                            <td><?= $row['nama_product']; ?></td>
-                            <td>Rp. <?= $row['harga']; ?></td>
-                            <td class="aksi">
-                                <div class="aksi_wrapper">
-                                    <a href="checkout.php?id_product=<?= $row['id_product']; ?>">Beli</a> |
-                                    <a href="../../includes/action.php?add_to_cart=<?= $row['id_product']; ?>">Keranjang</a>
+                <div class="main_image">
+                    <p></p>
+                </div>
+                <div class="product_display">
+                    <?php foreach (getDatas($query) as $row) : ?>
+                        <div class="card_wrapper">
+                            <div class="card_box">
+                                <div class="image_display">
+                                    <img src="../../image/product/<?= $row['product_image']; ?>" alt="foto" style="width: 100%; height: 100%;">
                                 </div>
-                            </td>
-                        </tr>
+                                <div class="info_product">
+                                    <p><?= $row['nama_product']; ?></p>
+                                    <p style="font-weight: 700;">Rp. <?= $row['harga']; ?></p>
+                                </div>
+                                <div class="product_wrapper">
+                                    <a href="checkout.php?id_product=<?= $row['id_product']; ?>">Beli</a> |
+                                    <a href="../../includes/action.php?add_to_cart=<?= $row['id_product']; ?>"><i class='bx bx-cart'></i></a>
+                                </div>
+
+                            </div>
+                        </div>
                     <?php endforeach; ?>
-                </table>
+                </div>
+
             </div>
         </section>
 
@@ -120,13 +124,6 @@ $query = "SELECT * FROM products";
     </main>
 
 
-
-
-    <br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br>
     <script src="../../script.js"></script>
 
 </body>

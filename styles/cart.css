@@ -473,7 +473,7 @@ content .content_container {
 
 .img_product {
     border-radius: 5px;
-    border: 1px solid #bf202f;
+    /* border: 1px solid #bf202f; */
 }
 
 .product_detail {
