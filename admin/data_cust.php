@@ -13,6 +13,23 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'admin') {
 
 require '../includes/functions.php';
 $query = "SELECT * FROM customers ORDER BY id_cust DESC";
+
+
+if (isset($_GET['container']) && $_GET['container'] === 'customers'){
+    if(isset($_GET['id_cust']) && ($_GET['id_cust'] > 0)){
+        $id_cust = $_GET['id_cust'];
+        $row = getCustomerId($id_cust);
+    
+        $form_action = '../includes/action.php?action=updateCustomer';
+        $title = 'Admin | Edit Data Customers';
+        $h1 = 'Form Edit Data Customers';
+    } else {
+        $row = [];
+        $form_action = '../includes/action.php?action=addCustomer';
+        $title = 'Admin | Tambah Data Customers';
+        $h1 = 'Form Tambah Data Customers';
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +53,7 @@ $query = "SELECT * FROM customers ORDER BY id_cust DESC";
                 <div class="logo_wrapper">
                     <img src="../image/rofaralogo.png" alt="Logo Rofara" style="width: 180.6px; height: 53.235px;">
                 </div>
-                
+
                 <span class="vertical_line"></span>
 
                 <div class="sidebar-content">
@@ -112,32 +129,63 @@ $query = "SELECT * FROM customers ORDER BY id_cust DESC";
             </div>
 
             <div class="table_container">
-            <a class="add_data" href="form_cust.php">Tambah Data</a>
-            <table border="1">
-                <tr>
-                    <th class="id">Id</th>
-                    <th>Customer</th>
-                    <th>Alamat</th>
-                    <th>No Telp</th>
-                    <th>Email</th>
-                    <th class="aksi">Aksi</th>
-                </tr>
-                <?php foreach (getDatas($query) as $row) : ?>
-                    <tr class="data_table">
-                        <td class="id"><?= $row['id_cust']; ?></td>
-                        <td><?= $row['nama_cust']; ?></td>
-                        <td><?= $row['alamat']; ?></td>
-                        <td><?= $row['no_telp']; ?></td>
-                        <td><?= $row['email']; ?></td>
-                        <td class="aksi">
-                            <div class="aksi_wrapper">
-                                <a class="edit" href="form_cust.php?id_cust=<?= $row['id_cust']; ?>">Edit</a>
-                                <a class="delete" href="../includes/action.php?id_delete=<?= $row['id_cust'] ?>&page=customer">Delete</a>
-                            </div>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
+                <?php if (isset($_GET['container']) && $_GET['container'] === 'customers') : ?>
+
+                    <form action="<?= $form_action ?>" method="POST">
+        <?php if ($row) : ?>
+            <input type="hidden" name="id_cust" value="<?= $row['id_cust'] ?>">
+        <?php endif; ?>
+        <ul>
+            <li>
+                <label for="cust">customers</label>
+                <input type="text" name="cust" id="cust" value="<?= ($row) ? $row['nama_cust'] : '' ?>">
+            </li>
+            <li>
+                <label for="alamat">Alamat</label>
+                <input type="text" name="alamat" id="alamat" value="<?= ($row) ? $row['alamat'] : '' ?>">
+            </li>
+            <li>
+                <label for="no_telp">No Telp</label>
+                <input type="number" name="no_telp" id="no_telp" value="<?= ($row) ? $row['no_telp'] : '' ?>">
+            </li>
+            <li>
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" value="<?= ($row) ? $row['email'] : '' ?>">
+            </li>
+            <li>
+                <button type="submit" name="cust_submit">Submit</button>
+            </li>
+        </ul>
+    </form>
+
+                <?php else : ?>
+                    <a class="add_data" href="?container=customers">Tambah Data</a>
+                    <table border="1">
+                        <tr>
+                            <th class="id">Id</th>
+                            <th>Customer</th>
+                            <th>Alamat</th>
+                            <th>No Telp</th>
+                            <th>Email</th>
+                            <th class="aksi">Aksi</th>
+                        </tr>
+                        <?php foreach (getDatas($query) as $row) : ?>
+                            <tr class="data_table">
+                                <td class="id"><?= $row['id_cust']; ?></td>
+                                <td><?= $row['nama_cust']; ?></td>
+                                <td><?= $row['alamat']; ?></td>
+                                <td><?= $row['no_telp']; ?></td>
+                                <td><?= $row['email']; ?></td>
+                                <td class="aksi">
+                                    <div class="aksi_wrapper">
+                                        <a class="edit" href="?id_cust=<?= $row['id_cust']; ?>&container=customers">Edit</a>
+                                        <a class="delete" href="../includes/action.php?id_delete=<?= $row['id_cust'] ?>&page=customer">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
+                <?php endif; ?>
             </div>
         </section>
     </div>

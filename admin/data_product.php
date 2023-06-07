@@ -26,6 +26,23 @@ $dataAwal = ($jumlahDataPerhalaman * $halamanAktif) - $jumlahDataPerhalaman;
 $query = "SELECT * FROM products ORDER BY id_product ASC LIMIT $dataAwal, $jumlahDataPerhalaman";
 
 
+if(isset($_GET['container']) && $_GET['container'] === 'product'){
+
+    if(isset($_GET['id_product']) && $_GET['id_product'] > 0){
+        $id_product = $_GET['id_product'];
+        $row = getProductId($id_product);
+    
+        $title = 'Admin | Form Edit Data Product';
+        $h1 = 'Form Edit Data Product';
+        $form_action = '../includes/action.php?action=updateProduct';
+    } else {
+        $row = [];
+        
+        $title = 'Admin | Form Tambah Data Product';
+        $h1 = 'Form Tambah Data Product';
+        $form_action = '../includes/action.php?action=addProduct';
+    }
+}
 
 
 
@@ -142,7 +159,34 @@ $query = "SELECT * FROM products ORDER BY id_product ASC LIMIT $dataAwal, $jumla
 
             <div class="table_container">
 
-        <?php if(isset($_GET['id_product']) && $_GET['id_product'] > 0) :?>
+        <?php if(isset($_GET['container']) && $_GET['container'] === 'product') :?>
+
+
+                    <form action="<?= $form_action; ?>" method="POST" enctype="multipart/form-data">
+                        <?php if($row) : ?>
+                    <input type="hidden" name="id_product" value="<?= $row['id_product']; ?>">
+                <?php endif; ?>
+
+                <ul>
+                    <li>
+                        <label for="product_image">Image</label>
+                        <input type="file" name="product_image" id="product_image" value="<?= ($row) ? $row['product_image'] : ''; ?>">
+                    </li>
+                    <li>
+                        <label for="product">Produk</label>
+                        <input type="text" name="product" id="product" value="<?= ($row) ? $row['nama_product'] : ''; ?>">
+                    </li>
+                    <li>
+                        <label for="harga">Harga</label>
+                        <input type="number" name="harga" id="harga" value="<?= ($row) ? $row['harga'] : ''; ?>">
+                    </li>
+                    <li>
+                        <button type="submit" name="product_submit">Submit</button>
+                    </li>
+                </ul>
+            </form>
+
+            <?php else: ?>
             <?php if($halamanAktif > 1): ?>
                         <a href="?page=<?= $halamanAktif - 1?>">&laquo;</a>
                     <?php endif; ?>
@@ -160,7 +204,7 @@ $query = "SELECT * FROM products ORDER BY id_product ASC LIMIT $dataAwal, $jumla
                     <?php if($halamanAktif < $jumlahHalaman): ?>
                         <a href="?page=<?= $halamanAktif + 1?>">&raquo;</a>
                     <?php endif; ?>
-                <a class="add_data" href="form_product.php">Tambah Data</a>
+                <a class="add_data" href="?container=product">Tambah Data</a>
                     <table border="1">
                         <tr>
                             <th class="id">Id</th>
@@ -176,7 +220,7 @@ $query = "SELECT * FROM products ORDER BY id_product ASC LIMIT $dataAwal, $jumla
                                 <td>Rp. <?= $row['harga']; ?></td>
                                 <td class="aksi">
                                     <div class="aksi_wrapper">
-                                        <a class="edit" href="form_product.php?id_product=<?= $row['id_product']; ?>">Edit</a>
+                                        <a class="edit" href="?id_product=<?= $row['id_product']; ?>&container=product">Edit</a>
                                         <a class="delete" href="../includes/action.php?id_delete=<?= $row['id_product']; ?>&page=product">Delete</a>
                                     </div>
                                 </td>

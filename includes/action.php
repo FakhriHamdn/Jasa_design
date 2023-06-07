@@ -52,7 +52,6 @@ if(isset($_POST['cust_submit'])){
     $no_telp = htmlspecialchars($_POST['no_telp']);
     $email = strtolower(htmlspecialchars($_POST['email']));
 
-    if(empty($nama_cust))
     if($_GET['action'] === 'addCustomer'){
         $result = addDataCustomer($nama_cust, $alamat, $no_telp, $email);
         if($result){
