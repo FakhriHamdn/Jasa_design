@@ -1,16 +1,19 @@
 <?php
 session_start();
 
-if(isset($_SESSION['status'])){
-    header('Location: ../index.php');
-    exit;
-}
+// if (isset($_SESSION['status'])) {
+//     header('Location: ../index.php');
+//     exit;
+// } else if($_SESSION['role'] === 'admin'){
+//     header("location:register.php");
+// }
 
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,18 +23,19 @@ if(isset($_SESSION['status'])){
     <link rel="stylesheet" href="../styles/auth.css">
     <title>Create your account</title>
 </head>
+
 <body>
     <main>
         <div id="wrapper" class="register_wrapper">
             <section id="content" class="form_content">
-            <div class="form_container_register">
-                <h3 class="auth_title">Create your account</h3>
-                <span class="text_span">Register</span>
-                <?php
-                if (isset($_GET['message'])) {
-                    $msg = $_GET['message'];
-                    echo "<div class= 'notif'>$msg</div>";
-                }?>
+                <div class="form_container_register">
+                    <h3 class="auth_title">Create your account</h3>
+                    <span class="text_span">Register</span>
+                    <?php
+                    if (isset($_GET['message'])) {
+                        $msg = $_GET['message'];
+                        echo "<div class= 'notif'>$msg</div>";
+                    } ?>
                     <form action="../includes/action.php?auth=register" method="POST">
                         <ul style="list-style-type: none;">
                             <div class="input_container_register">
@@ -60,16 +64,31 @@ if(isset($_SESSION['status'])){
                                     </li>
                                 </div>
                             </div>
+                            <?php if (isset($_SESSION['status']) && $_SESSION['role'] === 'admin') : ?>
                                 <li>
-                                <input type="hidden" name="role" value="user">
-                            </li>
+                                    <input type="hidden" name="role" value="user">
+                                </li>
+                                <li>
+                                    <label for="access_code" class="label-wrap">Dashboard Pass</label>
+                                    <input type="password" name="access_code" id="access_code" placeholder="******" class="input_bar" autocomplete="off" required>
+                                </li>
+                            <?php else : ?>
+                                <li>
+                                    <input type="hidden" name="role" value="user">
+                                </li>
+                                <li>
+                                    <input type="hidden" name="access_code" value="null">
+                                </li>
+                            <?php endif; ?>
+
                             <li>
                                 <button type="submit" name="auth_submit" class="btn_register">Register</button>
                             </li>
                         </ul>
                         <div class="cta">
                             <p class="cta_text">Already have an account?
-                            <span class="cta_text2"><a href="login.php">Login</a></span></p>
+                                <span class="cta_text2"><a href="login.php">Login</a></span>
+                            </p>
                         </div>
                     </form>
             </section>
@@ -82,9 +101,10 @@ if(isset($_SESSION['status'])){
                 </div>
             </section>
 
-            </div>
-            </div>
+        </div>
+        </div>
     </main>
 
 </body>
+
 </html>

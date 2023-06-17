@@ -96,6 +96,7 @@ $query = "SELECT * FROM products";
                 <div class="main_image">
                     <p></p>
                 </div>
+                
                 <div class="product_display">
                     <?php foreach (getDatas($query) as $row) : ?>
                         <div class="card_wrapper">

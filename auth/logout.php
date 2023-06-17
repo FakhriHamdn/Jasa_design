@@ -5,6 +5,7 @@ session_start();
 unset($_SESSION['status']);
 unset($_SESSION['role']);
 unset($_SESSION['fullname']);
+unset($_SESSION['verify']);
 
 setcookie('id', '', time()-3600, "/");
 

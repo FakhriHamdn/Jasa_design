@@ -92,7 +92,7 @@ session_start();
         <section class="content_container">
             <div class="text_biasalah">
                 <p>ini about us</p><br>
-                <h3>Hehh???</h3>
+                <h3>MAINTENANCE NEXT FITUR YA CUY</h3>
 
             </div>
             

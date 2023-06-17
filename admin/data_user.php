@@ -64,19 +64,6 @@ $query = "SELECT * FROM users";
                                 <span class="link">Data Transactions</span>
                             </a>
                         </li>
-                        <li class="list">
-                            <a href="#" class="nav-link">
-                                <i class="bx bx-pie-chart-alt-2 icon"></i>
-                                <span class="link">Analytics</span>
-                            </a>
-                        </li>
-                        <li class="list">
-                            <a href="#" class="nav-link">
-                                <i class="bx bx-heart icon"></i>
-                                <span class="link">Likes</span>
-                            </a>
-                        </li>
-
                     </ul>
 
                     <div class="bottom-cotent">
@@ -104,7 +91,7 @@ $query = "SELECT * FROM users";
                 echo "<div class= 'notif'>$msg</div>";
             } ?>
 
-            <h1>Data Users</h1>
+            <h1>Admin | Data Users</h1>
 
             <div class="notif_operator">
                 <p></p>

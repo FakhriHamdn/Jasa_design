@@ -23,7 +23,6 @@ if(isset($_GET['id_product']) && $_GET['id_product'] > 0){
     $form_action = '../includes/action.php?action=updateProduct';
 } else {
     $row = [];
-    
     $title = 'Admin | Form Tambah Data Product';
     $h1 = 'Form Tambah Data Product';
     $form_action = '../includes/action.php?action=addProduct';

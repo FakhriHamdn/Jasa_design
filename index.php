@@ -3,8 +3,6 @@ session_start();
 
 require 'includes/functions.php';
 
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,12 +11,16 @@ require 'includes/functions.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--===== LINK-LINK =====-->
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link href="/your-path-to-fontawesome/css/solid.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="shortcut icon" href="image/Logo-rofara2.png" type="image/x-icon">
     <link rel="stylesheet" href="styles/home.css">
+    <!--===== END =====-->
+
     <title> Unleash your creativity | Rofara Store </title>
 </head>
 
@@ -49,19 +51,9 @@ require 'includes/functions.php';
                     <?php if (isset($_SESSION['status'])) : ?>
                         <?php if ($_SESSION['role'] === 'admin') : ?>
                             <div class="after_auth">
-                                <div class="dash_container">
-                                    <button class="dash-button">
-                                        <!-- <a class="dashboard" href="admin/data_product.php?dash=admin"> -->
-                                        <i class='bx bx-data'></i>
-                                        <!-- </a> -->
-                                    </button>
-                                    <div class="dash-content">
-                                        <form action="" method="post">
-                                            <input type="password" name="admin_password" placeholder="******">
-                                            <button type="submit">Verify</button>
-                                        </form>
-                                    </div>
-                                </div>
+                                <a class="dashboard" href="admin/data_product.php?dash=admin">
+                                    <i class='bx bx-data'></i>
+                                </a>
                             <?php elseif ($_SESSION['role'] === 'operator') : ?>
                                 <a class="dashboard" href="operator/data_product.php">
                                     <i class='bx bx-data'></i>
@@ -103,7 +95,21 @@ require 'includes/functions.php';
         </nav>
 
         <section class="content_container">
-            <p>ini homepage</p>
+            <div class="content_wrapper">
+                <div class="banner_section">
+                    <img src="image/backgroundHome.jpg" alt="">
+                </div>
+                <div class="main_content">
+                    ini contentnya 
+                    <!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
+                </div>
+                <div class="footer_container">
+                    <div class="footer_content">
+                        <p>ini footer</p> 
+
+                    </div>
+                </div>
+            </div>
         </section>
 
 

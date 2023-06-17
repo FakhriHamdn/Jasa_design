@@ -66,19 +66,9 @@ if (isset($_GET['deleteAll'])) {
                     <?php if (isset($_SESSION['status'])) : ?>
                         <?php if ($_SESSION['role'] === 'admin') : ?>
                             <div class="after_auth">
-                                <div class="dash_container">
-                                    <button class="dash-button">
-                                        <!-- <a class="dashboard" href="admin/data_product.php?dash=admin"> -->
-                                        <i class='bx bx-data'></i>
-                                        <!-- </a> -->
-                                    </button>
-                                    <div class="dash-content">
-                                        <form action="" method="post">
-                                            <input type="password" name="admin_password" placeholder="******">
-                                            <button type="submit">Verify</button>
-                                        </form>
-                                    </div>
-                                </div>
+                                <a class="dashboard" href="admin/data_product.php?dash=admin">
+                                    <i class='bx bx-data'></i>
+                                </a>
                             <?php elseif ($_SESSION['role'] === 'operator') : ?>
                                 <a class="dashboard" href="operator/data_product.php">
                                     <i class='bx bx-data'></i>

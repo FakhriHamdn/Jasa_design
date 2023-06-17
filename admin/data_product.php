@@ -8,6 +8,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'admin') {
 } else if (!isset($_SESSION['status'])) {
     header('Location: ../index.php');
     exit;
+} else if(!isset($_SESSION['verify'])) {
+    header("location: ../auth/verify.php");
 }
 //======= END VALIDASI
 
@@ -107,18 +109,6 @@ if(isset($_GET['container']) && $_GET['container'] === 'product'){
                             <a href="data_transaction.php" class="nav-link">
                                 <i class="bx bx-message-rounded icon"></i>
                                 <span class="link">Data Transactions</span>
-                            </a>
-                        </li>
-                        <li class="list">
-                            <a href="#" class="nav-link">
-                                <i class="bx bx-pie-chart-alt-2 icon"></i>
-                                <span class="link">Analytics</span>
-                            </a>
-                        </li>
-                        <li class="list">
-                            <a href="#" class="nav-link">
-                                <i class="bx bx-heart icon"></i>
-                                <span class="link">Likes</span>
                             </a>
                         </li>
                     </ul>

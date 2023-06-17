@@ -199,9 +199,9 @@ function deleteDataTransaction($id_transaction){
 
 
 //================= FUNCTION FOR AUTHENTICATION =================
-function addUsersData($email, $password, $fullname, $role){
+function addUsersData($email, $password, $fullname, $role, $access_code){
     global $getConnect;
-    $query = "INSERT INTO users VALUES('', '$email', '$password', '$fullname', '$role')";
+    $query = "INSERT INTO users VALUES('', '$email', '$password', '$fullname', '$role', '$access_code')";
     $result = mysqli_query($getConnect, $query);
     return $result;
 }
@@ -237,6 +237,12 @@ function validatePassword($password) {
 
 //================== END AUTHENTICATION ==================
 
+function adminVerify($adminEmail){
+    global $getConnect;
+    $query = "SELECT access_code FROM users WHERE email = '$adminEmail'";
+    $result = mysqli_query($getConnect, $query);
+    return $result;
+}
 
 
 ?>

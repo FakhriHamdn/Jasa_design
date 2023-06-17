@@ -75,19 +75,6 @@ $query = "SELECT transactions.id_transaction,
                                 <span class="link">Data Transactions</span>
                             </a>
                         </li>
-                        <li class="list">
-                            <a href="#" class="nav-link">
-                                <i class="bx bx-pie-chart-alt-2 icon"></i>
-                                <span class="link">Analytics</span>
-                            </a>
-                        </li>
-                        <li class="list">
-                            <a href="#" class="nav-link">
-                                <i class="bx bx-heart icon"></i>
-                                <span class="link">Likes</span>
-                            </a>
-                        </li>
-
                     </ul>
 
                     <div class="bottom-cotent">
@@ -114,7 +101,7 @@ $query = "SELECT transactions.id_transaction,
                 $msg = $_GET['message'];
                 echo "<div class= 'notif'>$msg</div>";
             } ?>
-            <h1>Data Transactions</h1>
+            <h1>Admin | Data Transactions</h1>
 
             <div class="notif_operator">
                 <p></p>

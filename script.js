@@ -4,14 +4,6 @@ const profile = document.querySelector('.profile');
 
 profileButton.addEventListener('click', () => {
     profile.classList.toggle('active');
-
-});
-
-const dashButton = document.querySelector('.dash-button');
-const dash = document.querySelector('.dash_container');
-
-dashButton.addEventListener('click', () => {
-    dash.classList.toggle('active');
 });
 
 
@@ -21,10 +13,6 @@ document.addEventListener('click', (event) => {
     // Periksa apakah elemen yang diklik berada di luar elemen profil
     if (!profile.contains(targetElement)) {
         profile.classList.remove('active');
-    }
-    
-    if(!dash.contains(targetElement)) {
-        dash.classList.remove('active');
     }
 
 });

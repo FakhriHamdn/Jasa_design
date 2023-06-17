@@ -82,19 +82,6 @@ if (isset($_GET['container']) && $_GET['container'] === 'customers'){
                                 <span class="link">Data Transactions</span>
                             </a>
                         </li>
-                        <li class="list">
-                            <a href="#" class="nav-link">
-                                <i class="bx bx-pie-chart-alt-2 icon"></i>
-                                <span class="link">Analytics</span>
-                            </a>
-                        </li>
-                        <li class="list">
-                            <a href="#" class="nav-link">
-                                <i class="bx bx-heart icon"></i>
-                                <span class="link">Likes</span>
-                            </a>
-                        </li>
-
                     </ul>
 
                     <div class="bottom-cotent">
@@ -121,8 +108,7 @@ if (isset($_GET['container']) && $_GET['container'] === 'customers'){
                 $msg = $_GET['message'];
                 echo "<div class= 'notif'>$msg</div>";
             } ?>
-            <a href="../auth/logout.php">Logout</a>
-            <h1>Data Jasa Produk</h1>
+            <h1>Admin | Data Customers</h1>
 
             <div class="notif_operator">
                 <p></p>
