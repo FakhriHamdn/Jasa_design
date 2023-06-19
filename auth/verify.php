@@ -1,3 +1,24 @@
+<?php 
+session_start();
+
+//====== VALIDASI AKSES
+if(!isset($_SESSION['status'])){
+    header("Location: ../index.php");
+    exit;
+
+} else if(isset($_SESSION['role'])) {
+    if($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'operator'){
+        header("location:");
+
+    } else {
+        header("location: ../index.php");
+        exit;
+    }
+}
+//======= END VALIDASI
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 

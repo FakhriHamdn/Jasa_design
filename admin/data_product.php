@@ -1,18 +1,33 @@
 <?php
 session_start();
 
-//====== VALIDASI AGAR USER TIDAK BISA ASAL MASUK
-if (isset($_SESSION['role']) && $_SESSION['role'] !== 'admin') {
+//====== VALIDASI AKSES
+if (!isset($_SESSION['status'])) {
     header('Location: ../index.php');
     exit;
-} else if (!isset($_SESSION['status'])) {
-    header('Location: ../index.php');
-    exit;
-} else if(!isset($_SESSION['verify'])) {
+
+} else if (!isset($_SESSION['verify'])) {
     header("location: ../auth/verify.php");
+    exit;
+
+} else if (isset($_SESSION['role'])) {
+    if($_SESSION['role'] === 'admin'){
+        $role_text = 'Admin';
+        header("location:");
+
+    } else if($_SESSION['role'] === 'operator'){
+        $role_text = 'Operator';
+        header("location:");
+
+    } else {
+        header('Location: ../index.php');
+        exit;
+    }
 }
 //======= END VALIDASI
 
+
+//======= ACTION UNTUK BEBERAPA FITUR
 require '../includes/functions.php';
 
 $jumlahDataPerhalaman = 10;
@@ -28,31 +43,28 @@ $dataAwal = ($jumlahDataPerhalaman * $halamanAktif) - $jumlahDataPerhalaman;
 $query = "SELECT * FROM products ORDER BY id_product ASC LIMIT $dataAwal, $jumlahDataPerhalaman";
 
 
-if(isset($_GET['container']) && $_GET['container'] === 'product'){
+if (isset($_GET['container']) && $_GET['container'] === 'product') {
 
-    if(isset($_GET['id_product']) && $_GET['id_product'] > 0){
+    if (isset($_GET['id_product']) && $_GET['id_product'] > 0) {
         $id_product = $_GET['id_product'];
         $row = getProductId($id_product);
-    
+
         $title = 'Admin | Form Edit Data Product';
         $h1 = 'Form Edit Data Product';
         $form_action = '../includes/action.php?action=updateProduct';
     } else {
         $row = [];
-        
+
         $title = 'Admin | Form Tambah Data Product';
         $h1 = 'Form Tambah Data Product';
         $form_action = '../includes/action.php?action=addProduct';
     }
 }
 
-
+//======= END ACTION
 
 
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,13 +73,13 @@ if(isset($_GET['container']) && $_GET['container'] === 'product'){
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!--===== LINK-LINK =====-->
+    <!--======= LINK-LINK =======-->
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
     <link rel="shortcut icon" href="../image/Logo-rofara2.png" type="image/x-icon">
     <link rel="stylesheet" href="../styles/admin.css" />
-    <!--===== END =====-->
+    <!--======= END =======-->
 
-    <title>Admin Dashboard | Data Products</title>
+    <title><?= $role_text; ?> Dashboard | Data Products</title>
 </head>
 
 
@@ -76,38 +88,38 @@ if(isset($_GET['container']) && $_GET['container'] === 'product'){
         <nav class="navbar_container">
             <div class="sidebar">
 
-                <!--===== LOGO WRAPPPER =====-->
+                <!--======= LOGO WRAPPPER =======-->
                 <div class="logo_wrapper">
                     <img src="../image/rofaralogo.png" alt="Logo Rofara" style="width: 180.6px; height: 53.235px;">
                 </div>
-                <!--===== END LOGO =====-->
-                
+                <!--======= END LOGO =======-->
+
                 <span class="vertical_line"></span>
 
-                <!--===== SIDEBAR CONTENT =====-->
+                <!--======= SIDEBAR CONTENT =======-->
                 <div class="sidebar-content">
                     <ul class="lists">
                         <li class="list">
                             <a href="data_product.php" class="nav-link">
-                                <i class="bx bx-home-alt icon"></i>
+                                <i class='bx bx-package icon'></i>
                                 <span class="link">Data Products</span>
                             </a>
                         </li>
                         <li class="list">
                             <a href="data_cust.php" class="nav-link">
-                                <i class="bx bx-bar-chart-alt-2 icon"></i>
+                                <i class='bx bx-group icon'></i>
                                 <span class="link">Data Customers</span>
                             </a>
                         </li>
                         <li class="list">
                             <a href="data_user.php" class="nav-link">
-                                <i class="bx bx-bell icon"></i>
+                                <i class='bx bx-user icon'></i>
                                 <span class="link">Data Users</span>
                             </a>
                         </li>
                         <li class="list">
                             <a href="data_transaction.php" class="nav-link">
-                                <i class="bx bx-message-rounded icon"></i>
+                                <i class='bx bx-wallet icon'></i>
                                 <span class="link">Data Transactions</span>
                             </a>
                         </li>
@@ -129,72 +141,93 @@ if(isset($_GET['container']) && $_GET['container'] === 'product'){
                     </div>
                     <!-- END BOTTOM -->
                 </div>
-                <!--===== END CONTENT =====-->
+                <!--======= END SIDEBAR CONTENT =======-->
             </div>
         </nav>
 
-        <!--===== MAIN CONTENT =====-->
+
+        <!--============= MAIN CONTENT =============-->
         <section class="content">
-            <?php
-            if (isset($_GET['message'])) {
-                $msg = $_GET['message'];
-                echo "<div class= 'notif'>$msg</div>";
-            }?>
+                <h1 class="header_text"><?= $role_text; ?> | Data Product</h1>
 
-            <h1 class="header_text">Admin | Data Product</h1>
 
-            <div class="notif_operator">
-                <p></p>
-            </div>
+            <!--======= SPACE OPERATOR IN ADMIN DATABASE =======-->
+            <?php if($_SESSION['role'] === 'admin'):?>
+                <div class="space_operator">
+                    <div class="operator_wrapper">
+                    <table border="1">
+                            <tr>
+                                <th class="id">Id</th>
+                                <th>Product</th>
+                                <th>Harga</th>
+                                <th class="aksi">Aksi</th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Banner X Ori</td>
+                                <td>Rp. xxx</td>
+                                <td>
+                                    <a href="?view">view</a>
+                                    <a href="">reject</a>|
+                                    <a href="">accept</a>|
+                                </td>
+                            </tr>
+                            
+                        </table>
+                    </div>
+                </div>
+            <?php endif;?>
+            <!--======= END SPACE OPERATOR =======-->
 
+
+            <!--======= SPACE TABLE DATABASES =======-->
             <div class="table_container">
-
-        <?php if(isset($_GET['container']) && $_GET['container'] === 'product') :?>
+                <?php if (isset($_GET['container']) && $_GET['container'] === 'product') : ?>
 
 
                     <form action="<?= $form_action; ?>" method="POST" enctype="multipart/form-data">
-                        <?php if($row) : ?>
-                    <input type="hidden" name="id_product" value="<?= $row['id_product']; ?>">
-                <?php endif; ?>
+                        <?php if ($row) : ?>
+                            <input type="hidden" name="id_product" value="<?= $row['id_product']; ?>">
+                        <?php endif; ?>
 
-                <ul>
-                    <li>
-                        <label for="product_image">Image</label>
-                        <input type="file" name="product_image" id="product_image" value="<?= ($row) ? $row['product_image'] : ''; ?>">
-                    </li>
-                    <li>
-                        <label for="product">Produk</label>
-                        <input type="text" name="product" id="product" value="<?= ($row) ? $row['nama_product'] : ''; ?>">
-                    </li>
-                    <li>
-                        <label for="harga">Harga</label>
-                        <input type="number" name="harga" id="harga" value="<?= ($row) ? $row['harga'] : ''; ?>">
-                    </li>
-                    <li>
-                        <button type="submit" name="product_submit">Submit</button>
-                    </li>
-                </ul>
-            </form>
+                        <ul>
+                            <li>
+                                <label for="product_image">Image</label>
+                                <input type="file" name="product_image" id="product_image" value="<?= ($row) ? $row['product_image'] : ''; ?>">
+                            </li>
+                            <li>
+                                <label for="product">Produk</label>
+                                <input type="text" name="product" id="product" value="<?= ($row) ? $row['nama_product'] : ''; ?>">
+                            </li>
+                            <li>
+                                <label for="harga">Harga</label>
+                                <input type="number" name="harga" id="harga" value="<?= ($row) ? $row['harga'] : ''; ?>">
+                            </li>
+                            <li>
+                                <button type="submit" name="product_submit">Submit</button>
+                            </li>
+                        </ul>
+                    </form>
 
-            <?php else: ?>
-            <?php if($halamanAktif > 1): ?>
-                        <a href="?page=<?= $halamanAktif - 1?>">&laquo;</a>
+                <?php else : ?>
+                    <?php if ($halamanAktif > 1) : ?>
+                        <a href="?page=<?= $halamanAktif - 1 ?>">&laquo;</a>
                     <?php endif; ?>
 
 
-                    <?php for($i = 1; $i <= $jumlahHalaman; $i++): ?>
-                        <?php if( $i == $halamanAktif) : ?>
+                    <?php for ($i = 1; $i <= $jumlahHalaman; $i++) : ?>
+                        <?php if ($i == $halamanAktif) : ?>
                             <!-- href ini bakal tetep ke index.php karena kosong -->
-                            <a href="?page=<?= $i; ?>" style="font-weight: bold; color: red;"><?= $i;?></a>
+                            <a href="?page=<?= $i; ?>" style="font-weight: bold; color: red;"><?= $i; ?></a>
                         <?php else : ?>
-                            <a href="?page=<?= $i; ?>"><?= $i;?></a>
+                            <a href="?page=<?= $i; ?>"><?= $i; ?></a>
                         <?php endif; ?>
                     <?php endfor; ?>
 
-                    <?php if($halamanAktif < $jumlahHalaman): ?>
-                        <a href="?page=<?= $halamanAktif + 1?>">&raquo;</a>
+                    <?php if ($halamanAktif < $jumlahHalaman) : ?>
+                        <a href="?page=<?= $halamanAktif + 1 ?>">&raquo;</a>
                     <?php endif; ?>
-                <a class="add_data" href="?container=product">Tambah Data</a>
+                    <a class="add_data" href="?container=product">Tambah Data</a>
                     <table border="1">
                         <tr>
                             <th class="id">Id</th>
@@ -210,8 +243,12 @@ if(isset($_GET['container']) && $_GET['container'] === 'product'){
                                 <td>Rp. <?= $row['harga']; ?></td>
                                 <td class="aksi">
                                     <div class="aksi_wrapper">
-                                        <a class="edit" href="?id_product=<?= $row['id_product']; ?>&container=product">Edit</a>
-                                        <a class="delete" href="../includes/action.php?id_delete=<?= $row['id_product']; ?>&page=product">Delete</a>
+                                        <?php if($_SESSION['role'] === 'admin'):?>
+                                            <a class="edit" href="?id_product=<?= $row['id_product']; ?>&container=product">Edit</a>
+                                            <a class="delete" href="../includes/action.php?id_delete=<?= $row['id_product']; ?>&page=product">Delete</a>
+                                        <?php elseif($_SESSION['role'] === 'operator'):?>
+                                            <a class="edit" href="?id_product=<?= $row['id_product']; ?>&container=product">Edit</a>
+                                        <?php endif;?>
                                     </div>
                                 </td>
                             </tr>
@@ -221,9 +258,11 @@ if(isset($_GET['container']) && $_GET['container'] === 'product'){
                 <?php endif; ?>
             </div>
 
-        </section>
-        <!--===== END MAIN =====-->
-    </div>
-</body>
+            <!--======= END TABLE DATABASES =======-->
 
+        </section>
+        <!--======= END MAIN CONTENT =======-->
+    </div>
+
+</body>
 </html>

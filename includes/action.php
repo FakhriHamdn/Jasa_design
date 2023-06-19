@@ -215,9 +215,10 @@ if (isset($_POST['auth_submit']) && $_GET['auth'] === 'register') {
             }
 
             $msg = "Yayy! you have successfully logged in!";
-            if ($_SESSION['role'] === 'admin') {
+            if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'operator') {
                 header("Location: ../admin/data_product.php?message=" . urlencode($msg));
                 exit();
+                
             } else {
                 header("Location: ../index.php?message=" . urlencode($msg));
                 exit();

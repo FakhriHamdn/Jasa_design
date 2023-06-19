@@ -55,7 +55,7 @@ require 'includes/functions.php';
                                     <i class='bx bx-data'></i>
                                 </a>
                             <?php elseif ($_SESSION['role'] === 'operator') : ?>
-                                <a class="dashboard" href="operator/data_product.php">
+                                <a class="dashboard" href="admin/data_product.php?dash=operator">
                                     <i class='bx bx-data'></i>
                                 </a>
                             <?php endif; ?>
