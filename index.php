@@ -76,11 +76,6 @@ require 'includes/functions.php';
                                     <a class="dropdown" href="#">Help</a>
                                     <a class="dropdown" href="#">Settings</a>
 
-                                    <?php if ($_SESSION['role'] === 'admin') : ?>
-                                        <a class="dropdown" href="#">Admin Power</a>
-                                    <?php elseif ($_SESSION['role'] === 'operator') : ?>
-                                        <a class="dropdown" href="#">Operator Power</a>
-                                    <?php endif; ?>
                                     <a class="dropdown" href="auth/logout.php">Sign out</a>
 
                                 </div>
@@ -97,7 +92,7 @@ require 'includes/functions.php';
         <section class="content_container">
             <div class="content_wrapper">
                 <div class="banner_section">
-                    <img src="image/backgroundHome.jpg" alt="">
+                    <img src="image/home_bg.jpg" alt="">
                 </div>
                 <div class="main_content">
                     ini contentnya 

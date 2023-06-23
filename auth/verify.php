@@ -30,10 +30,11 @@ if(!isset($_SESSION['status'])){
     <!--===== LINK-LINK =====-->
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
     <link rel="shortcut icon" href="../image/Logo-rofara2.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/admin.css" />
     <!--===== END =====-->
 
-    <title>Admin Dashboard | Verify</title>
+    <title>Access Control | Verify</title>
 </head>
 
 <body>
@@ -42,7 +43,7 @@ if(!isset($_SESSION['status'])){
             <div class="verify_box">
                 <div class="title_verify">
                     <h3>Access Control</h3>
-                    <h5>Admin Verification for Dashboard</h5>
+                    <h5>Access Verification for Dashboard</h5>
     
                     <span class="text_verify">Verify</span>
                 <?php
@@ -54,7 +55,7 @@ if(!isset($_SESSION['status'])){
 
 
                 <form action="../includes/action.php" class="verify_form " method="post">
-                    <input type="password" name="pass_verify" placeholder="******" class="input_bar" autocomplete="off" required>
+                    <input type="password" name="pass_verify" placeholder="******" class="input_bar" autocomplete="off" required autofocus>
 
                     <div class="verify_button_wrapper">
                         <button type="submit" name="dashboard_verify" class="btn">Verify</button>

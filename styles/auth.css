@@ -322,6 +322,12 @@ label.remember {
     color: #24242a;
     transition: 0.2s;
 } 
+
+.btn_register:hover{
+    background: #d7a900;
+    color: #24242a;
+    transition: 0.2s;
+} 
 /*===== END ATUR BUTTON */
 
 

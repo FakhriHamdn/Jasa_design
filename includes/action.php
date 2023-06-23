@@ -22,7 +22,7 @@ if (isset($_POST['product_submit'])) {
             $result = addDataProduct($product_image, $nama_product, $harga);
             if ($result) {
                 $msg = "Product data has been successfully added";
-                header("Location: ../admin/data_product.php?message=" . urlencode($msg));
+                header("Location: ../admin/data_product.php?message&add_message=" . urlencode($msg));
                 exit();
             } else {
                 header("Location: ../admin/data_product.php");
@@ -35,7 +35,7 @@ if (isset($_POST['product_submit'])) {
             $result = updateDataProduct($id_product, $product_image, $nama_product, $harga);
             if ($result) {
                 $msg = "Product data has been successfully updated";
-                header("Location: ../admin/data_product.php?message=" . urlencode($msg));
+                header("Location: ../admin/data_product.php?message&update_message=" . urlencode($msg));
                 exit();
             }
         }
@@ -117,7 +117,7 @@ if (isset($_GET['id_delete'])) {
         $result = deleteDataProduct($id_product);
         if ($result) {
             $msg = "Product data has been successfully deleted";
-            header("Location: ../admin/data_product.php?message=" . urlencode($msg));
+            header("Location: ../admin/data_product.php?message&delete_message=" . urlencode($msg));
             exit();
         }
     } else if ($_GET['page'] === 'customer') {
@@ -218,7 +218,7 @@ if (isset($_POST['auth_submit']) && $_GET['auth'] === 'register') {
             if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'operator') {
                 header("Location: ../admin/data_product.php?message=" . urlencode($msg));
                 exit();
-                
+
             } else {
                 header("Location: ../index.php?message=" . urlencode($msg));
                 exit();
@@ -238,17 +238,18 @@ if (isset($_POST['auth_submit']) && $_GET['auth'] === 'register') {
 //================== END AUTHENTICATION ==================
 
 
-//================== CART SYSTEM ==================
 
+//================== CART SYSTEM ==================
 if (isset($_GET['add_to_cart'])) {
     $id_product = $_GET['add_to_cart'];
-    $row = getProductId($id_product);
+    $row = getProductId($id_product); //ngambil semua data product berdasarkan id tertentu
 
     $userIdentity = $_SESSION['email'];
 
     // MEMBUAT VARIABLE SUPER GLOBAL CART
-    $_SESSION['cart'][$userIdentity][] = $row['id_product'];
+    $_SESSION['cart'][$userIdentity][] = $row['nama_product'];
 
+    // var_dump($_SESSION['cart'][$userIdentity]);
     header('Location: ../public/marketplace/marketplace.php');
 }
 
@@ -274,7 +275,7 @@ if (isset($_POST['dashboard_verify'])) {
             $_SESSION['verify'] = true;
 
             $msg = "Welcome " . $_SESSION['fullname'];
-            header("Location: ../admin/data_product.php?message=" . urlencode($msg));
+            header("Location: ../admin/data_product.php?message&auth_message=" . urlencode($msg));
             exit();
 
         } else {
@@ -288,3 +289,115 @@ if (isset($_POST['dashboard_verify'])) {
         exit();
     }
 }
+//================== END VERIFY ==================
+
+if(isset($_POST['request_operator_submit'])){
+    // $id_product = $_GET['id_product'];
+    // $getProductById = getProductId($id_product);
+
+    $nama_product = $_POST['product'];
+    $harga = $_POST['harga'];
+    $product_image = uploadImage();
+    if (!$product_image) {
+        return false; //return false dia bakal memberhentikan eksekusi sampai sini, dan tidak ada menjalankan syntac selanjutnya
+    }
+
+    //SETTING DATE 
+    date_default_timezone_set('Asia/Jakarta');
+    $jamSekarang = date('d M Y H:i' );
+
+    if($_GET['action'] === 'request_updateProduct'){
+
+        $operator = $_SESSION['email'];
+
+        $_SESSION['request'][] = [
+            'nama_sender' => $operator,
+            'send_time' => $jamSekarang,
+            'nama_product' => $nama_product, 
+            'harga' => $harga, 
+            'product_image' => $product_image
+        ];
+
+        // var_dump($_SESSION['request']);
+        header("location: ../admin/data_product.php");
+    }
+}       
+
+if(isset($_GET['accept_request'])){
+    $accept_req = $_GET['accept_request'];
+
+    $result = $_SESSION['request'][$accept_req];
+    // var_dump($result);
+
+    $msg = 'Successful add a request to database';
+    header("Location: ../admin/data_product.php?message&add_message=" . urlencode($msg));
+}
+
+
+
+
+
+
+if(isset($_GET['reject_request'])){
+    $reject_req = $_GET['reject_request'];
+
+    // unset($_SESSION['request'][$reject_req]);
+
+    $msg = 'rejected some request';
+    header("Location: ../admin/data_product.php?message&delete_message=" . urlencode($msg));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//==================  REQUEST OPERATOR ==================
+// if(isset($_POST['request_operator_submit'])){
+//     $nama_product = htmlspecialchars($_POST['product']);
+//     $harga = htmlspecialchars($_POST['harga']);
+//     $product_image = uploadImage();
+
+//     if (!$product_image) {
+//         return false; //return false dia bakal memberhentikan eksekusi sampai sini, dan tidak ada menjalankan syntac selanjutnya
+//     }
+//     $result = [$nama_product, $harga, $product_image];
+    
+//     if ($_GET['action'] === 'request_updateProduct') {
+//         $id_product = $_POST['id_product'];
+//         $row = getProductId($id_product);
+        
+//         $operator_request = $_SESSION['email'];
+
+//         // MEMBUAT VARIABLE SUPER GLOBAL CART
+//         $_SESSION['request'][] = 
+//         [
+//             'nama_product' => $nama_product,
+//             'harga' => $harga,
+//             'nama_product' => $nama_product
+//         ];
+
+//         header('Location: ../admin/data_product.php');
+//     }
+// }
+
+
+//================== END REQUEST ==================
+
