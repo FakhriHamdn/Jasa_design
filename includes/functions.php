@@ -55,58 +55,62 @@ function addDataProduct($product_image, $nama_product, $harga){
     return $result;
 }
 
-function uploadImage(){
-    //mengambil isi dari $_FILES
+function uploadImage()
+{
     $namaFile = $_FILES['product_image']['name'];
     $ukuranFile = $_FILES['product_image']['size'];
     $error = $_FILES['product_image']['error'];
-    $tmpname = $_FILES['product_image']['tmp_name'];
+    $tmpName = $_FILES['product_image']['tmp_name'];
 
-    //cek apakah gambar diupload atau tidak, 4 Situ tidak ada gambar yang diupload, caranya pake var_dump sebuah $_FILES
-    if($error === 4){
-        echo 
-        '<script>
-            alert("Pilih gambar terlebih dahulu");
-        </script>';
-
-        //setelah pesan tmpil kita berhentikan juga functionnya, jika upload()nya gagal jadi function tambahnya gagal juga
+    // Cek apakah gambar diupload atau tidak
+    if ($error === 4) {
+        $msg = "Failed to add data. Please upload an image first.";
+        header("Location: ../admin/data_product.php?container=product&message&delete_message=" . urlencode($msg));
         return false;
     }
 
-    //yang diupload harus gambar
     $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
+    $ekstensiGambar = pathinfo($namaFile, PATHINFO_EXTENSION);
 
-    //ngambil ekstensi file gambar yang akan diupload
-    //function exlode untuk memecah sebuah string menajdi array, memecahnya menggunakan delimiter
-    $ekstensiGambar = explode('.', $namaFile); //parameternya (delimiter, string)
-    $ekstensiGambar = strtolower(end($ekstensiGambar)); //strtolower buat maksa jadi huruf kecil semua
+    // Cek ekstensi gambar yang diupload
+    if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
+        $msg = "Failed to add data. The file you uploaded is not an image.";
+        header("Location: ../admin/data_product.php?container=product&message&delete_message=" . urlencode($msg));
+        exit;
+    }
 
-    //cek ekstensi gambar yang diupload ada ngk disini
-    //in_array buat ngecek ada gk sebuah string didalam sebuah array, parameter defaultnya needle, haystack,
-    if(in_array($ekstensiGambar, $ekstensiGambarValid)); //fungsi ini menghasilkan nilai true jika sesuai dengan ..valid
-    echo 
-        '<script>
-            alert("yang anda upload bukan gambar");
-        </script>';
+    // Cek ukuran file gambar
+    $maxFileSize = 50 * 1024 * 1024; // 50MB dalam byte
+    if ($ukuranFile > $maxFileSize) {
+        $msg = "Failed to add data. The uploaded image is too large (max: 50MB).";
+        header("Location: ../admin/data_product.php?container=product&message&delete_message=" . urlencode($msg));
+        exit;
+    }
 
-    //untuk membatasi ukuran gambar yang diupload
-    if($ukuranFile > 1000000000){ //dalam byte
-        echo 
-        '<script>
-            alert("ukuran gambar terlalu besar");
-        </script>';
-    } 
+    // Generate nama file baru
+    $namaFileBaru = uniqid() . '.' . $ekstensiGambar;
 
-
-    //menggenerate nama gambar baru
-    $namaFileBaru = uniqid();
-    $namaFileBaru .= '.';
-    $namaFileBaru .= $ekstensiGambar;
-
-    move_uploaded_file($tmpname, '../image/product/' . $namaFileBaru);
+    move_uploaded_file($tmpName, '../image/product/' . $namaFileBaru);
     return $namaFileBaru;
 }
 
+
+
+function updateImage($id_product, $imageLama, $nama_product, $harga){
+    global $getConnect;
+        //cek apakah user memilih file baru atau tdk
+        if($_FILES['image']['error'] === 4) {
+            $image = $imageLama;
+        } else {
+        $product_image = uploadImage();
+        }
+    
+        $query = "UPDATE products SET product_image = '$product_image', nama_product = '$nama_product', harga = '$harga' WHERE id_product = '$id_product'";
+        $result = mysqli_query($getConnect, $query);
+    
+        //return angka ketika ada data yang berhasil di upadate di database
+        return mysqli_affected_rows($getConnect);
+}
 
 function getProductId($id_product){
     global $getConnect;
@@ -243,7 +247,3 @@ function adminVerify($adminEmail){
     $result = mysqli_query($getConnect, $query);
     return $result;
 }
-
-
-
-?>
