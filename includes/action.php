@@ -373,10 +373,6 @@ if(isset($_GET['key_accept_request'])){
         } else {
             $harga =  $_POST['harga'];
         }
-
-        var_dump($product_image, $nama_product, $harga);
-        exit;
-
     }
 
     
@@ -387,10 +383,6 @@ if(isset($_GET['key_accept_request'])){
         $product_image = $row['product_image'];
         $nama_product = $row['nama_product'];
         $harga = $row['harga'];
-
-        header("location: berhasil.php");
-
-        // echo 'hello';exit;
     }
 
     $id_product = $row['id'];
@@ -413,8 +405,8 @@ if(isset($_GET['key_accept_request'])){
 
 
 //======= ACTION TO REJECT AN REQUEST 
-if(isset($_GET['reject_request'])){
-    $key_reject = $_GET['key_request'];
+if(isset($_GET['key_reject_request'])){
+    $key_reject = $_GET['key_reject_request'];
 
     unset($_SESSION['request'][$key_reject]);
 
@@ -423,3 +415,9 @@ if(isset($_GET['reject_request'])){
 }
 //======= END REJECT REQUEST 
 //================== END REQUEST ==================
+
+
+// else if(isset($_POST['accept_update_request'])){
+
+
+// }

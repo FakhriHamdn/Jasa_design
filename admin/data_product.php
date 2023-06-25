@@ -218,26 +218,17 @@ if ($_SESSION['role'] === 'operator') {
 
                             <div class="space_operator">
                                 <div class="operator_wrapper">
-
-                                    <?php //var_dump($_SESSION['request']); 
-                                    ?>
-
                                     <?php if (count($_SESSION['request']) > 0) : ?>
 
                                         <?php if (isset($_GET['details_request'])) : ?>
-                                            <?php $detailRequest = $_GET['details_request'] ?>
-                                            <?php //$key_request = $_GET['key_request'];?>
-
-                                            
+                                            <?php $detailRequest = $_GET['details_request']; ?>
 
                                             <div class="form_container">
-                                                <?php $key_request = $_GET['key_request'] ?>
-                                                <?php //var_dump($_SESSION['request'][$id_request])
+                                                <?php 
+                                                    $key_request = $_GET['key_request'];
+                                                    $req_product = $_SESSION['request'][$key_request]; 
                                                 ?>
-                                                <?php $req_product = $_SESSION['request'][$key_request] ?>
-                                                <?php //var_dump($key_request)?>
-
-
+                                                
                                                 <div class="title_form_request">
                                                     <h2>Details Request</h2>
 
@@ -247,26 +238,26 @@ if ($_SESSION['role'] === 'operator') {
                                                         <span class="statusNewRequest"><?= $req_product['status'] ?></span>
                                                     <?php endif; ?>
                                                 </div>
-                                                
+
                                                 <?php
-                                                if($req_product['status'] === 'Update'){
-                                                    $id_realProduct = $req_product['id'];
-                                                    $realProduct = getProductId($id_realProduct);
-                                                }
+                                                    if ($req_product['status'] === 'Update') {
+                                                        $id_realProduct = $req_product['id'];
+                                                        $realProduct = getProductId($id_realProduct);
+                                                    }
                                                 ?>
 
 
                                                 <form action="../includes/action.php?key_accept_request=<?= $key_request ?>" method="POST" enctype="multipart/form-data">
-                                                <?php if($req_product['status'] === 'Update'):?>
-                                                    <input type="hidden" name="id_product" value="<?= $req_product['id']; ?> ">
-                                                    <?php endif;?>
+                                                    <?php if ($req_product['status'] === 'Update') : ?>
+                                                        <input type="hidden" name="id_product" value="<?= $req_product['id']; ?> ">
+                                                    <?php endif; ?>
 
                                                     <div class="info_sender">
                                                         <div class="description_request">
 
-                                                            <?php if($req_product['status'] === 'Update'):?>
+                                                            <?php if ($req_product['status'] === 'Update') : ?>
                                                                 <p>Id Product : <?= $req_product['id']; ?></p>
-                                                            <?php endif;?>
+                                                            <?php endif; ?>
 
                                                             <p>Request From : <?= $req_product['nama_sender']; ?></p>
                                                             <p>Date : <?= $req_product['send_time']; ?> </p>
@@ -276,7 +267,6 @@ if ($_SESSION['role'] === 'operator') {
                                                             </div>
                                                         </div>
                                                     </div>
-
 
                                                     <div class="form_request_wrapper">
                                                         <div class="form_image_preview">
@@ -291,11 +281,16 @@ if ($_SESSION['role'] === 'operator') {
                                                                     <label for="product">Product</label>
                                                                     <div class="selectData">
                                                                         <?php if ($req_product['status'] === 'Update') : ?>
-                                                                            <input type="text" id="product" placeholder="Input product" value="<?= $realProduct['nama_product']; ?>" disabled>
 
                                                                             <?php if ($realProduct['nama_product'] !== $req_product['nama_product']) : ?>
+                                                                                <input type="text" name="product" id="product" placeholder="Input product" value="<?= $realProduct['nama_product']; ?>" disabled>
                                                                                 <i class='bx bx-right-arrow-alt'></i>
                                                                                 <input type="text" name="product" id="product" placeholder="Input product" value="<?= $req_product['nama_product']; ?>">
+
+                                                                            <?php else : ?>
+                                                                                <input type="hidden" name="product" id="product" placeholder="Input product" value="<?= $realProduct['nama_product']; ?>">
+                                                                                <input type="text" name="product" id="product" placeholder="Input product" value="<?= $req_product['nama_product']; ?>" disabled>
+
                                                                             <?php endif; ?>
 
                                                                         <?php else : ?>
@@ -307,36 +302,40 @@ if ($_SESSION['role'] === 'operator') {
                                                                     <label for="harga">Price (Rp.)</label>
                                                                     <div class="selectData">
                                                                         <?php if ($req_product['status'] === 'Update') : ?>
-                                                                            <input type="number" name="harga"id="harga" placeholder="Rp. xxx" value="<?= $realProduct['harga'] ?>" disabled>
 
                                                                             <?php if ($realProduct['harga'] != $req_product['harga']) : ?>
+                                                                                <input type="number" name="harga" id="harga" placeholder="Rp. xxx" value="<?= $realProduct['harga'] ?>" disabled>
                                                                                 <i class='bx bx-right-arrow-alt'></i>
                                                                                 <input type="number" name="harga" id="harga" placeholder="Rp. xxx" value="<?= $req_product['harga'] ?>">
+
+                                                                            <?php else: ?>
+                                                                                <input type="hidden" name="harga" id="harga" placeholder="Rp. xxx" value="<?= $req_product['harga'] ?>">
+                                                                                <input type="number" name="harga" id="harga" placeholder="Rp. xxx" value="<?= $realProduct['harga'] ?>" disabled>
+                                                                            
                                                                             <?php endif; ?>
 
-                                                                        <?php else: ?>
+                                                                        <?php else : ?>
                                                                             <input type="number" name="harga" id="harga" placeholder="Rp. xxx" value="<?= $req_product['harga'] ?>">
                                                                         <?php endif; ?>
                                                                     </div>
                                                                 </li>
                                                             </div>
                                                             <li class="aksi">
-                                                                <?php if($req_product['status'] === 'New'): ?>
+                                                                <?php if ($req_product['status'] === 'New') : ?>
                                                                     <button type="submit" name="accept_new_request"><?= $textFormButton; ?></button>
 
-                                                                <?php elseif($req_product['status'] === 'Update'): ?>
+                                                                <?php elseif ($req_product['status'] === 'Update') : ?>
                                                                     <button type="submit" name="accept_update_request"><?= $textFormButton; ?></button>
-                                                                    
+
                                                                 <?php endif; ?>
                                                                 <a href="data_product.php" class="reject">Cancel</a>
-                                                                <a href="../includes/action.php?reject_request=<?= $key_request ?>" class="reject">Reject</a>
+                                                                <a href="../includes/action.php?key_reject_request=<?= $key_request ?>" class="reject">Reject</a>
                                                             </li>
                                                         </ul>
-                                                        <!-- </div> -->
                                                     </div>
                                                 </form>
                                             </div>
-                                            
+
                                             <?php ?>
 
                                         <?php else : ?>
@@ -383,7 +382,7 @@ if ($_SESSION['role'] === 'operator') {
                                                                 <div class="aksi_wrapper">
                                                                     <a href="?key_request=<?= $keys ?>&details_request" class="details_operator"><i class='bx bx-detail dash-aksi'></i></a>
                                                                     <a href="../includes/action.php?key_accept_request=<?= $keys ?>&accept_from_table" class="accept_operator"><i class='bx bx-check-square dash-aksi'></i></a>
-                                                                    <a href="../includes/action.php?key_request=<?= $keys ?>&reject_request" class="reject_operator"><i class='bx bxs-x-square dash-aksi'></i></a>
+                                                                    <a href="../includes/action.php?key_reject_request=<?= $keys ?>" class="reject_operator"><i class='bx bxs-x-square dash-aksi'></i></a>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -393,7 +392,21 @@ if ($_SESSION['role'] === 'operator') {
                                             </div>
                                         <?php endif; ?>
                                     <?php else : ?>
-                                        <h5>Tidak ada request dari operator</h5>
+                                        <!-- <div class="operator_table">
+                                                <table>
+                                                    <tr class="tr_no_request">
+                                                        <th class="id">No</th>
+                                                        <th>Senders</th>
+                                                        <th class="date">Date</th>
+                                                        <th>changes</th>
+                                                        <th class="status">Status</th>
+                                                        <th class="aksi">Actions</th>
+                                                    </tr>
+                                                </table>
+                                        </div> -->
+                                        <div class="no_request_wrapper">
+                                            <p class="no_request">No operator requests received</h5>
+                                        </div>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -431,12 +444,12 @@ if ($_SESSION['role'] === 'operator') {
                                                         <label for="harga">Price (Rp.)</label>
                                                         <input type="number" name="harga" id="harga" placeholder="Rp. xxx" value="<?= ($row) ? $row['harga'] : ''; ?>" required>
                                                     </li>
-                                                    <?php if($_SESSION['role'] === 'operator'):?>
-                                                    <li>
-                                                        <label for="area_notes">Notes</label>
-                                                        <textarea name="notes" class="notes" id="area_notes" cols="30" rows="5" placeholder="Request Notes..." required></textarea>
-                                                    </li>
-                                                    <?php endif;?>
+                                                    <?php if ($_SESSION['role'] === 'operator') : ?>
+                                                        <li>
+                                                            <label for="area_notes">Notes</label>
+                                                            <textarea name="notes" class="notes" id="area_notes" cols="30" rows="5" placeholder="Request Notes..." required></textarea>
+                                                        </li>
+                                                    <?php endif; ?>
                                                 </div>
                                                 <li class="aksi">
                                                     <button type="submit" name="<?= $formButtonName; ?>"><?= $textFormButton; ?></button>
@@ -477,9 +490,6 @@ if ($_SESSION['role'] === 'operator') {
                                     </div>
                                 </div>
 
-
-
-
                                 <div class="table_data_wrapper">
                                     <table>
                                         <tr>
@@ -510,7 +520,6 @@ if ($_SESSION['role'] === 'operator') {
                                         <?php endforeach; ?>
                                     </table>
                                 </div>
-
                             <?php endif; ?>
                         </div>
                     </div>

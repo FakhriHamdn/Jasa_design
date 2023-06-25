@@ -1,7 +1,16 @@
 <?php 
 session_start();
 
+
+if(!isset($_SESSION['implem_image'])){
+    $_SESSION['implem_image'] = [];
+}
+
+var_dump($_FILES);
+// unset($_SESSION['imple_image']);
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,17 +18,28 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Testing</title>
+    <title>Document</title>
 </head>
-<html>
 <body>
-    <h1>Home page mabroooooooo</h1>
-    <?php if(isset($_SESSION['request'])): ?>
-        <?php foreach($_SESSION['request'] as $row): ?>
-            <?php echo $row[0]; ?>
-            <?php echo $row[1]; ?>
-        <?php endforeach; ?>
-    <?php endif; ?>
+    <br>
+    <a href="index.php">Tambah Data</a>
+    <table border="1" cellspacing="0.5" cellpadding="10">
+        <tr>
+            <td>Image</td>
+            <td>Nama Barang</td>
+            <td>Harga</td>
+            <td>Aksi</td>
+        </tr>
+        <?php foreach($_SESSION['imple_image'] as $key => $row) : ?>
+        <tr>
+            <td><?= $row['image']?></td>
+            <td><?= $row['nama_barang']?></td>
+            <td><?= $row['harga']?></td>
+            <td>
+                <a href="action.php?delete_imple=<?= $key ?>">delete</a>
+            </td>
+        </tr>
+        <?php endforeach;?>
+    </table>
 </body>
-</html>
 </html>

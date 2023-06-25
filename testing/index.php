@@ -7,12 +7,16 @@
     <title>Testing Array Assosiatif</title>
 </head>
 <body>
-    <h1>Contoh pengimplementasian Array</h1>
-    <form action="action.php" method="POST">
+    <h1>Upload Image</h1>
+    <form action="action.php" method="POST" enctype="multipart/form-data">
         <ul>
             <li>
+                <label for="upload_image">Image</label>
+                <input type="file" name="upload_image" id="upload_image" placeholder="Upload image">
+            </li>
+            <li>
                 <label for="nama_barang">Input Barang</label>
-                <input type="text" name="nama_barang" id="nama_barang" placeholder="input baraang">
+                <input type="text" name="nama_barang" id="nama_barang" placeholder="input barang">
             </li>
             <li>
                 <label for="harga">Input Harga</label>

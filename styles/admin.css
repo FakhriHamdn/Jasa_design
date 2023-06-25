@@ -242,7 +242,7 @@ table tr {
     /* border: 1px solid tomato; */
 }
 
-table tr:hover{
+table tr:not(.tr_no_request):hover{
     background: #f6f6f6;
 }
 
@@ -385,6 +385,7 @@ tr th.aksi {
     padding: 0.8px 0.9em;
     border-radius: 20px;
     text-align: center;
+    width: 6em;
 }
 
 .statusNew {
@@ -632,20 +633,22 @@ span.text_verify:after {
     font-weight: 600;
 }
 
-.statusUpdateRequest {
+.statusUpdateRequest, .statusNewRequest {
     font-size: 13px;
-    padding: 1px 1.1em;
     border-radius: 20px;
+    text-align: center;
+}
+
+
+.statusUpdateRequest {
+    padding: 0.8px 1.1em;
     text-align: center;
     border: 1px solid #fec112;
     background: #fffce6;
 }
 
 .statusNewRequest {
-    font-size: 13px;
-    padding: 1px 1.1em;
-    border-radius: 20px;
-    text-align: center;
+    padding: 1px 1.5em;
     border: 1px solid  #00BFFF;
     background: #F0F8FF;
 }
@@ -821,6 +824,27 @@ i.bx-right-arrow-alt {
     /* padding: 1em 0; */
 
     /* border: 1px solid purple; */
+}
+
+.no_request_wrapper {
+    /* border: 1px solid purple; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* margin-top: 1em; */
+    color: #555;
+    text-transform: italic;
+}
+
+p.no_request {
+    /* background: #bf202f; */
+    width: max-content;
+    font-weight: 500;
+    padding: 0.3em 2em;
+    font-size: 1em;
+    /* box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2); */
+    border-radius: 4px;
 }
 
 
