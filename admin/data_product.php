@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-//====== VALIDASI AKSES
+//====== VALIDASI AKSESIBILITY
 if (!isset($_SESSION['status'])) {
     header('Location: ../index.php');
     exit;
@@ -20,12 +20,28 @@ if (!isset($_SESSION['status'])) {
         exit;
     }
 }
-//======= END VALIDASI
+//======= END AKSESIBILITY
 
 
-//======= ACTION UNTUK BEBERAPA FITUR
+//======= COMPONENT PENDUKUNG 
+if ($_SESSION['role'] === 'admin') {
+    $actionUpdate = 'updateProduct';
+    $actionAdd = 'addProduct';
+    $formButtonName = 'product_submit';
+    $textFormButton = 'Accept';
+} elseif ($_SESSION['role'] === 'operator') {
+    $actionUpdate = 'requestUpdateProduct';
+    $actionAdd = 'requestAddProduct';
+    $formButtonName = 'request_operator_submit';
+    $textFormButton = 'Request Changes';
+}
+//======= END COMPONENT
+
+
 require '../includes/functions.php';
 
+
+//======= STATEMENT FOR PAGINATION
 $jumlahDataPerhalaman = 10;
 
 // count menghitung panjang data di array associatif
@@ -33,12 +49,13 @@ $jumlahData = count(getDatas("SELECT * FROM products"));
 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerhalaman);
 
 $halamanAktif = (isset($_GET['page'])) ? $_GET['page'] : 1;
-
 $dataAwal = ($jumlahDataPerhalaman * $halamanAktif) - $jumlahDataPerhalaman;
 
 $query = "SELECT * FROM products ORDER BY id_product ASC LIMIT $dataAwal, $jumlahDataPerhalaman";
+//======= END PAGINATION
 
 
+//======= ACTION FOR CURD DATA PRODUCT
 if (isset($_GET['container']) && $_GET['container'] === 'product') {
 
     if (isset($_GET['id_product']) && $_GET['id_product'] > 0) {
@@ -47,28 +64,25 @@ if (isset($_GET['container']) && $_GET['container'] === 'product') {
 
         $title = 'Admin | Form Edit Data Product';
         $h1 = 'Edit Data Product';
-        if ($_SESSION['role'] === 'admin') {
-            $form_action = '../includes/action.php?action=updateProduct';
-        } elseif ($_SESSION['role'] === 'operator') {
-            $form_action = '../includes/action.php?action=request_updateProduct';
-        }
+        $form_action = '../includes/action.php?action=' . $actionUpdate;
     } else {
         $row = [];
 
         $title = 'Admin | Form Tambah Data Product';
         $h1 = 'Tambah Data Product';
-        $form_action = '../includes/action.php?action=addProduct';
+        $form_action = '../includes/action.php?action=' . $actionAdd;
     }
 }
-//======= END ACTION
-// $operator_request = $_SESSION['email'];
+//======= END CRUD PRODUCT
 
+
+//======= VALIDASI FOR REQUEST OPERATORS
 if ($_SESSION['role'] === 'operator') {
     if (!isset($_SESSION['request'])) {
         $_SESSION['request'] = [];
     }
 }
-// $operator = 'nabilazifa@gmail.com';
+//======= END VALIDASI REQUEST 
 
 
 ?>
@@ -87,9 +101,7 @@ if ($_SESSION['role'] === 'operator') {
     <!--======= END =======-->
 
     <title><?= $role_text; ?> Dashboard | Data Products</title>
-
 </head>
-
 
 <body>
     <div class="container">
@@ -134,12 +146,6 @@ if ($_SESSION['role'] === 'operator') {
                     </ul>
                     <!-- BOTTOM CONTENT -->
                     <div class="bottom-cotent">
-                        <!-- <li class="list">
-                            <a href="#" class="nav-link">
-                                <i class="bx bx-cog icon"></i>
-                                <span class="link">Settings</span>
-                            </a>
-                        </li> -->
                         <li class="list">
                             <a href="../index.php" class="nav-link">
                                 <i class='bx bx-home icon'></i>
@@ -167,6 +173,7 @@ if ($_SESSION['role'] === 'operator') {
         <section class="content">
             <div class="content_wrapper">
                 <h1 class="header_text"><?= $role_text; ?> | Data Products</h1>
+
 
                 <!--=============== NOTIFICATION  -->
                 <?php if (isset($_GET['message'])) : ?>
@@ -202,67 +209,195 @@ if ($_SESSION['role'] === 'operator') {
                 <?php endif; ?>
                 <!--=============== END NOTIFICATION  -->
 
+
                 <div class="main_dashboard_container">
                     <!--======= SPACE OPERATOR IN ADMIN DATABASE =======-->
                     <?php if ($_SESSION['role'] === 'admin') : ?>
-                        <div class="space_operator">
-                            <div class="operator_wrapper">
+                        <?php if (isset($_GET['container']) && $_GET['container'] === 'product') : ?>
+                        <?php else : ?>
 
-                                <?php //var_dump($_SESSION['request']); ?>
-                                <?php //unset($_SESSION['request']);
-                                ?>
+                            <div class="space_operator">
+                                <div class="operator_wrapper">
 
-                                <?php if (count($_SESSION['request']) > 0) : ?>
+                                    <?php //var_dump($_SESSION['request']); 
+                                    ?>
 
-                                    <?php if (isset($_GET['details_op'])) : ?>
+                                    <?php if (count($_SESSION['request']) > 0) : ?>
 
-                                        <?php else:?>
-                                    <div class="title_operator">
-                                        <h3>Operator Request's</h3>
+                                        <?php if (isset($_GET['details_request'])) : ?>
+                                            <?php $detailRequest = $_GET['details_request'] ?>
+                                            <?php //$key_request = $_GET['key_request'];?>
 
-                                        <div class="data_management_container">
-                                            <div class="search_container">
-                                                <input type="text" class="search_bar" placeholder="Search datas..." autofocus>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="operator_table">
-                                        <table border="1">
-                                            <tr>
-                                                <th class="id">No</th>
-                                                <th>Senders</th>
-                                                <th class="date">Date</th>
-                                                <th>changes</th>
-                                                <th class="aksi">Actions</th>
-                                            </tr>
-                                            <?php $id = 1 ?>
-                                            <?php foreach ($_SESSION['request'] as $keys => $rows) : ?>
-                                                <tr class="data_table">
-                                                    <td class="id"><?= $id++ ?></td>
-                                                    <td><?= $rows['nama_sender'] ?></td>
-                                                    <td class="date"><?= $rows['send_time'] ?></td>
-                                                    <td><?= $rows['nama_product'] ?></td>
-                                                    <td class="aksi">
-                                                        <div class="aksi_wrapper">
-                                                            <a href="?id_request=<?= $keys ?>&details_op" class="details_operator"><i class='bx bx-detail dash-aksi'></i></a>
-                                                            <a href="../includes/action.php?accept_request=<?= $keys ?>" class="accept_operator"><i class='bx bx-check-square dash-aksi'></i></a>
-                                                            <a href="../includes/action.php?reject_request=<?= $keys ?>" class="reject_operator"><i class='bx bxs-x-square dash-aksi'></i></a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach; ?>
                                             
+
+                                            <div class="form_container">
+                                                <?php $key_request = $_GET['key_request'] ?>
+                                                <?php //var_dump($_SESSION['request'][$id_request])
+                                                ?>
+                                                <?php $req_product = $_SESSION['request'][$key_request] ?>
+                                                <?php //var_dump($key_request)?>
+
+
+                                                <div class="title_form_request">
+                                                    <h2>Details Request</h2>
+
+                                                    <?php if ($req_product['status'] === 'Update') : ?>
+                                                        <span class="statusUpdateRequest"><?= $req_product['status'] ?></span>
+                                                    <?php elseif ($req_product['status'] === 'New') : ?>
+                                                        <span class="statusNewRequest"><?= $req_product['status'] ?></span>
+                                                    <?php endif; ?>
+                                                </div>
                                                 
+                                                <?php
+                                                if($req_product['status'] === 'Update'){
+                                                    $id_realProduct = $req_product['id'];
+                                                    $realProduct = getProductId($id_realProduct);
+                                                }
+                                                ?>
+
+
+                                                <form action="../includes/action.php?key_accept_request=<?= $key_request ?>" method="POST" enctype="multipart/form-data">
+                                                <?php if($req_product['status'] === 'Update'):?>
+                                                    <input type="hidden" name="id_product" value="<?= $req_product['id']; ?> ">
+                                                    <?php endif;?>
+
+                                                    <div class="info_sender">
+                                                        <div class="description_request">
+
+                                                            <?php if($req_product['status'] === 'Update'):?>
+                                                                <p>Id Product : <?= $req_product['id']; ?></p>
+                                                            <?php endif;?>
+
+                                                            <p>Request From : <?= $req_product['nama_sender']; ?></p>
+                                                            <p>Date : <?= $req_product['send_time']; ?> </p>
+                                                            <div class="notes_request">
+                                                                <p>Notes: </p>
+                                                                <p class="text_notes">"<?= $req_product['notes']; ?>"</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form_request_wrapper">
+                                                        <div class="form_image_preview">
+                                                            <label for="product_image" class="label_product_image">Upload Image</label>
+                                                            <input type="file" name="product_image" class="product_image" id="product_image" placeholder="Choose image" value="<?= $req_product['product_image'] ?>">
+                                                        </div>
+
+                                                        <!-- <div class="form_input_data"> -->
+                                                        <ul class="ul_form_input">
+                                                            <div class="form_input_wrapper">
+                                                                <li>
+                                                                    <label for="product">Product</label>
+                                                                    <div class="selectData">
+                                                                        <?php if ($req_product['status'] === 'Update') : ?>
+                                                                            <input type="text" id="product" placeholder="Input product" value="<?= $realProduct['nama_product']; ?>" disabled>
+
+                                                                            <?php if ($realProduct['nama_product'] !== $req_product['nama_product']) : ?>
+                                                                                <i class='bx bx-right-arrow-alt'></i>
+                                                                                <input type="text" name="product" id="product" placeholder="Input product" value="<?= $req_product['nama_product']; ?>">
+                                                                            <?php endif; ?>
+
+                                                                        <?php else : ?>
+                                                                            <input type="text" name="product" id="product" placeholder="Input product" value="<?= $req_product['nama_product']; ?>">
+                                                                        <?php endif; ?>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <label for="harga">Price (Rp.)</label>
+                                                                    <div class="selectData">
+                                                                        <?php if ($req_product['status'] === 'Update') : ?>
+                                                                            <input type="number" name="harga"id="harga" placeholder="Rp. xxx" value="<?= $realProduct['harga'] ?>" disabled>
+
+                                                                            <?php if ($realProduct['harga'] != $req_product['harga']) : ?>
+                                                                                <i class='bx bx-right-arrow-alt'></i>
+                                                                                <input type="number" name="harga" id="harga" placeholder="Rp. xxx" value="<?= $req_product['harga'] ?>">
+                                                                            <?php endif; ?>
+
+                                                                        <?php else: ?>
+                                                                            <input type="number" name="harga" id="harga" placeholder="Rp. xxx" value="<?= $req_product['harga'] ?>">
+                                                                        <?php endif; ?>
+                                                                    </div>
+                                                                </li>
+                                                            </div>
+                                                            <li class="aksi">
+                                                                <?php if($req_product['status'] === 'New'): ?>
+                                                                    <button type="submit" name="accept_new_request"><?= $textFormButton; ?></button>
+
+                                                                <?php elseif($req_product['status'] === 'Update'): ?>
+                                                                    <button type="submit" name="accept_update_request"><?= $textFormButton; ?></button>
+                                                                    
+                                                                <?php endif; ?>
+                                                                <a href="data_product.php" class="reject">Cancel</a>
+                                                                <a href="../includes/action.php?reject_request=<?= $key_request ?>" class="reject">Reject</a>
+                                                            </li>
+                                                        </ul>
+                                                        <!-- </div> -->
+                                                    </div>
+                                                </form>
+                                            </div>
                                             
-                                        </table>
-                                    </div>
+                                            <?php ?>
+
+                                        <?php else : ?>
+                                            <div class="title_operator">
+                                                <h3>Operator Request's</h3>
+
+                                                <div class="data_management_container">
+                                                    <div class="search_container">
+                                                        <input type="text" class="search_bar" placeholder="Search datas...">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="operator_table">
+                                                <table>
+                                                    <tr>
+                                                        <th class="id">No</th>
+                                                        <th>Senders</th>
+                                                        <th class="date">Date</th>
+                                                        <th>changes</th>
+                                                        <th class="status">Status</th>
+                                                        <th class="aksi">Actions</th>
+                                                    </tr>
+                                                    <?php $id = 1 ?>
+                                                    <?php foreach ($_SESSION['request'] as $keys => $rows) : ?>
+                                                        <tr class="data_table">
+                                                            <td class="id"><?= $id++ ?></td>
+                                                            <td class="nama_sender"><?= $rows['nama_sender'] ?></td>
+                                                            <td class="date"><?= $rows['send_time'] ?></td>
+                                                            <td><?= $rows['nama_product'] ?></td>
+
+                                                            <?php if ($rows['status'] === 'New') : ?>
+                                                                <td class="status">
+                                                                    <p class="statusNew"><?= $rows['status'] ?></p>
+                                                                </td>
+
+                                                            <?php elseif ($rows['status'] === 'Update') : ?>
+                                                                <td class="status">
+                                                                    <p class="statusUpdate"><?= $rows['status'] ?></p>
+                                                                </td>
+                                                            <?php endif; ?>
+
+                                                            <td class="aksi">
+                                                                <div class="aksi_wrapper">
+                                                                    <a href="?key_request=<?= $keys ?>&details_request" class="details_operator"><i class='bx bx-detail dash-aksi'></i></a>
+                                                                    <a href="../includes/action.php?key_accept_request=<?= $keys ?>&accept_from_table" class="accept_operator"><i class='bx bx-check-square dash-aksi'></i></a>
+                                                                    <a href="../includes/action.php?key_request=<?= $keys ?>&reject_request" class="reject_operator"><i class='bx bxs-x-square dash-aksi'></i></a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+
+                                                </table>
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php else : ?>
+                                        <h5>Tidak ada request dari operator</h5>
                                     <?php endif; ?>
-                                <?php else : ?>
-                                    <h5>Tidak ada request dari operator</h5>
-                                <?php endif; ?>
+                                </div>
                             </div>
-                        </div>
+                        <?php endif; ?>
                     <?php endif; ?>
                     <!--======= END SPACE OPERATOR =======-->
 
@@ -281,31 +416,31 @@ if ($_SESSION['role'] === 'operator') {
                                         <?php endif; ?>
                                         <div class="form_wrapper">
                                             <div class="form_image_preview">
-                                                <label for="product_image">Image</label>
-                                                <input type="file" name="product_image" id="product_image" placeholder="Choose image" value="<?= ($row) ? $row['product_image'] : ''; ?>">
+                                                <label for="product_image" class="label_product_image">Upload Image</label>
+                                                <input type="file" name="product_image" class="product_image" id="product_image" placeholder="Choose image" value="<?= ($row) ? $row['product_image'] : ''; ?>">
                                             </div>
 
                                             <!-- <div class="form_input_data"> -->
                                             <ul class="ul_form_input">
-                                                <li>
-                                                    <label for="product">Product</label>
-                                                    <input type="text" name="product" id="product" placeholder="Input product" value="<?= ($row) ? $row['nama_product'] : ''; ?>">
-                                                </li>
-                                                <li>
-                                                    <label for="harga">Price (Rp.)</label>
-                                                    <input type="number" name="harga" id="harga" placeholder="Rp. xxx" value="<?= ($row) ? $row['harga'] : ''; ?>">
-                                                </li>
+                                                <div class="form_input_wrapper">
+                                                    <li>
+                                                        <label for="product">Product</label>
+                                                        <input type="text" name="product" id="product" placeholder="Input product" value="<?= ($row) ? $row['nama_product'] : ''; ?>" required>
+                                                    </li>
+                                                    <li>
+                                                        <label for="harga">Price (Rp.)</label>
+                                                        <input type="number" name="harga" id="harga" placeholder="Rp. xxx" value="<?= ($row) ? $row['harga'] : ''; ?>" required>
+                                                    </li>
+                                                    <?php if($_SESSION['role'] === 'operator'):?>
+                                                    <li>
+                                                        <label for="area_notes">Notes</label>
+                                                        <textarea name="notes" class="notes" id="area_notes" cols="30" rows="5" placeholder="Request Notes..." required></textarea>
+                                                    </li>
+                                                    <?php endif;?>
+                                                </div>
                                                 <li class="aksi">
-
-                                                    <?php if ($_SESSION['role'] === 'admin') : ?>
-                                                        <button type="submit" name="product_submit">Accept changes</button>
-
-                                                    <?php elseif ($_SESSION['role'] === 'operator') : ?>
-                                                        <button type="submit" name="request_operator_submit">Accept Changes</button>
-
-                                                    <?php endif; ?>
-
-                                                    <a href="data_product.php" class="reject">Reject</a>
+                                                    <button type="submit" name="<?= $formButtonName; ?>"><?= $textFormButton; ?></button>
+                                                    <a href="data_product.php" class="reject">Cancel</a>
                                                 </li>
                                             </ul>
 
@@ -338,7 +473,7 @@ if ($_SESSION['role'] === 'operator') {
                                 <div class="data_management_container">
                                     <a class="add_data" href="?container=product">Add Data</a>
                                     <div class="search_container">
-                                        <input type="text" class="search_bar" placeholder="Search datas..." autofocus>
+                                        <input type="text" class="search_bar" placeholder="Search datas...">
                                     </div>
                                 </div>
 

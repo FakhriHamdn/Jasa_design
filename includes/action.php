@@ -150,6 +150,7 @@ if (isset($_GET['id_delete'])) {
 //================== END CRUD DATAS ==================
 
 
+
 //================= VALIDASI / CONDITION FOR AUTHENTICATION =================
 if (isset($_POST['auth_submit']) && $_GET['auth'] === 'register') {
     //data yang diketikkan user bakal ditampung ke variable
@@ -192,6 +193,7 @@ if (isset($_POST['auth_submit']) && $_GET['auth'] === 'register') {
         header("Location: ../auth/register.php?message=" . urlencode($msg));
         exit();
     }
+
 } else if (isset($_POST['auth_submit']) && $_GET['auth'] === 'login') {
     //data yang diketikkan user bakal ditampung divariable ini
     $email = strtolower($_POST['email']);
@@ -234,7 +236,6 @@ if (isset($_POST['auth_submit']) && $_GET['auth'] === 'register') {
         exit();
     }
 }
-
 //================== END AUTHENTICATION ==================
 
 
@@ -260,9 +261,11 @@ if (isset($_GET['remove_from_cart'])) {
     unset($_SESSION['cart'][$userIdentity][$key]);
     header("Location: ../keranjang.php");
 }
+//================== END CART SYSTEM ==================
+
+
 
 //================== DASHBOARD VERIFY ==================
-
 if (isset($_POST['dashboard_verify'])) {
     $pass_verify = htmlspecialchars($_POST['pass_verify']);
 
@@ -291,12 +294,15 @@ if (isset($_POST['dashboard_verify'])) {
 }
 //================== END VERIFY ==================
 
-if(isset($_POST['request_operator_submit'])){
-    // $id_product = $_GET['id_product'];
-    // $getProductById = getProductId($id_product);
 
-    $nama_product = $_POST['product'];
-    $harga = $_POST['harga'];
+
+//================== ACTION REQUEST OPERATOR ==================
+//======= ACTION CREATE AN REQUEST 
+if(isset($_POST['request_operator_submit'])){
+    $id_product = $_POST['id_product'];
+    $nama_product = htmlspecialchars($_POST['product']);
+    $harga = htmlspecialchars($_POST['harga']);
+    $notes = htmlspecialchars($_POST['notes']);
     $product_image = uploadImage();
     if (!$product_image) {
         return false; //return false dia bakal memberhentikan eksekusi sampai sini, dan tidak ada menjalankan syntac selanjutnya
@@ -306,98 +312,114 @@ if(isset($_POST['request_operator_submit'])){
     date_default_timezone_set('Asia/Jakarta');
     $jamSekarang = date('d M Y H:i' );
 
-    if($_GET['action'] === 'request_updateProduct'){
+    $operator = $_SESSION['email'];
+    if($_GET['action'] === 'requestUpdateProduct'){
+        $_SESSION['request'][] = [
+            'nama_sender' => $operator,
+            'send_time' => $jamSekarang,
+            'id' => $id_product, 
+            'nama_product' => $nama_product, 
+            'harga' => $harga, 
+            'product_image' => $product_image,
+            'notes' => $notes,
+            'status' => 'Update'
+        ];
 
-        $operator = $_SESSION['email'];
-
+    } else if($_GET['action'] === 'requestAddProduct'){
         $_SESSION['request'][] = [
             'nama_sender' => $operator,
             'send_time' => $jamSekarang,
             'nama_product' => $nama_product, 
             'harga' => $harga, 
-            'product_image' => $product_image
+            'product_image' => $product_image,
+            'notes' => $notes,
+            'status' => 'New'
         ];
-
-        // var_dump($_SESSION['request']);
-        header("location: ../admin/data_product.php");
     }
+    header("location: ../admin/data_product.php");
+    exit;
 }       
+//======= END CREATE REQUEST 
 
-if(isset($_GET['accept_request'])){
-    $accept_req = $_GET['accept_request'];
 
-    $result = $_SESSION['request'][$accept_req];
-    // var_dump($result);
+//======= ACTION TO ACCEPT AN REQUEST 
+if(isset($_GET['key_accept_request'])){
+    $key_request = $_GET['key_accept_request'];
+    $row = $_SESSION['request'][$key_request]; //AMBIL DATA YANG DIMASUKKAN OLEH OPERATOR
 
-    $msg = 'Successful add a request to database';
+    if(isset($_POST['accept_new_request'])){
+        $nama_product = $_POST['product'];
+        $harga = $_POST['harga'];
+        $product_image = uploadImage();
+        if (!$product_image) {
+            return false;
+        }
+
+    } else if(isset($_POST['accept_update_request'])){
+        if($row['product_image'] != uploadImage()){
+            $product_image = $row['product_image'];
+        } else {
+            $product_image = uploadImage();
+        }
+        
+        if($row['nama_product'] != $_POST['product']){
+            $nama_product = $row['nama_product'];
+        } else {
+            $nama_product = $_POST['product'];
+        }
+        
+        if($row['harga'] != $_POST['harga']){
+            $harga =  $row['harga'];
+        } else {
+            $harga =  $_POST['harga'];
+        }
+
+        var_dump($product_image, $nama_product, $harga);
+        exit;
+
+    }
+
+    
+    // $key_request = $_GET['accept_request'];
+    
+    if(isset($_GET['accept_from_table'])){
+        // NYIMPEN DATA PENTING YANG DIPERLUKAN DI DATABASE
+        $product_image = $row['product_image'];
+        $nama_product = $row['nama_product'];
+        $harga = $row['harga'];
+
+        header("location: berhasil.php");
+
+        // echo 'hello';exit;
+    }
+
+    $id_product = $row['id'];
+
+    // VALIDASI SEBELUM KEDATABASE BERDASARKAN STATUS TERTENTU
+    if($row['status'] === 'New'){
+        $result = addDataProduct($product_image, $nama_product, $harga);
+        $msg = 'Successful add new data request';
+        
+    } else if ($row['status'] === 'Update'){
+        $result = updateDataProduct($id_product, $product_image, $nama_product, $harga);
+        $msg = 'Successful add an update data request';
+    }
+
+    //JIKA SUDAH SELESAI TEREKSEKUSI MAKA SESSION TERKAIT AKAN DIHAPUS
+    unset($_SESSION['request'][$key_request]);
     header("Location: ../admin/data_product.php?message&add_message=" . urlencode($msg));
 }
+//======= END ACCEPT AN REQUEST 
 
 
-
-
-
-
+//======= ACTION TO REJECT AN REQUEST 
 if(isset($_GET['reject_request'])){
-    $reject_req = $_GET['reject_request'];
+    $key_reject = $_GET['key_request'];
 
-    // unset($_SESSION['request'][$reject_req]);
+    unset($_SESSION['request'][$key_reject]);
 
     $msg = 'rejected some request';
     header("Location: ../admin/data_product.php?message&delete_message=" . urlencode($msg));
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//==================  REQUEST OPERATOR ==================
-// if(isset($_POST['request_operator_submit'])){
-//     $nama_product = htmlspecialchars($_POST['product']);
-//     $harga = htmlspecialchars($_POST['harga']);
-//     $product_image = uploadImage();
-
-//     if (!$product_image) {
-//         return false; //return false dia bakal memberhentikan eksekusi sampai sini, dan tidak ada menjalankan syntac selanjutnya
-//     }
-//     $result = [$nama_product, $harga, $product_image];
-    
-//     if ($_GET['action'] === 'request_updateProduct') {
-//         $id_product = $_POST['id_product'];
-//         $row = getProductId($id_product);
-        
-//         $operator_request = $_SESSION['email'];
-
-//         // MEMBUAT VARIABLE SUPER GLOBAL CART
-//         $_SESSION['request'][] = 
-//         [
-//             'nama_product' => $nama_product,
-//             'harga' => $harga,
-//             'nama_product' => $nama_product
-//         ];
-
-//         header('Location: ../admin/data_product.php');
-//     }
-// }
-
-
+//======= END REJECT REQUEST 
 //================== END REQUEST ==================
-
