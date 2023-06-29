@@ -4,48 +4,63 @@ session_start();
 
 
 //================= ACTION FOR CRUD DATA =================
-// CRUD DATA PRODUCT
+//========== CRUD DATA PRODUCT
 if (isset($_POST['product_submit'])) {
     $nama_product = htmlspecialchars($_POST['product']);
     $harga = htmlspecialchars($_POST['harga']);
 
-    // var_dump(uploadImage()); exit;
-
     if ($_GET['action'] === 'addProduct') {
         if (empty($nama_product) || empty($harga)) {
             $msg = "Cannot add null product";
-            header("Location: ../admin/data_product.php?message=" . urlencode($msg));
+            header("Location: " . $_SERVER['HTTP_REFERER'] . "&message&warning=" . urlencode($msg));
+            // header("Location: ../admin/data_product.php?message&warning=" . urlencode($msg));
             exit();
         } else {
             $product_image = uploadImage();
             if (!$product_image) {
                 return false;
             }
+
             $result = addDataProduct($product_image, $nama_product, $harga);
             if ($result) {
                 $msg = "Product data has been successfully added";
-                header("Location: ../admin/data_product.php?message&add_message=" . urlencode($msg));
+                header("Location: ../admin/data_product.php?message&success=" . urlencode($msg));
                 exit();
             } else {
-                header("Location: ../admin/data_product.php");
+                $msg = "Failed to add data product";
+                header("Location: " . $_SERVER['HTTP_REFERER'] . "&message&warning=" . urlencode($msg));
+                exit();
             }
         }
+
     } else if ($_GET['action'] === 'updateProduct') {
         $id_product = $_POST['id_product'];
-        $imagelama = $_POST['product_image'];
+        $imageLama = $_POST['old_product_image'];
 
-        if($_FILES['image']['error'] === 4) {
+        if ($_FILES['product_image']['error'] === 4) {
             $product_image = $imageLama;
         } else {
-        $product_image = uploadImage();
+            $product_image = uploadImage();
         }
 
+        // var_dump($id_product, $product_image, $nama_product, $harga);exit;
+
         $row = getProductId($id_product);
+
+        if ($imageLama !== $product_image) {
+            $pathImage = '../image/product/' . $imageLama;
+            if (file_exists($pathImage)) {
+                unlink($pathImage);
+            } else {
+                echo "<script>alert('Gagal menghapus gambar');</script>";
+            }
+        }
+
         if ($row) {
             $result = updateDataProduct($id_product, $product_image, $nama_product, $harga);
             if ($result) {
                 $msg = "Product data has been successfully updated";
-                header("Location: ../admin/data_product.php?message&update_message=" . urlencode($msg));
+                header("Location: ../admin/data_product.php?message&changes=" . urlencode($msg));
                 exit();
             }
         }
@@ -122,16 +137,31 @@ if (isset($_POST['transaction_submit'])) {
 
 //ACTION DELETING DATAS
 if (isset($_GET['id_delete'])) {
+    
     if ($_GET['page'] === 'product') {
         $id_product = $_GET['id_delete'];
+        $getProduct = getProductId($id_product);
+
+        $removeImage = $getProduct['product_image'];
+        $pathImage = '../image/product/' . $removeImage;
+        if (file_exists($pathImage)) {
+            unlink($pathImage);
+        } else {
+            echo "<script>alert('Gagal menghapus gambar');</script>";
+        }
+
+        
         $result = deleteDataProduct($id_product);
         if ($result) {
             $msg = "Product data has been successfully deleted";
-            header("Location: ../admin/data_product.php?message&delete_message=" . urlencode($msg));
+            if($_GET['type'] === 'form') {
+                header("Location: ../admin/data_product.php?message&warning=" . urlencode($msg));
+                exit();
+            }
+            header("Location: " . $_SERVER['HTTP_REFERER'] . "&message&warning=" . urlencode($msg));
             exit();
-            // header("Location: " . $_SERVER['HTTP_REFERER'] . "&message&delete_message=" . urlencode($msg));
-            // exit();
         }
+
     } else if ($_GET['page'] === 'customer') {
         $id_cust = $_GET['id_delete'];
         $result = deleteDataCustomer($id_cust);
@@ -288,7 +318,7 @@ if (isset($_POST['dashboard_verify'])) {
             $_SESSION['verify'] = true;
 
             $msg = "Welcome " . $_SESSION['fullname'];
-            header("Location: ../admin/data_product.php?message&auth_message=" . urlencode($msg));
+            header("Location: ../admin/data_product.php?message&auth=" . urlencode($msg));
             exit();
         } else {
             $msg = "Incorrect password";
@@ -313,9 +343,12 @@ if (isset($_POST['request_operator_submit'])) {
     $harga = htmlspecialchars($_POST['harga']);
     $notes = htmlspecialchars($_POST['notes']);
     $title_request = htmlspecialchars(ucwords($_POST['title_request']));
-    $product_image = uploadImage();
-    if (!$product_image) {
-        return false; //return false dia bakal memberhentikan eksekusi sampai sini, dan tidak ada menjalankan syntac selanjutnya
+    
+    if (empty($nama_product) || empty($harga) || empty($title_request)) {
+        $msg = "Cannot add null product";
+        header("Location: " . $_SERVER['HTTP_REFERER'] . "&message&warning=" . urlencode($msg));
+        // header("Location: ../admin/data_product.php?message&warning=" . urlencode($msg));
+        exit();
     }
 
     //SETTING DATE 
@@ -323,7 +356,35 @@ if (isset($_POST['request_operator_submit'])) {
     $jamSekarang = date('d M Y H:i');
 
     $operator = $_SESSION['email'];
-    if ($_GET['action'] === 'requestUpdateProduct') {
+    
+    if ($_GET['action'] === 'requestAddProduct') {
+        $product_image = uploadImage();
+        if (!$product_image) {
+        return false; 
+        }
+
+        $_SESSION['request'][] = [
+            'nama_sender' => $operator,
+            'send_time' => $jamSekarang,
+            'nama_product' => $nama_product,
+            'harga' => $harga,
+            'product_image' => $product_image,
+            'notes' => $notes,
+            'title_request' => $title_request,
+            'status' => 'New'
+        ];
+    $msg = "The request to add data has been successfully executed";
+    header("Location: ../admin/data_product.php?message&success=" . urlencode($msg));
+    exit();
+
+    } else if ($_GET['action'] === 'requestUpdateProduct') {
+        $imageLama = $_POST['old_product_image'];
+        if ($_FILES['product_image']['error'] === 4) {
+            $product_image = $imageLama;
+        } else {
+            $product_image = uploadImage();
+        }
+
         $_SESSION['request'][] = [
             'nama_sender' => $operator,
             'send_time' => $jamSekarang,
@@ -335,20 +396,13 @@ if (isset($_POST['request_operator_submit'])) {
             'title_request' => $title_request,
             'status' => 'Update'
         ];
-    } else if ($_GET['action'] === 'requestAddProduct') {
-        $_SESSION['request'][] = [
-            'nama_sender' => $operator,
-            'send_time' => $jamSekarang,
-            'nama_product' => $nama_product,
-            'harga' => $harga,
-            'product_image' => $product_image,
-            'notes' => $notes,
-            'title_request' => $title_request,
-            'status' => 'New'
-        ];
+
+        
+    $msg = "The request to update data has been successfully executed";
+    header("Location: ../admin/data_product.php?message&changes=" . urlencode($msg));
+    exit();
     }
-    header("location: ../admin/data_product.php");
-    exit;
+    
 }
 //======= END CREATE REQUEST 
 
@@ -359,34 +413,31 @@ if (isset($_GET['key_accept_request'])) {
     $row = $_SESSION['request'][$key_request]; //AMBIL DATA YANG DIMASUKKAN OLEH OPERATOR
 
     if (isset($_POST['accept_new_request'])) {
-        $nama_product = $_POST['product'];
-        $harga = $_POST['harga'];
-        $product_image = uploadImage();
-        if (!$product_image) {
-            return false;
-        }
+        $nama_product = htmlspecialchars($_POST['product']);
+        $harga = htmlspecialchars($_POST['harga']);
+        $product_image = $_POST['new_product_image'];
+
+
     } else if (isset($_POST['accept_update_request'])) {
-        if ($row['product_image'] != uploadImage()) {
+
+        if ($row['product_image'] != $_POST['old_product_image']) {
             $product_image = $row['product_image'];
         } else {
-            $product_image = uploadImage();
+            $product_image = $_POST['old_product_image'];
         }
 
         if ($row['nama_product'] != $_POST['product']) {
             $nama_product = $row['nama_product'];
         } else {
-            $nama_product = $_POST['product'];
+            $nama_product = htmlspecialchars($_POST['product']);
         }
 
         if ($row['harga'] != $_POST['harga']) {
             $harga =  $row['harga'];
         } else {
-            $harga =  $_POST['harga'];
+            $harga =  htmlspecialchars($_POST['harga']);
         }
     }
-
-
-    // $key_request = $_GET['accept_request'];
 
     if (isset($_GET['accept_from_table'])) {
         // NYIMPEN DATA PENTING YANG DIPERLUKAN DI DATABASE
@@ -395,20 +446,42 @@ if (isset($_GET['key_accept_request'])) {
         $harga = $row['harga'];
     }
 
+    if (empty($nama_product) || empty($harga)) {
+        $msg = "Cannot add null product";
+        header("Location: " . $_SERVER['HTTP_REFERER'] . "&message&warning=" . urlencode($msg));
+        // header("Location: ../admin/data_product.php?message&warning=" . urlencode($msg));
+        exit();
+    }
+
     $id_product = $row['id'];
 
     // VALIDASI SEBELUM KEDATABASE BERDASARKAN STATUS TERTENTU
     if ($row['status'] === 'New') {
         $result = addDataProduct($product_image, $nama_product, $harga);
-        $msg = 'Successful add new data request';
+        $msg = 'Successfully added data from the request';
     } else if ($row['status'] === 'Update') {
+
+        // var_dump($row['product_image']);
+        // var_dump($_POST['old_product_image']);exit;
+
+        $imageLama = $_POST['old_product_image'];
+
+        if ($imageLama !== $product_image) {
+            $pathImage = '../image/product/' . $imageLama;
+            if (file_exists($pathImage)) {
+                unlink($pathImage);
+            } else {
+                echo "<script>alert('Gagal menghapus gambar');</script>";
+            }
+        }
+
         $result = updateDataProduct($id_product, $product_image, $nama_product, $harga);
-        $msg = 'Successful add an update data request';
+        $msg = 'Successfully updated data from the request';
     }
 
     //JIKA SUDAH SELESAI TEREKSEKUSI MAKA SESSION TERKAIT AKAN DIHAPUS
     unset($_SESSION['request'][$key_request]);
-    header("Location: ../admin/data_product.php?message&add_message=" . urlencode($msg));
+    header("Location: ../admin/data_product.php?message&success=" . urlencode($msg));
 }
 //======= END ACCEPT AN REQUEST 
 
@@ -417,16 +490,21 @@ if (isset($_GET['key_accept_request'])) {
 if (isset($_GET['key_reject_request'])) {
     $key_reject = $_GET['key_reject_request'];
 
+    $row = $_SESSION['request'][$key_reject];
+
+    $removeImage = $row['product_image'];
+    $pathImage = '../image/product/' . $removeImage;
+    if (file_exists($pathImage)) {
+        unlink($pathImage);
+    } else {
+        echo "<script>alert('Gagal menghapus gambar');</script>";
+    }
+
+
     unset($_SESSION['request'][$key_reject]);
 
-    $msg = 'rejected some request';
-    header("Location: ../admin/data_product.php?message&delete_message=" . urlencode($msg));
+    $msg = 'Rejected some data request';
+    header("Location: ../admin/data_product.php?message&warning=" . urlencode($msg));
 }
 //======= END REJECT REQUEST 
 //================== END REQUEST ==================
-
-
-// else if(isset($_POST['accept_update_request'])){
-
-
-// }

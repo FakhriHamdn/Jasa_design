@@ -311,6 +311,7 @@ if ($_SESSION['role'] === 'operator') {
                                                                             <img src="../image/product/<?= $req_product['product_image'] ?>" height="170" width="170">
                                                                         </label>
                                                                         <input type="file" name="product_image" class="product_image" id="product_image" placeholder="Choose image">
+                                                                        <input type="hidden" name="old_product_image" class="product_image" id="product_image" placeholder="Choose image" value="<?= $realProduct['product_image'];?>">
                                                                     </div>
                                                                 </div>
 
