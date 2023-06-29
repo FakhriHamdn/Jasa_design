@@ -404,7 +404,7 @@ if ($_SESSION['role'] === 'operator') {
 
                                                             <?php endif; ?>
                                                             <!-- <a href="data_product.php" class="reject">Cancel</a> -->
-                                                            <a href="../includes/action.php?key_reject_request=<?= $key_request ?>" class="reject">Reject</a>
+                                                            <a href="../includes/action.php?key_reject_request=<?= $key_request ?>&type=product" class="reject">Reject</a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -459,7 +459,7 @@ if ($_SESSION['role'] === 'operator') {
                                                                 <div class="aksi_wrapper">
                                                                     <a href="?key_request=<?= $keys ?>&details_request" class="details_operator"><i class='bx bx-detail dash-aksi'></i></a>
                                                                     <a href="../includes/action.php?key_accept_request=<?= $keys ?>&accept_from_table" class="accept_operator"><i class='bx bx-check-square dash-aksi'></i></a>
-                                                                    <a href="../includes/action.php?key_reject_request=<?= $keys ?>" class="reject_operator"><i class='bx bxs-x-square dash-aksi'></i></a>
+                                                                    <a href="../includes/action.php?key_reject_request=<?= $keys ?>&type=product" class="reject_operator"><i class='bx bxs-x-square dash-aksi'></i></a>
                                                                 </div>
                                                             </td>
                                                         </tr>

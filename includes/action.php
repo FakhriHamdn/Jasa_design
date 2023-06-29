@@ -444,6 +444,19 @@ if (isset($_GET['key_accept_request'])) {
         $product_image = $row['product_image'];
         $nama_product = $row['nama_product'];
         $harga = $row['harga'];
+        
+        $getProduct = getProductId($row['id']);
+        $imageLama = $getProduct['product_image'];
+
+        if ($imageLama !== $product_image) {
+            $pathImage = '../image/product/' . $imageLama;
+            if (file_exists($pathImage)) {
+                unlink($pathImage);
+            } else {
+                echo "<script>alert('Gagal menghapus gambar');</script>";
+            }
+        }
+
     }
 
     if (empty($nama_product) || empty($harga)) {
@@ -491,16 +504,20 @@ if (isset($_GET['key_reject_request'])) {
     $key_reject = $_GET['key_reject_request'];
 
     $row = $_SESSION['request'][$key_reject];
+    
+    if ($_GET['type'] === 'product'){
+        $removeImage = $row['product_image'];
+        $pathImage = '../image/product/' . $removeImage;
+    
+        $getData = getProductId($row['id']);
 
-    $removeImage = $row['product_image'];
-    $pathImage = '../image/product/' . $removeImage;
-    if (file_exists($pathImage)) {
-        unlink($pathImage);
-    } else {
-        echo "<script>alert('Gagal menghapus gambar');</script>";
+        if($getData['product_image'] !== $removeImage){
+            if (file_exists($pathImage)) {
+                unlink($pathImage);
+            }
+        }
     }
-
-
+    
     unset($_SESSION['request'][$key_reject]);
 
     $msg = 'Rejected some data request';
