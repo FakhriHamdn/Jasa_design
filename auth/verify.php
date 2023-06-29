@@ -8,13 +8,17 @@ if(!isset($_SESSION['status'])){
 
 } else if(isset($_SESSION['role'])) {
     if($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'operator'){
-        header("location:");
+        if (isset($_SESSION['verify'])){
+            header("Location: ../admin/data_product.php");
+            exit;
+        }
 
+        header("location:");
     } else {
         header("location: ../index.php");
         exit;
     }
-}
+} 
 //======= END VALIDASI
 
 

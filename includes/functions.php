@@ -65,7 +65,8 @@ function uploadImage()
     // Cek apakah gambar diupload atau tidak
     if ($error === 4) {
         $msg = "Failed to add data. Please upload an image first.";
-        header("Location: ../admin/data_product.php?container=product&message&delete_message=" . urlencode($msg));
+        header("Location: " . $_SERVER['HTTP_REFERER'] . "&message&warning=" . urlencode($msg));
+        // header("Location: ../admin/data_product.php?container=product&message&warning=" . urlencode($msg));
         return false;
     }
 
@@ -75,7 +76,8 @@ function uploadImage()
     // Cek ekstensi gambar yang diupload
     if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
         $msg = "Failed to add data. The file you uploaded is not an image.";
-        header("Location: ../admin/data_product.php?container=product&message&delete_message=" . urlencode($msg));
+        header("Location: " . $_SERVER['HTTP_REFERER'] . "&message&warning=" . urlencode($msg));
+        // header("Location: ../admin/data_product.php?container=product&message&delete_message=" . urlencode($msg));
         exit;
     }
 

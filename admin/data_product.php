@@ -177,32 +177,32 @@ if ($_SESSION['role'] === 'operator') {
 
                 <!--=============== NOTIFICATION  -->
                 <?php if (isset($_GET['message'])) : ?>
-                    <?php if (isset($_GET['auth_message'])) : ?>
+                    <?php if (isset($_GET['auth'])) : ?>
                         <div class="notif" style="background: #2EDBE3; color: #24242a;">
                             <i class='bx bx-user-check icon-msg'></i>
                             <span class='msg-text'>
-                                <?= $_GET['auth_message']; ?>
+                                <?= $_GET['auth']; ?>
                         </div>
 
-                    <?php elseif (isset($_GET['delete_message'])) : ?>
+                    <?php elseif (isset($_GET['warning'])) : ?>
                         <div class="notif" style="background: #bf202f; color: #fff;">
                             <i class='bx bx-message-x icon-msg'></i>
                             <span class='msg-text'>
-                                <?= $_GET['delete_message']; ?>
+                                <?= $_GET['warning']; ?>
                         </div>
 
-                    <?php elseif (isset($_GET['update_message'])) : ?>
+                    <?php elseif (isset($_GET['changes'])) : ?>
                         <div class="notif" style="background: #fec112; color: #24242a;">
                             <i class='bx bx-message-check icon-msg'></i>
                             <span class='msg-text'>
-                                <?= $_GET['update_message']; ?>
+                                <?= $_GET['changes']; ?>
                         </div>
 
-                    <?php elseif (isset($_GET['add_message'])) : ?>
+                    <?php elseif (isset($_GET['success'])) : ?>
                         <div class="notif" style="background: #029400; color: #fff;">
                             <i class='bx bx-message-add icon-msg'></i>
                             <span class='msg-text'>
-                                <?= $_GET['add_message']; ?>
+                                <?= $_GET['success']; ?>
                         </div>
 
                     <?php endif; ?>
@@ -294,7 +294,7 @@ if ($_SESSION['role'] === 'operator') {
                                                     <div class="form_image_preview">
                                                         <?php if ($req_product['status'] === 'Update') : ?>
 
-                                                            <?php if ($realProduct['nama_product'] !== $req_product['nama_product']) : ?>
+                                                            <?php if ($realProduct['product_image'] !== $req_product['product_image']) : ?>
                                                                 <div class="image_request_wrap">
                                                                     <div class="real_image_product">
                                                                         <label for="product_image" class="label_product_image">
@@ -321,17 +321,18 @@ if ($_SESSION['role'] === 'operator') {
                                                                         <img src="../image/product/<?= $realProduct['product_image']; ?>" height="170" width="170">
                                                                     </label>
                                                                     <input type="file" name="product_image" class="product_image" id="product_image" placeholder="Choose image" disabled>
+                                                                    <input type="hidden" name="old_product_image" class="product_image" id="product_image" placeholder="Choose image" value="<?= $realProduct['product_image']?>">
                                                                 </div>
 
-                                                                <i class='bx bx-right-arrow-alt'></i>
+                                                                <!-- <i class='bx bx-right-arrow-alt'></i> -->
 
-                                                                <div class="request_image_product">
+                                                                <!-- <div class="request_image_product">
                                                                     <label for="product_image" class="label_product_image">
                                                                         <span class="upload_label">Upload Images</span>
                                                                         <img src="../image/product/<?= $req_product['product_image'] ?>" height="170" width="170">
                                                                     </label>
                                                                     <input type="file" name="product_image" class="product_image" id="product_image" placeholder="Choose image">
-                                                                </div>
+                                                                </div> -->
 
                                                             <?php endif; ?>
                                                         <?php else : ?>
@@ -341,6 +342,8 @@ if ($_SESSION['role'] === 'operator') {
                                                                     <img src="../image/product/<?= $req_product['product_image'] ?>" height="170" width="170">
                                                                 </label>
                                                                 <input type="file" name="product_image" class="product_image" id="product_image" placeholder="Choose image">
+                                                                <input type="hidden" name="new_product_image" class="product_image" value="<?= $req_product['product_image'] ?>">
+
                                                             </div>
                                                         <?php endif; ?>
                                                     </div>
@@ -499,7 +502,11 @@ if ($_SESSION['role'] === 'operator') {
 
                                     <div class="detail_form">
                                         <a href="data_product.php" class="back_request"><i class="bx bx-log-out icon"></i>Back</a>
-                                        <h3><?= $h3; ?></h3>
+                                        <?php if($row):?>
+                                            <h3><?= $h3; ?> (ID: <?= $row['id_product']; ?>)</h3>
+                                        <?php else: ?>
+                                            <h3><?= $h3; ?></h3>
+                                        <?php endif; ?>
                                     </div>
                                     <form action="<?= $form_action; ?>" method="POST" enctype="multipart/form-data">
                                         <?php if ($row) : ?>
@@ -520,7 +527,8 @@ if ($_SESSION['role'] === 'operator') {
                                                             </div>
                                                         <?php endif; ?>
                                                     </label>
-                                                    <input type="file" name="product_image" class="product_image" id="product_image" placeholder="Choose image" value="<?= ($row) ? $row['product_image'] : ''; ?>">
+                                                    <input type="file" name="product_image" class="product_image" id="product_image" placeholder="Choose image" >
+                                                    <input type="hidden" name="old_product_image" class="product_image" id="product_image" placeholder="Choose image" value="<?= ($row) ? $row['product_image'] : ''; ?>">
                                                 </div>
                                             </div>
                                             <!-- <div class="form_input_data"> -->
@@ -529,7 +537,7 @@ if ($_SESSION['role'] === 'operator') {
                                                     <?php if ($_SESSION['role'] === 'operator') : ?>
                                                         <li>
                                                             <label for="title_request">Title Request</label>
-                                                            <textarea name="title_request" class="title_request" id="title_request" cols="30" rows="2" placeholder="Title..."></textarea>
+                                                            <textarea name="title_request" class="title_request" id="title_request" cols="30" rows="2" placeholder="Title..." required></textarea>
                                                         </li>
                                                     <?php endif; ?>
                                                     <li>
@@ -551,7 +559,7 @@ if ($_SESSION['role'] === 'operator') {
                                                     <button type="submit" name="<?= $formButtonName; ?>"><?= $textFormButton; ?></button>
                                                     
                                                     <?php if($row): ?>
-                                                        <a class="form_delete" href="../includes/action.php?id_delete=<?= $row['id_product']; ?>&page=product"><i class='bx bx-trash dash-aksi'></i></a>
+                                                        <a class="form_delete" href="../includes/action.php?id_delete=<?= $row['id_product']; ?>&page=product&type=form"><i class='bx bx-trash dash-aksi'></i></a>
                                                     <?php endif;?>
                                                 </li>
                                             </ul>
@@ -636,24 +644,38 @@ if ($_SESSION['role'] === 'operator') {
 
     <!-- Script JavaScript untuk mengatur animasi notifikasi -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Ambil element notifikasi
-            const notification = document.querySelector('.notif');
+    document.addEventListener('DOMContentLoaded', function() {
+        // Ambil element notifikasi
+        const notification = document.querySelector('.notif');
 
-            // Atur opacity notifikasi menjadi 1 agar tampil dengan animasi
-            notification.style.opacity = 1;
+        // Atur opacity notifikasi menjadi 1 agar tampil dengan animasi
+        notification.style.opacity = 1;
 
-            // Atur timeout untuk menghilangkan notifikasi setelah 5 detik
-            setTimeout(function() {
-                // Atur opacity notifikasi menjadi 0 agar menghilang dengan animasi
-                notification.style.opacity = 0;
+        // Atur timeout untuk menghilangkan notifikasi setelah 5 detik
+        setTimeout(function() {
+            // Atur opacity notifikasi menjadi 0 agar menghilang dengan animasi
+            notification.style.opacity = 0;
 
-                // Hapus parameter 'message' dari URL dengan redirect menggunakan replaceState()
-                const urlWithoutMessage = window.location.pathname;
-                history.replaceState({}, document.title, urlWithoutMessage);
-            }, 6000);
-        });
-    </script>
+            // Dapatkan parameter URL saat ini
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Hapus parameter 'message' dan 'warning' dari URL
+            urlParams.delete('message');
+            urlParams.delete('success');
+            urlParams.delete('changes');
+            urlParams.delete('warning');
+            urlParams.delete('auth');
+            urlParams.delete('id_product');
+
+            // Bangun kembali URL tanpa parameter yang dihapus
+            const urlWithoutParams = window.location.origin + window.location.pathname + '?' + urlParams.toString();
+
+            // Ubah URL menggunakan replaceState()
+            history.replaceState({}, document.title, urlWithoutParams);
+        }, 6000);
+    });
+</script>
+
 
 </body>
 
