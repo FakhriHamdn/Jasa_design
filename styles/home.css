@@ -99,15 +99,15 @@ a {
     font-weight: 550;
     font-size: 0.9em;
     width: 9em;
+    padding: 0 1.2em 0 1em;
+    pointer-events: auto;
     height: 2.6em;
     background: #fec112;
     border-radius: 3.5px;
-    padding: 0 1.2em 0 1em;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: 0.3s;
-    pointer-events: auto;
 }
 
 .auth a.auth_register:hover {
